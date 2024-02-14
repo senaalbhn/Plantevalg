@@ -60,13 +60,13 @@ public class NyPlanteStepdefs {
         nyPlante.slekt.sendKeys(fakeSlekt, Keys.TAB, "Artsepitet",Keys.TAB, "Kultivar", Keys.TAB, "Frøkilde", Keys.TAB, "Underart", Keys.TAB, "Varietet", Keys.TAB, "Form ", Keys.TAB, "Varemerke ");
     }
 
-    @And("Velg Hybrid mellom arter-slekter")
-    public void velgHybridMellomArterSlekter() {
+    @And("Velg Hybrid mellom arter")
+    public void velgHybridMellomArter() {
         nyPlante.hybridMellomArter.click();
     }
 
-    @And("Velg varemerke \\(R-TM)")
-    public void velgVaremerkeRTM() {
+    @And("Velg varemerke {string}")
+    public void velgVaremerke(String str) {
         nyPlante.varemerkeButton.click();
     }
 
@@ -106,8 +106,8 @@ public class NyPlanteStepdefs {
         nyPlante.lagreButton.click();
     }
 
-    @Then("Klikk Nei for Viltvoksende i Norge og Produsert i Norge")
-    public void klikkNeiForViltvoksendeINorgeOgProdusertINorge() {
+    @Then("Klikk {string} for Viltvoksende i Norge og Produsert i Norge")
+    public void klikkJaForViltvoksendeINorgeOgProdusertINorge(String str) {
         nyPlante.viltvoksendeINorge.click();
         nyPlante.produsertINorge.click();
     }
@@ -136,16 +136,16 @@ public class NyPlanteStepdefs {
         Select select= new Select(sprok);
         //List<WebElement> sprokList = select.getOptions();
         //select.selectByIndex(random.nextInt(sprokList.size()));
-        select.selectByIndex(2);
+        select.selectByIndex(4);
     }
 
-    @And("Skriv i navn")
-    public void skrivINavn() {
-        nyPlante.navn.sendKeys("aa");
+    @And("Skriv i {string}")
+    public void skrivINavn(String str) {
+        nyPlante.navn.sendKeys(str);
     }
 
-    @Then("Klikk Nei for E-plante")
-    public void klikkNeiForEPlante() {
+    @Then("Klikk {string} for E-plante")
+    public void klikkForEPlante(String str) {
         ReusableMethods.wait(1);
         nyPlante.ePlante.click();
     }
@@ -168,43 +168,47 @@ public class NyPlanteStepdefs {
         ReusableMethods.wait(1);
     }
 
-    @Then("Velg en fra Pollinator-vennlig")
-    public void velgEnFraPollinatorVennlig() {
+    @Then("Velg {string} fra Pollinator-vennlig")
+    public void velgEnFraPollinatorVennlig(String str) {
         WebElement pollinatorVennlig = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        Select select= new Select(pollinatorVennlig);
+        //Select select= new Select(pollinatorVennlig);
         //List<WebElement> pollinatorVennligList = select.getOptions();
         //select.selectByIndex(random.nextInt(pollinatorVennligList.size()));
-        select.selectByIndex(2);
+        //select.selectByIndex(2);
         //ReusableMethods.wait(1);
+        ReusableMethods.ddmVisibleText(pollinatorVennlig,str);
     }
 
-    @Then("Velg en fra Matnyttig")
-    public void velgEnFraMatnyttig() {
+    @Then("Velg {string} fra Matnyttig")
+    public void velgFraMatnyttig(String str) {
         WebElement matnyttig = Driver.getDriver().findElement(By.xpath("(//select)[2]"));
-        Select select= new Select(matnyttig);
+        //Select select= new Select(matnyttig);
         //List<WebElement> matnyttigList = select.getOptions();
         //select.selectByIndex(random.nextInt(matnyttigList.size()));
-        select.selectByIndex(2);
+        //select.selectByIndex(2);
         //ReusableMethods.wait(1);
+        ReusableMethods.ddmVisibleText(matnyttig,str);
     }
 
-    @Then("Velg en fra Allergi")
-    public void velgEnFraAllergi() {
+    @Then("Velg {string} fra Allergi")
+    public void velgFraAllergi(String str) {
         WebElement allergi = Driver.getDriver().findElement(By.xpath("(//select)[3]"));
-        Select select= new Select(allergi);
+        ReusableMethods.ddmVisibleText(allergi,str);
+        //Select select= new Select(allergi);
         //List<WebElement> allergiList = select.getOptions();
         //select.selectByIndex(random.nextInt(allergiList.size()));
-        select.selectByIndex(2);
+        //select.selectByIndex(2);
         //ReusableMethods.wait(1);
     }
 
-    @Then("Velg en fra Naturlig levealder")
-    public void velgEnFraNaturligLevealder() {
+    @Then("Velg {string} fra Naturlig levealder")
+    public void velgFraNaturligLevealder(String str) {
         WebElement naturlig = Driver.getDriver().findElement(By.xpath("(//select)[4]"));
-        Select select= new Select(naturlig);
+        ReusableMethods.ddmVisibleText(naturlig,str);
+        //Select select= new Select(naturlig);
         //List<WebElement> naturligList = select.getOptions();
         //select.selectByIndex(random.nextInt(naturligList.size()));
-        select.selectByIndex(2);
+        //select.selectByIndex(2);
         //ReusableMethods.wait(1);
     }
 
@@ -217,13 +221,13 @@ public class NyPlanteStepdefs {
 
     }
 
-    @Then("Klikk Nei for Vegetativ")
-    public void klikkNeiForVegetativ() {
+    @Then("Klikk {string} for Vegetativ")
+    public void klikkForVegetativ(String str) {
         nyPlante.vegetativ.click();
     }
 
-    @Then("Klikk Nei for Fro")
-    public void klikkNeiForFro() {
+    @Then("Klikk {string} for Fro")
+    public void klikkNeiForFro(String str) {
         nyPlante.fro.click();
     }
 
@@ -562,10 +566,10 @@ public class NyPlanteStepdefs {
     @Then("Klikk Velg Bilde")
     public void klikkVelgBilde() {
         nyPlante.velgBilde.click();
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(1);
         String filbane = "C:\\Users\\SenaAlbahan\\Downloads\\eple.jpg";
         ReusableMethods.uploadFile(filbane);
-        ReusableMethods.visibleWait(nyPlante.bildeBekreftelse, 15);
+        ReusableMethods.visibleWait(nyPlante.bildeBekreftelse, 30);
         //ReusableMethods.wait(6);
     }
 

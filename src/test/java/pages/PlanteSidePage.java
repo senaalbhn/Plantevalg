@@ -16,4 +16,12 @@ public class PlanteSidePage {
     public WebElement slettPlante;
 
 
+    //Navn og opprinnelse
+    @FindBy(xpath = "//*[@class='_origin_1692g_1']" )
+    public WebElement opphav;
+    @FindBy(xpath = "//*[@class='_synonym_1692g_14']" )
+    public WebElement registrertSynonym;
+    @FindBy(xpath = "(//*[@placeholder='Fritekst'])[2]")
+    public WebElement synonymerTil;
+
 }

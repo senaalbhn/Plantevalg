@@ -1,16 +1,16 @@
 Feature: Ny Plante Tilsetning Test
 
-  @q12
+  @q1
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
 
-  @q12
+  @q1
   Scenario: Brukeren skal kunne legge til Botanisk navn informasjon
     Given   Klikk Ny Plnate
     Then    Fyll ut Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke
-    And     Velg Hybrid mellom arter-slekter
-    And     Velg varemerke (R-TM)
+    And     Velg Hybrid mellom arter
+    And     Velg varemerke "TM"
     And     Klikk Lagre og Fortsette
 
   @q1
@@ -20,28 +20,28 @@ Feature: Ny Plante Tilsetning Test
     And    Fyll ut Slekt, Artsepitet for Primaer opprinnelse
     And    Fyll ut Slekt, Artsepitet for Sekundaer opprinnelse
     And    Klikk Lagre
-    Then   Klikk Nei for Viltvoksende i Norge og Produsert i Norge
+    Then   Klikk "Nei" for Viltvoksende i Norge og Produsert i Norge
     Then   Klikk Legg til under Synonymer botanisk navn
     And    Fyll ut Slekt, Artsepitet for Primaer opprinnelse i Synonym
     And    Klikk Lagre
     Then   Klikk Legg til under Andre sprok
     And    Velg Engelsk som sprok
-    And    Skriv i navn
+    And    Skriv i "English Name"
     And    Klikk Lagre
-    Then   Klikk Nei for E-plante
+    Then   Klikk "Nei" for E-plante
 
   @q1
   Scenario: Brukeren skal kunne legge til Egenskaper informasjon
     Given  Klikk Egenskaper
     And    Velg Traer
     And    Velg Alltidgronn
-    Then   Velg en fra Pollinator-vennlig
-    Then   Velg en fra Matnyttig
-    Then   Velg en fra Allergi
-    Then   Velg en fra Naturlig levealder
+    Then   Velg "Ja" fra Pollinator-vennlig
+    Then   Velg "Honningplante" fra Matnyttig
+    Then   Velg "Hudkontakt" fra Allergi
+    Then   Velg "Lang (100-300 år)" fra Naturlig levealder
     Then   Velg en fra Restriksjoner og vern
-    Then   Klikk Nei for Vegetativ
-    Then   Klikk Nei for Fro
+    Then   Klikk "Nei" for Vegetativ
+    Then   Klikk "Nei" for Fro
 
   @q1
   Scenario: Brukeren skal kunne legge til Størrelse og form informasjon
@@ -119,8 +119,7 @@ Feature: Ny Plante Tilsetning Test
     Given  Klikk Legg til forskningsresultat
     Then   Skriv i Forfattere, Ar, Tittel, Utgiver, Fra, Til, ISBN, Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
-    Then   Slett Plante
-    And    Lukk siden
+
 
 
 
