@@ -39,71 +39,70 @@ Feature: Ny Plante Tilsetning Test
     Then   Velg "Honningplante" fra Matnyttig
     Then   Velg "Hudkontakt" fra Allergi
     Then   Velg "Lang (100-300 år)" fra Naturlig levealder
-    Then   Velg en fra Restriksjoner og vern
+    Then   Velg "Søknadspliktig iht forskrift fremmede organismer vedl 5" alternativ fra Restriksjoner og vern
     Then   Klikk "Nei" for Vegetativ
     Then   Klikk "Nei" for Fro
 
   @q1
   Scenario: Brukeren skal kunne legge til Størrelse og form informasjon
     Given  Klikk Storrelse og form
-    And    Velg hoyde
-    And    Velg en fra bredde
-    Then   Velg en fra form
-    Then   Velg en fra rottype
+    And    Velg hoyde mellom "5" - "1000"
+    And    Velg "Smal (<1/2 av høyde)" fra bredde
+    Then   Velg "Klatrende" fra form
+    Then   Velg "Pålerot" fra rottype
 
   @q1
   Scenario: Brukeren skal kunne legge til Bruksområde informasjon
     Given  Klikk Bruksomrode
     And    Klikk Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer
-    And    Skriv i tregruppe
-    And    Skriv i Busk gruppe
-    And    Skriv i Solitaer
-    And    Skriv i Klippet hekk
-    Then   Velg en fra Dekkevne
-    Then   Velg en fra Beskjaeringsbehov
+    And    Skriv i "5" - "1500" tregruppe
+    And    Skriv i "5" - "1500" Busk gruppe
+    And    Skriv i "5" - "1500" Solitaer
+    And    Skriv i "5" - "1500" Klippet hekk
+    Then   Velg "Liten" fra Dekkevne
+    Then   Velg "Middels" fra Beskjaeringsbehov
 
   @q1
   Scenario: Brukeren skal kunne legge til Plassering informasjon
     Given  Klikk Plassering
     And    Klikk Lysforhold, Jord og Fuktighetsforhold
-    And    Skriv i Innland
-    And    Skriv i Kyst
-    Then   Velg en fra pH
-    Then   Velg en fra Salttoleranse
-    Then   Vindtoleranse
+    And    Skriv i "2" - "4" Innland
+    And    Skriv i "3" - "5" Kyst
+    Then   Velg "Basisk >7" alternativ fra pH
+    Then   Velg "Svak mot salt i jord" alternativ fra Salttoleranse
+    Then   Velg "Tåler noe vind" fra Vindtoleranse
 
   @q1
   Scenario: Brukeren skal kunne legge til Prydverdi informasjon
     Given  Klikk Prydverdi
-    Then   Velg en fra Blomst en eller flere farger
-    Then   Velg en fra Blomst farge
-    Then   Velg en fra Blomst andre farger
-    Then   Velg en fra Blomst prydverdi
-    Then   Velg en fra Fylt
-    And    Skriv i Blomstringstid
-    And    Skriv i Remontering-Gjenblomstring
-    And    Klikk Nei for Blomsterduft
-    And    Klikk Nei for Duft blad og stenge
-    Then   Velg en fra Fruktfarge
-    Then   Velg en fra Frukt tid
-    Then   Velg en fra Bladfarge
-    Then   Velg en fra Bladform
-    Then   Velg en fra Bladstørrelse
-    Then   Velg en fra Høstfarger
-    Then   Velg en fra Vinterkarakter
-    Then   Velg en fra Torner
-    Then   Velg en fra Stamme barkstruktur
-    Then   Velg en fra Stamme barkfarge
-    Then   Velg en fra Skudd-greiner farge
-
+    Then   Velg "Flere farger innen arten" fra Blomst en eller flere farger
+    Then   Velg "Hvit" fra Blomst farge
+    Then   Velg "Lilla" fra Blomst andre farger
+    Then   Velg "Lite betydelig" fra Blomst prydverdi
+    Then   Velg "Ja" fra Fylt
+    And    Skriv "2" - "5" i Blomstringstid
+    And    Skriv "2" - "5" i Remontering-Gjenblomstring
+    And    Klikk "Nei" for Blomsterduft
+    And    Klikk "Nei" for Duft blad og stenge
+    Then   Velg "Svart" fra Fruktfarge
+    Then   Velg "Sommer" fra Frukt tid
+    Then   Velg "Flerfarget/broket" fra Bladfarge
+    Then   Velg "Fliket" fra Bladform
+    Then   Velg "Liten" fra Bladstorrelse
+    Then   Velg "Guloransje" fra Hostfarger
+    Then   Velg "Silhuett" fra Vinterkarakter
+    Then   Velg "Kan ha torner" fra Torner
+    Then   Velg "Stripete" fra Stamme barkstruktur
+    Then   Velg "Uanselig (brun)" fra Stamme barkfarge
+    Then   Velg "Rødbrun" fra Skudd-greiner farge
   @q1
   Scenario: Brukeren skal kunne legge til Bilde
     Given  Klikk Bilde
     Then   Klikk Legg Til
-    And    Velg type bilde
-    And    Velg Fotograf
-    And    Skriv i Fotokilde,Notis,Hvor er bilde tatt,Postnummer,Poststed
-    Then   Klikk Velg Bilde
+    And    Velg "Diversebilde" type bilde
+    And    Velg "Erik Burås" Fotograf
+    And    Skriv "Fotokilde" i Fotokilde, "Notis" i Notis,"Hvor er bilde tatt" i Hvor er bilde tatt,"Postnummer" i Postnummer,"Poststed" i Poststed
+    Then   Klikk Velg Bilde "eple"
     Then   Klikk Lagre og Lukk
 
   @q1
@@ -117,7 +116,7 @@ Feature: Ny Plante Tilsetning Test
   Scenario: Brukeren skal kunne legge til Forskning informasjon
     Given  Klikk Forskning
     Given  Klikk Legg til forskningsresultat
-    Then   Skriv i Forfattere, Ar, Tittel, Utgiver, Fra, Til, ISBN, Tilgjengelig fra nett og Hentet dato
+    Then   Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og "121220" i Hentet dato
     And    Klikk Lagre
 
 

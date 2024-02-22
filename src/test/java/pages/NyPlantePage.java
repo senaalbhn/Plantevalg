@@ -61,7 +61,7 @@ public class NyPlantePage {
     public WebElement egenskaper;
     @FindBy(xpath = "(//*[@class='_plantGroupCard_1797k_1'])[1]")
     public WebElement plantegruppeTraer;
-    @FindBy(xpath = "(//*[@class='_plantGroupCard_1797k_1'])[5]")
+    @FindBy(xpath = "(//*[@class='_plantGroupCard_1797k_1'])[4]")
     public WebElement plantegruppeAlltidgronn;
     @FindBy(xpath = "//*[@class='_input_2gb8b_44']")
     public WebElement restriksjonerOgVern;
@@ -200,6 +200,9 @@ public class NyPlantePage {
     public WebElement forfattere ;
     @FindBy(xpath = "//button[@title='Legg til .pdf fra PC/Mac']")
     public WebElement leggTilPfd;
+    @FindBy(xpath = "//*[@type='date']")
+    public WebElement dato;
+
 
     //Slett Plante
     @FindBy(xpath = "//button[@title='Slett plante']")
