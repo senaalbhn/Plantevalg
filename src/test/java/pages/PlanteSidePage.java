@@ -10,9 +10,9 @@ public class PlanteSidePage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    @FindBy(xpath = "(//*[@class='_children_1su0p_15'])[2]" )
+    @FindBy(css = "button[title='Rediger']" )
     public WebElement rediger;
-    @FindBy(xpath = "(//*[@class='_children_1su0p_15'])[2]" )
+    @FindBy(css = "button[title='Slett plante']" )
     public WebElement slettPlante;
 
 
@@ -41,13 +41,16 @@ public class PlanteSidePage {
     public WebElement synonymerNavn;
     @FindBy(xpath = "(//*[@placeholder='Fritekst'])[2]")
     public WebElement synonymerTil;
+    @FindBy(css = "button[title*='flere språk']")
+    public WebElement flereSprook;
+
     @FindBy(xpath = "(//input)[3]")
     public WebElement andreSprokNavn;
     @FindBy(xpath = "/html/body/div/div/div/div[2]/div/div[5]/div[1]/div[6]/div/div[2]/div[2]/div/div/div[3]/button[2]")
     public WebElement lagre;
 
     //Egenskaper
-    @FindBy(xpath = "(//*[@class='_plantGroupCard_1797k_1'])[4]")
+    @FindBy(css = "div[title^='Løv']")
     public WebElement lovfellende;
 
     //Bruksområde

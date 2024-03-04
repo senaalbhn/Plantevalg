@@ -1,11 +1,11 @@
 Feature: Ny Plante Tilsetning Test
 
-  @q1
+  @q1 @d
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
 
-  @q1
+  @q1 @d
   Scenario: Brukeren skal kunne legge til Botanisk navn informasjon
     Given   Klikk Ny Plnate
     Then    Fyll ut Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke
@@ -13,7 +13,7 @@ Feature: Ny Plante Tilsetning Test
     And     Velg varemerke "TM"
     And     Klikk Lagre og Fortsette
 
-  @q1
+  @q1 @d
   Scenario: Brukeren skal kunne legge til Navn og opprinnelse informasjon
     Given  Klikk Navn og opprinnelse
     Then   Klikk Legg til under Opphav
@@ -46,7 +46,7 @@ Feature: Ny Plante Tilsetning Test
   @q1
   Scenario: Brukeren skal kunne legge til Størrelse og form informasjon
     Given  Klikk Storrelse og form
-    And    Velg hoyde mellom "5" - "1000"
+    And    Velg hoyde mellom "250" - "1000"
     And    Velg "Smal (<1/2 av høyde)" fra bredde
     Then   Velg "Klatrende" fra form
     Then   Velg "Pålerot" fra rottype
@@ -54,7 +54,7 @@ Feature: Ny Plante Tilsetning Test
   @q1
   Scenario: Brukeren skal kunne legge til Bruksområde informasjon
     Given  Klikk Bruksomrode
-    And    Klikk Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer
+    And    Klikk "Nei" Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer
     And    Skriv i "5" - "1500" tregruppe
     And    Skriv i "5" - "1500" Busk gruppe
     And    Skriv i "5" - "1500" Solitaer
@@ -65,7 +65,7 @@ Feature: Ny Plante Tilsetning Test
   @q1
   Scenario: Brukeren skal kunne legge til Plassering informasjon
     Given  Klikk Plassering
-    And    Klikk Lysforhold, Jord og Fuktighetsforhold
+    And    Klikk "Nei" Lysforhold, Jord og Fuktighetsforhold
     And    Skriv i "2" - "4" Innland
     And    Skriv i "3" - "5" Kyst
     Then   Velg "Basisk >7" alternativ fra pH
@@ -80,8 +80,8 @@ Feature: Ny Plante Tilsetning Test
     Then   Velg "Lilla" fra Blomst andre farger
     Then   Velg "Lite betydelig" fra Blomst prydverdi
     Then   Velg "Ja" fra Fylt
-    And    Skriv "2" - "5" i Blomstringstid
-    And    Skriv "2" - "5" i Remontering-Gjenblomstring
+    And    Skriv "2" - "6" i Blomstringstid
+    And    Skriv "7" - "10" i Remontering-Gjenblomstring
     And    Klikk "Nei" for Blomsterduft
     And    Klikk "Nei" for Duft blad og stenge
     Then   Velg "Svart" fra Fruktfarge
@@ -95,7 +95,7 @@ Feature: Ny Plante Tilsetning Test
     Then   Velg "Stripete" fra Stamme barkstruktur
     Then   Velg "Uanselig (brun)" fra Stamme barkfarge
     Then   Velg "Rødbrun" fra Skudd-greiner farge
-  @q1
+  @
   Scenario: Brukeren skal kunne legge til Bilde
     Given  Klikk Bilde
     Then   Klikk Legg Til
@@ -116,7 +116,7 @@ Feature: Ny Plante Tilsetning Test
   Scenario: Brukeren skal kunne legge til Forskning informasjon
     Given  Klikk Forskning
     Given  Klikk Legg til forskningsresultat
-    Then   Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og "121220" i Hentet dato
+    Then   Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
 
 

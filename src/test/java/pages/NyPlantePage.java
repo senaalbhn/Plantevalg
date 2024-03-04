@@ -25,63 +25,63 @@ public class NyPlantePage {
     public WebElement hybridMellomSlekter;
     @FindBy(xpath = "//button[@title='Lagre og fortsett']")
     public WebElement lagreOgFortsette;
-    @FindBy(xpath = "//button[@class='_button_1su0p_1 textStyleMenu _colorDarkGray_1su0p_99']")
+    @FindBy(xpath = "//button[@title='Neste']")
     public WebElement neste;
 
     //Navn og opprinnelse
-    @FindBy(xpath = "(//div//a)[5]")
+    @FindBy(css = "a[title^='Navn']")
     public WebElement navnOgOpprinnelse;
-    @FindBy(xpath = "(//*[@class='_button_1su0p_1 textStyleMenu _colorLightCyan_1su0p_114'])[1]")
+    @FindBy(xpath = "//div[@class='_origins_1692g_1']//parent::button")
     public WebElement leggTilOpphav;
-    @FindBy(xpath = "(//*[@placeholder='Fritekst'])[1]")
+    @FindBy(xpath = "(//label[@title='Slekt']//following-sibling::div//input)[1]")
     public WebElement slektPrimaerOpprinnelse;
-    @FindBy(xpath = "(//*[@placeholder='Fritekst'])[9]")
+    @FindBy(xpath = "(//label[@title='Slekt']//following-sibling::div//input)[2]")
     public WebElement slektSekundaerOpprinnelse;
-    @FindBy(xpath = "//button[ .='Lagre']")
+    @FindBy(xpath = "//button[@title='Lagre']")
     public WebElement lagreButton;
-    @FindBy(xpath = "(//*[@class='_togglePart_16oj8_10'])[1]")
+    @FindBy(xpath = "//div[@title='Viltvoksende i Norge']//following-sibling::a")
     public WebElement viltvoksendeINorge;
-    @FindBy(xpath = "(//*[@class='_togglePart_16oj8_10'])[2]")
+    @FindBy(xpath = "//div[@title='Produsert i Norge']//following-sibling::a")
     public WebElement produsertINorge;
-    @FindBy(xpath = "(//*[@class='_button_1su0p_1 textStyleMenu _colorLightCyan_1su0p_114'])[1]")
+    @FindBy(css = "div[class^='_synonyms'] button")
     public WebElement leggTilSynonymer;
-    @FindBy(xpath = "(//*[@placeholder='Fritekst'])[1]")
+    @FindBy(css = "label[title='Slekt']+._inputWrapper_ce2pu_79>input")
     public WebElement slektSynonym;
-    @FindBy(xpath = "(//*[@class='_button_1su0p_1 textStyleMenu _colorLightCyan_1su0p_114'])[2]")
+    @FindBy(css = "div[class^='_plantS'] button")
     public WebElement leggTilSprok;
     @FindBy(xpath = "//select")
     public WebElement sprok;
-    @FindBy(xpath = "//input")
+    @FindBy(css = "label[title='Navn']+div>input")
     public WebElement navn;
-    @FindBy(xpath = "(//*[@class='_togglePart_16oj8_10'])[3]")
+    @FindBy(xpath = "//div[@class='_ePlant_1692g_72']//descendant::a")
     public WebElement ePlante;
 
     //Egenskaper
-    @FindBy(xpath = "(//div//a)[6]")
+    @FindBy(css = "a[title^='Ege']")
     public WebElement egenskaper;
-    @FindBy(xpath = "(//*[@class='_plantGroupCard_1797k_1'])[1]")
+    @FindBy(css = "div[title^='Tr']")
     public WebElement plantegruppeTraer;
-    @FindBy(xpath = "(//*[@class='_plantGroupCard_1797k_1'])[4]")
+    @FindBy(css = "div[title^='All']")
     public WebElement plantegruppeAlltidgronn;
     @FindBy(xpath = "//*[@class='_input_2gb8b_44']")
     public WebElement restriksjonerOgVern;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[1]")
     public WebElement restriksjonerOgVernValg;
-    @FindBy(xpath = "(//*[@class='_togglePart_16oj8_10'])[1]")
+    @FindBy(xpath = "//div[@title='Vegetativ']//following-sibling::a")
     public WebElement vegetativ;
-    @FindBy(xpath = "(//*[@class='_togglePart_16oj8_10'])[2]")
+    @FindBy(xpath = "//div[@title='Frø']//following-sibling::a")
     public WebElement fro;
 
     //Størrelse og form
-    @FindBy(xpath = "(//div//a)[7]")
+    @FindBy(css = "a[title^='St']")
     public WebElement storrelseOgForm;
     @FindBy(xpath = "(//input[@type='text'])[1]")
     public WebElement hoyde;
 
     //Bruksområde
-    @FindBy(xpath = "(//div//a)[8]")
+    @FindBy(css = "a[title^='Br']")
     public WebElement bruksomrode;
-    @FindBy(xpath = "(//a[@title='Nei'])[1]")
+    @FindBy(xpath = "//div[@title='Gruppe']//following-sibling::a")
     public WebElement bruksomrodeValg;
     @FindBy(xpath = "(//input[@type='text'])[1]")
     public WebElement tregruppe;
@@ -89,11 +89,11 @@ public class NyPlantePage {
     public WebElement buskGruppe;
     @FindBy(xpath = "(//input[@type='text'])[5]")
     public WebElement solitaer;
-    @FindBy(xpath = "(//input[@type='text'])[7]")
+    @FindBy(xpath ="(//input[@type='text'])[7]")
     public WebElement klippetHekk;
 
     //Plassering
-    @FindBy(xpath = "(//div//a)[9]")
+    @FindBy(css = "a[title^='Pla']")
     public WebElement plassering;
     @FindBy(xpath = "(//a[@title='Nei'])[1]")
     public WebElement lysforholdOgJordOgFuktighetsforhold;
@@ -111,18 +111,19 @@ public class NyPlantePage {
     public WebElement salttoleranseValg;
 
     //Prydverdi
-    @FindBy(xpath = "//*[@title='Prydverdi']")
+    @FindBy(css = "a[title^='Pr']")
     public WebElement prydverdi;
-
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[1]")
+    @FindBy(xpath = "//span[.='Blomst en eller flere farger']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement blomstEnEllerFlereFarger;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement blomstEnEllerFlereFargerValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[2]")
+    @FindBy(xpath = "//span[text()='Blomst farge']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement blomstFarge;
+    //@FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[2]")
+    //public WebElement blomstFarge;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement blomstFargeValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[3]")
+    @FindBy(xpath = "//span[text()='Blomst andre farger']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement blomstAndeFarger;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement blomstAndeFargerValg;
@@ -132,35 +133,39 @@ public class NyPlantePage {
     public WebElement remontering;
     @FindBy(xpath = "(//a[@title='Nei'])[1]")
     public WebElement velgNei;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[4]")
+    @FindBy(xpath = "//div[@title='Blomsterduft']//following-sibling::a")
+    public WebElement blomsterduft;
+    @FindBy(xpath = "//div[@title='Duft blad og stengel']//following-sibling::a")
+    public WebElement duftBladStengel;
+    @FindBy(xpath = "//span[text()='Frukt tid']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement fruktTid;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement fruktTidValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[5]")
+    @FindBy(xpath = "//span[text()='Bladfarge']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement bladfarge;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement bladfargeValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[6]")
+    @FindBy(xpath = "//span[text()='Bladform']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement bladform;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement bladformValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[7]")
+    @FindBy(xpath = "//span[text()='Høstfarger']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement hostfarger;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement hostfargerValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[8]")
+    @FindBy(xpath = "//span[text()='Vinterkarakter']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement vinterkarakter;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement vinterkarakterValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[9]")
+    @FindBy(xpath = "//span[text()='Stamme barkstruktur']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement stammeBarkstruktur;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement stammeBarkstrukturValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[10]")
+    @FindBy(xpath = "//span[text()=' Stamme barkfarge']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement stammeBarkfarge;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement stammeBarkfargeValg;
-    @FindBy(xpath = "(//*[@class='_input_2gb8b_44'])[11]")
+    @FindBy(xpath = "//span[text()='Skudd/greiner farge']//parent::label//parent::div//child::div[@class='_input_2gb8b_44']")
     public WebElement skuddGreinerFarge;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[2]")
     public WebElement skuddGreinerFargeValg;
@@ -171,13 +176,13 @@ public class NyPlantePage {
     public WebElement leggTilBilde;
     @FindBy(xpath = "//button[@title='Velg bilde']")
     public WebElement velgBilde;
-    @FindBy(xpath = "/html/body/div/div/div/div[2]/div/div[5]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[3]/div/input")
+    @FindBy(xpath = "//label[@title='Fotokilde']//following-sibling::div//child::input")
     public WebElement fotokilde;
     @FindBy(xpath = "//button[@title='Lagre og lukk']")
     public WebElement lagreOgLukk;
     @FindBy(xpath = "//button[@title='Slett']")
     public WebElement slettBilde;
-    @FindBy(xpath = "//div[contains(@style, 'background-image') and contains(@class, '_image_ggpid_1')]")
+    @FindBy(xpath = "//div[@class='_image_ggpid_1 '][starts-with(@style,'background-image:')]")
     public WebElement bildeBekreftelse;
 
 
@@ -196,11 +201,11 @@ public class NyPlantePage {
     public WebElement forskning;
     @FindBy(xpath = "//button[@title='Legg til forskningsresultat']")
     public WebElement leggTilForskningsresultat;
-    @FindBy(xpath = "/html/body/div/div/div/div[2]/div/div[5]/div[1]/div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div/input")
+    @FindBy(css = "label[title^='Forfattere']+div input")
     public WebElement forfattere ;
     @FindBy(xpath = "//button[@title='Legg til .pdf fra PC/Mac']")
     public WebElement leggTilPfd;
-    @FindBy(xpath = "//*[@type='date']")
+    @FindBy(css = "input[type='date']")
     public WebElement dato;
 
 
