@@ -28,6 +28,11 @@ public class PlantevalgMethods {
         actions.moveToLocation(1,1).click().perform();
     }
 
+    public static void klikkJaEllerNei (String str) {
+        WebElement button = Driver.driver.findElement(By.xpath("(//a[@title='"+str+"'])[1]"));
+        actions.click(button).perform();
+    }
+
 
 
 }

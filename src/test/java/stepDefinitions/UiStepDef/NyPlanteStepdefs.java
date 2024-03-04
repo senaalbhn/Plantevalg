@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.UiStepDef;
 
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
@@ -10,7 +10,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HjemmesidePage;
 
 import pages.NyPlantePage;
@@ -20,22 +22,25 @@ import utilities.Driver;
 import utilities.PlantevalgMethods;
 import utilities.ReusableMethods;
 import org.testng.asserts.SoftAssert;
+
 import javax.swing.*;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 public class NyPlanteStepdefs {
     SoftAssert softAssert = new SoftAssert();
-    HjemmesidePage hjemmeside= new HjemmesidePage();
-    ReusableMethods reusableMethods=new ReusableMethods();
-    NyPlantePage nyPlante= new NyPlantePage();
-    Random random= new Random();
+    HjemmesidePage hjemmeside = new HjemmesidePage();
+    ReusableMethods reusableMethods = new ReusableMethods();
+    NyPlantePage nyPlante = new NyPlantePage();
+    Random random = new Random();
     List<WebElement> sprokList;
-    Actions actions= new Actions(Driver.getDriver());
-    Faker faker= new Faker();
+    Actions actions = new Actions(Driver.getDriver());
+    Faker faker = new Faker();
     String fakeSlekt;
-
 
 
     @Given("Go til Plantevalg-siden")
@@ -45,7 +50,7 @@ public class NyPlanteStepdefs {
 
     @Then("Skriv i epost og passord, klikk Logg inn")
     public void skrivIEpostOgPassordKlikkLoggInn() {
-        hjemmeside.epost.sendKeys(ConfigReader.getProperty("email"), Keys.TAB, ConfigReader.getProperty("password"), Keys.TAB, Keys.TAB,Keys.ENTER);
+        hjemmeside.epost.sendKeys(ConfigReader.getProperty("email"), Keys.TAB, ConfigReader.getProperty("password"), Keys.TAB, Keys.TAB, Keys.ENTER);
 
     }
 
@@ -58,8 +63,8 @@ public class NyPlanteStepdefs {
 
     @And("Fyll ut Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke")
     public void fyllUtSlektArtsepitetKultivarFrøkildeUnderartVarietetFormVaremerke() {
-        fakeSlekt=faker.food().fruit();
-        nyPlante.slekt.sendKeys("Avocado", Keys.TAB, "Artsepitet",Keys.TAB, "Kultivar", Keys.TAB, "Frøkilde", Keys.TAB, "Underart", Keys.TAB, "Varietet", Keys.TAB, "Form ", Keys.TAB, "Varemerke ");
+        fakeSlekt = faker.food().fruit();
+        nyPlante.slekt.sendKeys("Avocado", Keys.TAB, "Artsepitet", Keys.TAB, "Kultivar", Keys.TAB, "Frøkilde", Keys.TAB, "Underart", Keys.TAB, "Varietet", Keys.TAB, "Form ", Keys.TAB, "Varemerke ");
     }
 
     @And("Velg Hybrid mellom arter")
@@ -82,8 +87,10 @@ public class NyPlanteStepdefs {
 
     @Given("Klikk Navn og opprinnelse")
     public void klikkNavnOgOpprinnelse() {
-        ReusableMethods.wait(2);
-        nyPlante.navnOgOpprinnelse.click();
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.elementToBeClickable(nyPlante.neste));
+        ReusableMethods.wait(1);
+        nyPlante.neste.click();
     }
 
     @Then("Klikk Legg til under Opphav")
@@ -94,12 +101,13 @@ public class NyPlanteStepdefs {
 
     @And("Fyll ut Slekt, Artsepitet for Primaer opprinnelse")
     public void fyllUtSlektArtsepitetForPrimaerOpprinnelse() {
-        nyPlante.slektPrimaerOpprinnelse.sendKeys("SlektPrimaer", Keys.TAB,"ArtsepitetPrimaer");
+        nyPlante.slektPrimaerOpprinnelse.sendKeys("SlektPrimaer", Keys.TAB, "ArtsepitetPrimaer");
     }
 
     @And("Fyll ut Slekt, Artsepitet for Sekundaer opprinnelse")
     public void fyllUtSlektArtsepitetForSekundaerOpprinnelse() {
-        nyPlante.slektSekundaerOpprinnelse.sendKeys("SlektSekundaer", Keys.TAB,"ArtsepitetSekundaer");
+        nyPlante.slektSekundaerOpprinnelse.sendKeys("SlektSekundaer", Keys.TAB, "ArtsepitetSekundaer");
+        ReusableMethods.wait(1);
     }
 
     @And("Klikk Lagre")
@@ -122,7 +130,7 @@ public class NyPlanteStepdefs {
 
     @And("Fyll ut Slekt, Artsepitet for Primaer opprinnelse i Synonym")
     public void fyllUtSlektArtsepitetForPrimaerOpprinnelseISynonym() {
-        nyPlante.slektSynonym.sendKeys("SlektPrimaer2", Keys.TAB,"ArtsepitetPrimaer2");
+        actions.click(nyPlante.slektSynonym).sendKeys("SlektPrimaer2", Keys.TAB, "ArtsepitetPrimaer2",Keys.TAB, "Kultivar ",Keys.TAB, "Frøkilde",Keys.TAB, "Underart  ",Keys.TAB, "Varietet ",Keys.TAB, "Form ",Keys.TAB, "Varemerke").perform();
     }
 
     @Then("Klikk Legg til under Andre sprok")
@@ -133,9 +141,9 @@ public class NyPlanteStepdefs {
 
     @And("Velg Engelsk som sprok")
     public void velgEngelskSomSprok() {
-        //ReusableMethods.wait(1);
+        ReusableMethods.wait(1);
         WebElement sprok = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        Select select= new Select(sprok);
+        Select select = new Select(sprok);
         //List<WebElement> sprokList = select.getOptions();
         //select.selectByIndex(random.nextInt(sprokList.size()));
         select.selectByIndex(4);
@@ -143,12 +151,14 @@ public class NyPlanteStepdefs {
 
     @And("Skriv i {string}")
     public void skrivINavn(String str) {
-        nyPlante.navn.sendKeys(str);
+        ReusableMethods.wait(1);
+        ReusableMethods.sendKeysJS(nyPlante.navn,str);
+        ReusableMethods.wait(1);
     }
 
     @Then("Klikk {string} for E-plante")
     public void klikkForEPlante(String str) {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         nyPlante.ePlante.click();
     }
 
@@ -172,31 +182,32 @@ public class NyPlanteStepdefs {
 
     @Then("Velg {string} fra Pollinator-vennlig")
     public void velgEnFraPollinatorVennlig(String str) {
-        WebElement pollinatorVennlig = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        ReusableMethods.ddmVisibleText(pollinatorVennlig,str);
+        WebElement pollinatorVennlig = Driver.getDriver().findElement(By.cssSelector("label[title='Pollinator-vennlig']+div>select"));
+        ReusableMethods.ddmVisibleText(pollinatorVennlig, str);
     }
 
     @Then("Velg {string} fra Matnyttig")
     public void velgFraMatnyttig(String str) {
-        WebElement matnyttig = Driver.getDriver().findElement(By.xpath("(//select)[2]"));
-        ReusableMethods.ddmVisibleText(matnyttig,str);
+        WebElement matnyttig = Driver.getDriver().findElement(By.cssSelector("label[title='Matnyttig']+div>select"));
+        ReusableMethods.ddmVisibleText(matnyttig, str);
     }
 
     @Then("Velg {string} fra Allergi")
     public void velgFraAllergi(String str) {
-        WebElement allergi = Driver.getDriver().findElement(By.xpath("(//select)[3]"));
-        ReusableMethods.ddmVisibleText(allergi,str);
+        WebElement allergi = Driver.getDriver().findElement(By.cssSelector("label[title='Allergi']+div>select"));
+        ReusableMethods.ddmVisibleText(allergi, str);
     }
 
     @Then("Velg {string} fra Naturlig levealder")
     public void velgFraNaturligLevealder(String str) {
-        WebElement naturlig = Driver.getDriver().findElement(By.xpath("(//select)[4]"));
-        ReusableMethods.ddmVisibleText(naturlig,str);
+        WebElement naturlig = Driver.getDriver().findElement(By.cssSelector("label[title='Naturlig levealder']+div>select"));
+        ReusableMethods.ddmVisibleText(naturlig, str);
     }
 
 
     @Then("Velg {string} alternativ fra Restriksjoner og vern")
     public void velgAlternativFraRestriksjonerOgVern(String str) {
+        ReusableMethods.wait(2);
         PlantevalgMethods.velgEnMultiSelect(nyPlante.restriksjonerOgVern, str);
 
     }
@@ -215,22 +226,22 @@ public class NyPlanteStepdefs {
     @Given("Klikk Storrelse og form")
     public void klikkStorrelseOgForm() {
         nyPlante.storrelseOgForm.click();
+        ReusableMethods.wait(1);
     }
 
-    @And("Velg hoyde")
-    public void velgHoyde() {
 
-    }
+
     @And("Velg hoyde mellom {string} - {string}")
     public void velgHoydeMellom(String str, String str2) {
-        nyPlante.hoyde.sendKeys(str,Keys.TAB, str2,Keys.TAB);
+        ReusableMethods.wait(1);
+        nyPlante.hoyde.sendKeys(str, Keys.TAB, str2, Keys.TAB);
     }
 
 
     @And("Velg {string} fra bredde")
     public void velgFraBredde(String str) {
         WebElement bredde = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        ReusableMethods.ddmVisibleText(bredde,str);
+        ReusableMethods.ddmVisibleText(bredde, str);
         //Select select= new Select(bredde);
         //List<WebElement> naturligList = select.getOptions();
         //select.selectByIndex(random.nextInt(naturligList.size()));
@@ -238,10 +249,11 @@ public class NyPlanteStepdefs {
         //ReusableMethods.wait(1);
 
     }
+
     @Then("Velg {string} fra form")
     public void velgFraForm(String str) {
         WebElement form = Driver.getDriver().findElement(By.xpath("(//select)[2]"));
-        ReusableMethods.ddmVisibleText(form,str);
+        ReusableMethods.ddmVisibleText(form, str);
         //Select select= new Select(form);
         //List<WebElement> naturligList = select.getOptions();
         //select.selectByIndex(random.nextInt(naturligList.size()));
@@ -252,7 +264,7 @@ public class NyPlanteStepdefs {
     @Then("Velg {string} fra rottype")
     public void velgFraRottype(String str) {
         WebElement rottype = Driver.getDriver().findElement(By.xpath("(//select)[3]"));
-        ReusableMethods.ddmVisibleText(rottype,str);
+        ReusableMethods.ddmVisibleText(rottype, str);
         //Select select= new Select(rottype);
         //List<WebElement> naturligList = select.getOptions();
         //select.selectByIndex(random.nextInt(naturligList.size()));
@@ -267,48 +279,51 @@ public class NyPlanteStepdefs {
         nyPlante.bruksomrode.click();
     }
 
-    @And("Klikk Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer")
-    public void klikkGruppeAlleTrerekkeFriHekkKlippetHekkMarkdekkendeSlyngKlatreplanteOgSolitaer() {
-        nyPlante.bruksomrodeValg.click();
-        nyPlante.bruksomrodeValg.click();
-        nyPlante.bruksomrodeValg.click();
-        nyPlante.bruksomrodeValg.click();
-        nyPlante.bruksomrodeValg.click();
-        nyPlante.bruksomrodeValg.click();
-        nyPlante.bruksomrodeValg.click();
+    @And("Klikk {string} Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer")
+    public void klikkGruppeAlleTrerekkeFriHekkKlippetHekkMarkdekkendeSlyngKlatreplanteOgSolitaer(String str) {
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        ReusableMethods.wait(1);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
     }
 
 
     @And("Skriv i {string} - {string} tregruppe")
     public void skrivITregruppe(String str, String str2) {
-        nyPlante.tregruppe.sendKeys(str,Keys.TAB, str2);
+
+        nyPlante.tregruppe.sendKeys(str, Keys.TAB, str2);
     }
 
     @And("Skriv i {string} - {string} Busk gruppe")
     public void skrivIBuskGruppe(String str, String str2) {
-        nyPlante.buskGruppe.sendKeys(str,Keys.TAB, str2);
+        nyPlante.buskGruppe.sendKeys(str, Keys.TAB, str2);
     }
 
 
     @And("Skriv i {string} - {string} Solitaer")
     public void skrivISolitaer(String str, String str2) {
-        nyPlante.solitaer.sendKeys(str,Keys.TAB, str2);
+        nyPlante.solitaer.sendKeys(str, Keys.TAB, str2);
     }
 
     @And("Skriv i {string} - {string} Klippet hekk")
     public void skrivIKlippetHekk(String str, String str2) {
-        nyPlante.klippetHekk.sendKeys(str,Keys.TAB, str2,Keys.TAB);
+        nyPlante.klippetHekk.sendKeys(str, Keys.TAB, str2, Keys.TAB);
     }
+
     @Then("Velg {string} fra Dekkevne")
     public void velgFraDekkevne(String str) {
         WebElement dekkevne = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        ReusableMethods.ddmVisibleText(dekkevne,str);
+        ReusableMethods.ddmVisibleText(dekkevne, str);
     }
 
     @Then("Velg {string} fra Beskjaeringsbehov")
     public void velgFraBeskjaeringsbehov(String str) {
         WebElement beskjaeringsbehov = Driver.getDriver().findElement(By.xpath("(//select)[2]"));
-        ReusableMethods.ddmVisibleText(beskjaeringsbehov,str);
+        ReusableMethods.ddmVisibleText(beskjaeringsbehov, str);
         //Select select= new Select(beskjaeringsbehov);
         //List<WebElement> naturligList = select.getOptions();
         //select.selectByIndex(random.nextInt(naturligList.size()));
@@ -322,45 +337,47 @@ public class NyPlanteStepdefs {
         nyPlante.plassering.click();
     }
 
-    @And("Klikk Lysforhold, Jord og Fuktighetsforhold")
-    public void klikkLysforholdJordOgFuktighetsforhold() {
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
-        nyPlante.lysforholdOgJordOgFuktighetsforhold.click();
+    @And("Klikk {string} Lysforhold, Jord og Fuktighetsforhold")
+    public void klikkLysforholdJordOgFuktighetsforhold(String str) {
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        ReusableMethods.wait(1);
+        PlantevalgMethods.klikkJaEllerNei(str);
+        PlantevalgMethods.klikkJaEllerNei(str);
     }
 
 
     @And("Skriv i {string} - {string} Innland")
     public void skrivIInnland(String str, String str2) {
-        nyPlante.innland.sendKeys(str, Keys.TAB,str2);
+        nyPlante.innland.sendKeys(str, Keys.TAB, str2);
     }
+
     @And("Skriv i {string} - {string} Kyst")
     public void skrivIKyst(String str, String str2) {
-        nyPlante.kyst.sendKeys(str, Keys.TAB,str2);
+        nyPlante.kyst.sendKeys(str, Keys.TAB, str2);
     }
 
     @Then("Velg {string} alternativ fra pH")
     public void velgAlternativFraPH(String str) {
-        PlantevalgMethods.velgEnMultiSelect(nyPlante.pH,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.pH, str);
     }
 
     @Then("Velg {string} alternativ fra Salttoleranse")
     public void velgAlternativFraSalttoleranse(String str) {
-        PlantevalgMethods.velgEnMultiSelect(nyPlante.salttoleranse,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.salttoleranse, str);
     }
 
     @Then("Velg {string} fra Vindtoleranse")
     public void velgFraVindtoleranse(String str) {
         WebElement vindtoleranse = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        ReusableMethods.ddmVisibleText(vindtoleranse,str);
+        ReusableMethods.ddmVisibleText(vindtoleranse, str);
     }
 
 
@@ -373,110 +390,111 @@ public class NyPlanteStepdefs {
 
     @Then("Velg {string} fra Blomst en eller flere farger")
     public void velgFraBlomstEnEllerFlereFarger(String str) {
-        PlantevalgMethods.velgEnMultiSelect(nyPlante.blomstEnEllerFlereFarger,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.blomstEnEllerFlereFarger, str);
     }
 
     @Then("Velg {string} fra Blomst farge")
     public void velgFraBlomstFarge(String str) {
-        PlantevalgMethods.velgEnMultiSelect(nyPlante.blomstFarge,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.blomstFarge, str);
     }
 
     @Then("Velg {string} fra Blomst andre farger")
     public void velgFraBlomstAndreFarger(String str) {
-    PlantevalgMethods.velgEnMultiSelect(nyPlante.blomstAndeFarger,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.blomstAndeFarger, str);
     }
 
     @Then("Velg {string} fra Blomst prydverdi")
     public void velgFraBlomstPrydverdi(String str) {
         WebElement blomstPrydverdi = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        ReusableMethods.ddmVisibleText(blomstPrydverdi,str);
+        ReusableMethods.ddmVisibleText(blomstPrydverdi, str);
     }
 
     @Then("Velg {string} fra Fylt")
     public void velgFraFylt(String str) {
         WebElement fylt = Driver.getDriver().findElement(By.xpath("(//select)[2]"));
-        ReusableMethods.ddmVisibleText(fylt,str);
+        ReusableMethods.ddmVisibleText(fylt, str);
     }
 
     @And("Skriv {string} - {string} i Blomstringstid")
     public void skrivIBlomstringstid(String str1, String str2) {
-        nyPlante.blomstringstid.sendKeys(str1, Keys.TAB,str2);
+        nyPlante.blomstringstid.sendKeys(str1, Keys.TAB, str2);
     }
 
     @And("Skriv {string} - {string} i Remontering-Gjenblomstring")
     public void skrivIRemonteringGjenblomstring(String str1, String str2) {
-        nyPlante.remontering.sendKeys(str1, Keys.TAB,str2);
+        nyPlante.remontering.sendKeys(str1, Keys.TAB, str2);
     }
 
     @And("Klikk {string} for Blomsterduft")
     public void klikkForBlomsterduft(String str) {
-        nyPlante.velgNei.click();
+        nyPlante.blomsterduft.click();
     }
 
     @And("Klikk {string} for Duft blad og stenge")
     public void klikkForDuftBladOgStenge(String str) {
-        nyPlante.velgNei.click();
+        nyPlante.duftBladStengel.click();
     }
 
 
     @Then("Velg {string} fra Fruktfarge")
     public void velgFraFruktfarge(String str) {
         WebElement fruktfarge = Driver.getDriver().findElement(By.xpath("(//select)[3]"));
-        ReusableMethods.ddmVisibleText(fruktfarge,str);
+        ReusableMethods.ddmVisibleText(fruktfarge, str);
     }
 
     @Then("Velg {string} fra Frukt tid")
     public void velgFraFruktTid(String str) {
-        PlantevalgMethods.velgEnMultiSelect( nyPlante.fruktTid,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.fruktTid, str);
     }
+
     @Then("Velg {string} fra Bladfarge")
     public void velgFraBladfarge(String str) {
-        PlantevalgMethods.velgEnMultiSelect(nyPlante.bladfarge,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.bladfarge, str);
     }
 
     @Then("Velg {string} fra Bladform")
     public void velgFraBladform(String str) {
-        PlantevalgMethods.velgEnMultiSelect( nyPlante.bladform,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.bladform, str);
     }
 
     @Then("Velg {string} fra Bladstorrelse")
     public void velgFraBladstorrelse(String str) {
         WebElement bladstorrelse = Driver.getDriver().findElement(By.xpath("(//select)[4]"));
-        ReusableMethods.ddmVisibleText(bladstorrelse,str);
+        ReusableMethods.ddmVisibleText(bladstorrelse, str);
     }
 
     @Then("Velg {string} fra Hostfarger")
     public void velgFraHostfarger(String str) {
-        PlantevalgMethods.velgEnMultiSelect( nyPlante.hostfarger,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.hostfarger, str);
     }
 
     @Then("Velg {string} fra Vinterkarakter")
     public void velgFraVinterkarakter(String str) {
-        PlantevalgMethods.velgEnMultiSelect( nyPlante.vinterkarakter,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.vinterkarakter, str);
 
     }
 
     @Then("Velg {string} fra Torner")
     public void velgFraTorner(String str) {
         WebElement torner = Driver.getDriver().findElement(By.xpath("(//select)[5]"));
-        ReusableMethods.ddmVisibleText(torner,str);
+        ReusableMethods.ddmVisibleText(torner, str);
 
     }
 
     @Then("Velg {string} fra Stamme barkstruktur")
     public void velgFraStammeBarkstruktur(String str) {
-        PlantevalgMethods.velgEnMultiSelect(nyPlante.stammeBarkstruktur,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.stammeBarkstruktur, str);
     }
 
     @Then("Velg {string} fra Stamme barkfarge")
     public void velgFraStammeBarkfarge(String str) {
-        PlantevalgMethods.velgEnMultiSelect(nyPlante.stammeBarkfarge,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.stammeBarkfarge, str);
 
     }
 
     @Then("Velg {string} fra Skudd-greiner farge")
     public void velgFraSkuddGreinerFarge(String str) {
-        PlantevalgMethods.velgEnMultiSelect(nyPlante.skuddGreinerFarge,str);
+        PlantevalgMethods.velgEnMultiSelect(nyPlante.skuddGreinerFarge, str);
     }
 
 
@@ -494,26 +512,27 @@ public class NyPlanteStepdefs {
     @And("Velg {string} type bilde")
     public void velgTypeBilde(String str) {
         WebElement typeBilde = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        ReusableMethods.ddmVisibleText(typeBilde,str);
+        ReusableMethods.ddmVisibleText(typeBilde, str);
 
     }
 
     @And("Velg {string} Fotograf")
     public void velgFotograf(String str) {
         WebElement fotograf = Driver.getDriver().findElement(By.xpath("(//select)[2]"));
-        ReusableMethods.ddmVisibleText(fotograf,str);
+        ReusableMethods.ddmVisibleText(fotograf, str);
 
     }
+
     @And("Skriv {string} i Fotokilde, {string} i Notis,{string} i Hvor er bilde tatt,{string} i Postnummer,{string} i Poststed")
     public void skrivIFotokildeINotisIHvorErBildeTattIPostnummerIPoststed(String str0, String str1, String str2, String str3, String str4) {
-        nyPlante.fotokilde.sendKeys(str0, Keys.TAB, str1, Keys.TAB,str2, Keys.TAB, str3, Keys.TAB, str4);
+        nyPlante.fotokilde.sendKeys(str0, Keys.TAB, str1, Keys.TAB, str2, Keys.TAB, str3, Keys.TAB, str4);
     }
 
     @Then("Klikk Velg Bilde {string}")
     public void klikkVelgBilde(String str) {
         nyPlante.velgBilde.click();
         ReusableMethods.wait(1);
-        String filbane = "C:\\Users\\SenaAlbahan\\Downloads\\"+str+".jpg";
+        String filbane = "C:\\Users\\SenaAlbahan\\Downloads\\" + str + ".jpg";
         ReusableMethods.uploadFile(filbane);
         ReusableMethods.visibleWait(nyPlante.bildeBekreftelse, 30);
     }
@@ -533,17 +552,17 @@ public class NyPlanteStepdefs {
 
     @Then("Skriv i Tilleggsopplysninger")
     public void skrivITilleggsopplysninger() {
-        nyPlante.tilleggsopplysninger.sendKeys(faker.harryPotter().quote());
+        nyPlante.tilleggsopplysninger.sendKeys("Tilleggsopplysninger");
     }
 
     @And("Skriv i Kommentar")
     public void skrivIKommentar() {
-        nyPlante.kommentar.sendKeys(faker.harryPotter().quote());
+        nyPlante.kommentar.sendKeys("Kommentar");
     }
 
     @And("Skriv i Forskeres erfaring med planten")
     public void skrivIForskeresErfaringMedPlanten() {
-        nyPlante.forskeresErfaringMedPlanten.sendKeys(faker.harryPotter().quote());
+        nyPlante.forskeresErfaringMedPlanten.sendKeys("Forskeres erfaring med planten");
     }
 
     //Forskning
@@ -557,10 +576,16 @@ public class NyPlanteStepdefs {
         nyPlante.leggTilForskningsresultat.click();
     }
 
-    @Then("Skriv {string} i Forfattere,{string} i Ar, {string} i Tittel, {string} i Utgiver, {string} i Fra, {string} i Til, {string} ISBN, {string} i Tilgjengelig fra nett og {string} i Hentet dato")
-    public void skrivIForfattereIArITittelIUtgiverIFraITilISBNITilgjengeligFraNettOgIHentetDato(String arg0, String arg1, String arg2, String arg3, String arg4, String arg5, String arg6, String arg7, String arg8) {
-        nyPlante.forfattere.sendKeys(arg0,Keys.TAB,arg1,Keys.TAB,arg2,Keys.TAB,arg3,Keys.TAB,arg4,Keys.TAB,arg5,Keys.TAB,arg6,Keys.TAB,arg7,Keys.TAB,arg8);
-        actions.sendKeys(nyPlante.dato,"1212").perform();
+    @Then("Skriv {string} i Forfattere,{string} i Ar, {string} i Tittel, {string} i Utgiver, {string} i Fra, {string} i Til, {string} ISBN, {string} i Tilgjengelig fra nett og Hentet dato")
+    public void skrivIForfattereIArITittelIUtgiverIFraITilISBNITilgjengeligFraNettOgHentetDato(String arg0, String arg1, String arg2, String arg3, String arg4, String arg5, String arg6, String arg7) {
+        ReusableMethods.wait(2);
+        nyPlante.forfattere.sendKeys(arg0, Keys.TAB, arg1, Keys.TAB, arg2, Keys.TAB, arg3, Keys.TAB, arg4, Keys.TAB, arg5, Keys.TAB, arg6, Keys.TAB, arg7);
+        LocalDate myCurrentDate = LocalDate.now();
+        String yearValue = String.valueOf(myCurrentDate.getYear());
+        String montValue = String.valueOf(myCurrentDate.getMonthValue());
+        String dayValue = String.valueOf(myCurrentDate.getDayOfMonth());
+        actions.click(nyPlante.dato).sendKeys(yearValue,Keys.ARROW_LEFT,montValue,Keys.ARROW_LEFT,Keys.ARROW_LEFT,dayValue).perform();
+        ReusableMethods.wait(1);
     }
 
     //Slett plante
@@ -568,7 +593,7 @@ public class NyPlanteStepdefs {
     public void slettPlante() {
         ReusableMethods.wait(15);
         nyPlante.slettPlante.click();
-      ReusableMethods.wait(1);
+        ReusableMethods.wait(1);
         nyPlante.slettPlanteJA.click();
     }
 
@@ -579,5 +604,8 @@ public class NyPlanteStepdefs {
     }
 
 
-
+    @Given("Vente {int} sekunder")
+    public void venteSekunder(int skn) {
+        ReusableMethods.wait(skn);
+    }
 }

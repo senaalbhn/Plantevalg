@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.UiStepDef;
 
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
@@ -9,12 +9,16 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HjemmesidePage;
 import pages.NyPlantePage;
 import pages.PlanteSidePage;
 import utilities.Driver;
 import utilities.ReusableMethods;
+
+import java.time.Duration;
 
 public class RedigerPlanteStepdefs {
     HjemmesidePage hjemmeside= new HjemmesidePage();
@@ -29,7 +33,6 @@ public class RedigerPlanteStepdefs {
 
     @Given("Klikk Plante")
     public void klikkPlante() {
-        hjemmeside.nullstill.click();
         hjemmeside.forstePlante.click();
     }
 
@@ -42,7 +45,7 @@ public class RedigerPlanteStepdefs {
     @Then("Bytt Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke")
     public void byttSlektArtsepitetKultivarFrøkildeUnderartVarietetFormVaremerke() {
         fakeSlekt2=faker.harryPotter().character();
-        nyPlante.slekt.sendKeys(Keys.CONTROL, "a",Keys.CONTROL,"Slekt2", Keys.TAB, "Artsepitet2",Keys.TAB, "Kultivar2", Keys.TAB, "Frøkilde2", Keys.TAB, "Underart2", Keys.TAB, "Varietet2", Keys.TAB, "Form2", Keys.TAB, "Varemerke2");
+        nyPlante.slekt.sendKeys(Keys.CONTROL, "a",Keys.CONTROL,"Avocado2", Keys.TAB, "Artsepitet2",Keys.TAB, "Kultivar2", Keys.TAB, "Frøkilde2", Keys.TAB, "Underart2", Keys.TAB, "Varietet2", Keys.TAB, "Form2", Keys.TAB, "Varemerke2");
     }
 
     @And("Velg Hybrid mellom slekter")
@@ -108,7 +111,7 @@ public class RedigerPlanteStepdefs {
 
     @Then("Klikk Legg til flere sprok under Andre sprok")
     public void klikkLeggTilFlereSprokUnderAndreSprok() {
-    nyPlante.leggTilSprok.click();
+    planteSide.flereSprook.click();
     }
 
     @And("Velg Norsk som sprok")
@@ -131,9 +134,8 @@ public class RedigerPlanteStepdefs {
     @And("Velg Lovfellende")
     public void velgLovfellende() {
         planteSide.lovfellende.click();
+        ReusableMethods.wait(1);
     }
-
-
 
 
     @Then("Velg en annen fra form")
@@ -150,7 +152,6 @@ public class RedigerPlanteStepdefs {
     @Then("Klikk po og bytte det tidligere lagrede Bildet")
     public void klikkPoOgBytteDetTidligereLagredeBildet() {
         planteSide.registertBilde.click();
-
     }
 //Tilleggsinformasjon
     @Then("Bytt Tilleggsopplysninger")
@@ -195,5 +196,10 @@ public class RedigerPlanteStepdefs {
         planteSide.planteForKnytt.click();
         planteSide.planteForKnyttInfo.sendKeys(faker.backToTheFuture().quote());
         planteSide.knyttButton.click();
+    }
+
+    @And("Vent til nytt bilde")
+    public void ventTilNyttBilde() {
+        ReusableMethods.wait(20);
     }
 }

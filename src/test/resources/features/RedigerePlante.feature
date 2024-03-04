@@ -1,11 +1,11 @@
 Feature: Redigere Plante Test
 
-  @q2
+  @q2 @dato @synonym @bilde
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
 
-  @q2
+  @q2 @dato @synonym @bilde
   Scenario: Brukeren skal kunne velge en plante for redigering
     Given   Klikk Plante
     Then    Klikk Rediger
@@ -56,19 +56,19 @@ Feature: Redigere Plante Test
   @q2
   Scenario: Brukeren skal kunne redigere Bruksområde informasjon
     Given  Klikk Bruksomrode
-    And    Klikk Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer
-    And    Skriv i "1" - "2500" tregruppe
-    And    Skriv i "1" - "2500" Busk gruppe
-    And    Skriv i "1" - "2500" Solitaer
-    And    Skriv i "1" - "2500" Klippet hekk
+    And    Klikk "Ja" Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer
+    And    Skriv i "1567" - "2500" tregruppe
+    And    Skriv i "1567" - "2500" Busk gruppe
+    And    Skriv i "1567" - "2500" Solitaer
+    And    Skriv i "1567" - "2500" Klippet hekk
     Then   Velg "Stor" fra Dekkevne
     Then   Velg "Lite" fra Beskjaeringsbehov
   @q2
   Scenario: Brukeren skal kunne redigere Plassering informasjon
     Given  Klikk Plassering
-    And    Klikk Lysforhold, Jord og Fuktighetsforhold
+    And    Klikk "Ja" Lysforhold, Jord og Fuktighetsforhold
     And    Skriv i "1" - "7" Innland
-    And    Skriv i "3" - "8" Kyst
+    And    Skriv i "6" - "8" Kyst
     Then   Velg "Middels 5,5-7" alternativ fra pH
     Then   Velg "Toleranse for salt i luft" alternativ fra Salttoleranse
     Then   Velg "Bør stå i le" fra Vindtoleranse
@@ -95,7 +95,7 @@ Feature: Redigere Plante Test
     Then   Velg "Glatt" fra Stamme barkstruktur
     Then   Velg "Gul (grønn)" fra Stamme barkfarge
     Then   Velg "Grå" fra Skudd-greiner farge
-  @q2
+  @q2 @bilde
   Scenario: Brukeren skal kunne redigere Bilde
     Given  Klikk Bilde
     Then   Klikk po og bytte det tidligere lagrede Bildet
@@ -103,6 +103,8 @@ Feature: Redigere Plante Test
     And    Velg "Sally O’Halloran" Fotograf
     And    Skriv "Fotokilde2" i Fotokilde, "Notis2" i Notis,"Hvor er bilde tatt2" i Hvor er bilde tatt,"Postnummer2" i Postnummer,"Poststed2" i Poststed
     Then   Klikk Velg Bilde "eple3"
+    And    Vent til nytt bilde
+    Then   Klikk Lagre og Lukk
     Then   Klikk Legg Til
     And    Velg "Diversebilde" type bilde
     And    Velg "Erik Burås" Fotograf
@@ -129,4 +131,20 @@ Feature: Redigere Plante Test
     And    Skriv "Nivero" i searchbox og velg planten, skriv "Oppsummering av forskningen vedrørende denne planten" i textbox og klikk knytt
     Given  Klikk Legg til forskningsresultat
     And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og "121220" i Hentet dato
+    And    Klikk Lagre
+
+  @dato
+  Scenario: Brukeren skal kunne redigere Forskning-dato
+    Given  Klikk Forskning
+    Given  Klikk Legg til forskningsresultat
+    And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og "121220" i Hentet dato
+  @synonym
+  Scenario: Brukeren skal kunne redigere Navn og opprinnelse informasjon
+    Given  Klikk Navn og opprinnelse
+    Then   Klikk Legg til under Synonymer botanisk navn
+    And    Fyll ut Slekt, Artsepitet for Primaer opprinnelse i Synonym
+    And    Klikk Lagre
+    Then   Klikk Legg til under Andre sprok
+    And    Velg Engelsk som sprok
+    And    Skriv i "English Name"
     And    Klikk Lagre
