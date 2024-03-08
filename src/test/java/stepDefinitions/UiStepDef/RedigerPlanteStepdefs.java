@@ -45,7 +45,7 @@ public class RedigerPlanteStepdefs {
     @Then("Bytt Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke")
     public void byttSlektArtsepitetKultivarFrøkildeUnderartVarietetFormVaremerke() {
         fakeSlekt2=faker.harryPotter().character();
-        nyPlante.slekt.sendKeys(Keys.CONTROL, "a",Keys.CONTROL,"Avocado2", Keys.TAB, "Artsepitet2",Keys.TAB, "Kultivar2", Keys.TAB, "Frøkilde2", Keys.TAB, "Underart2", Keys.TAB, "Varietet2", Keys.TAB, "Form2", Keys.TAB, "Varemerke2");
+        nyPlante.slekt.sendKeys(Keys.CONTROL, "a",Keys.CONTROL,"Avocadoo2", Keys.TAB, "Artsepitet2",Keys.TAB, "Kultivar2", Keys.TAB, "Frøkilde2", Keys.TAB, "Underart2", Keys.TAB, "Varietet2", Keys.TAB, "Form2", Keys.TAB, "Varemerke2");
     }
 
     @And("Velg Hybrid mellom slekter")
@@ -134,7 +134,7 @@ public class RedigerPlanteStepdefs {
     @And("Velg Lovfellende")
     public void velgLovfellende() {
         planteSide.lovfellende.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.visibleWait(nyPlante.plantegruppeLovfellendeBekreft,10);
     }
 
 
@@ -156,17 +156,17 @@ public class RedigerPlanteStepdefs {
 //Tilleggsinformasjon
     @Then("Bytt Tilleggsopplysninger")
     public void byttTilleggsopplysninger() {
-        nyPlante.tilleggsopplysninger.sendKeys(faker.harryPotter().quote());
+        nyPlante.tilleggsopplysninger.sendKeys("Bytte Tilleggsopplysninger");
     }
 
     @And("Bytt Kommentar")
     public void byttKommentar() {
-        nyPlante.kommentar.sendKeys(faker.harryPotter().quote());
+        nyPlante.kommentar.sendKeys("Byttet Kommentar");
     }
 
     @And("Bytt Forskeres erfaring med planten")
     public void byttForskeresErfaringMedPlanten() {
-        nyPlante.forskeresErfaringMedPlanten.sendKeys(faker.harryPotter().quote());
+        nyPlante.forskeresErfaringMedPlanten.sendKeys("Byttet Forskeres erfaring med planten");
     }
 //Forskningen
     @Then("Klikk redigere forskningen")
@@ -187,6 +187,7 @@ public class RedigerPlanteStepdefs {
 
     @And("Klikk Knytt til flere")
     public void klikkKnyttTilFlere() {
+        planteSide.apneForskning.click();
         planteSide.knyttTilFlere.click();
     }
 

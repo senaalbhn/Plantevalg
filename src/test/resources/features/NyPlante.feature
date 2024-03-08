@@ -1,11 +1,11 @@
 Feature: Ny Plante Tilsetning Test
 
-  @q1 @d
+  @q1 @d @egenskaper
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
 
-  @q1 @d
+  @q1 @d @egenskaper
   Scenario: Brukeren skal kunne legge til Botanisk navn informasjon
     Given   Klikk Ny Plnate
     Then    Fyll ut Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke
@@ -23,25 +23,25 @@ Feature: Ny Plante Tilsetning Test
     Then   Klikk "Nei" for Viltvoksende i Norge og Produsert i Norge
     Then   Klikk Legg til under Synonymer botanisk navn
     And    Fyll ut Slekt, Artsepitet for Primaer opprinnelse i Synonym
-    And    Klikk Lagre
+  #  And    Klikk Lagre
     Then   Klikk Legg til under Andre sprok
     And    Velg Engelsk som sprok
     And    Skriv i "English Name"
-    And    Klikk Lagre
+   # And    Klikk Lagre
     Then   Klikk "Nei" for E-plante
 
-  @q1
+  @q1 @egenskaper
   Scenario: Brukeren skal kunne legge til Egenskaper informasjon
     Given  Klikk Egenskaper
-    And    Velg Traer
-    And    Velg Alltidgronn
+    Then   Velg "Søknadspliktig iht forskrift fremmede organismer vedl 5" alternativ fra Restriksjoner og vern
     Then   Velg "Ja" fra Pollinator-vennlig
     Then   Velg "Honningplante" fra Matnyttig
     Then   Velg "Hudkontakt" fra Allergi
     Then   Velg "Lang (100-300 år)" fra Naturlig levealder
-    Then   Velg "Søknadspliktig iht forskrift fremmede organismer vedl 5" alternativ fra Restriksjoner og vern
     Then   Klikk "Nei" for Vegetativ
     Then   Klikk "Nei" for Fro
+    And    Velg Traer
+    And    Velg Alltidgronn
 
   @q1
   Scenario: Brukeren skal kunne legge til Størrelse og form informasjon
@@ -102,7 +102,7 @@ Feature: Ny Plante Tilsetning Test
     And    Velg "Diversebilde" type bilde
     And    Velg "Erik Burås" Fotograf
     And    Skriv "Fotokilde" i Fotokilde, "Notis" i Notis,"Hvor er bilde tatt" i Hvor er bilde tatt,"Postnummer" i Postnummer,"Poststed" i Poststed
-    Then   Klikk Velg Bilde "eple"
+    Then   Klikk Velg Bilde "avocado"
     Then   Klikk Lagre og Lukk
 
   @q1

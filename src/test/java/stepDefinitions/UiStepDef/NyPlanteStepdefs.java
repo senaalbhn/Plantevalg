@@ -24,6 +24,7 @@ import utilities.ReusableMethods;
 import org.testng.asserts.SoftAssert;
 
 import javax.swing.*;
+import java.awt.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -56,7 +57,8 @@ public class NyPlanteStepdefs {
 
     @Then("Klikk Ny Plnate")
     public void klikkNyPlnate() {
-        //ReusableMethods.wait(1);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(nyPlante.nyPlante));
         nyPlante.nyPlante.click();
     }
     //Botonisk Navn
@@ -64,7 +66,7 @@ public class NyPlanteStepdefs {
     @And("Fyll ut Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke")
     public void fyllUtSlektArtsepitetKultivarFrøkildeUnderartVarietetFormVaremerke() {
         fakeSlekt = faker.food().fruit();
-        nyPlante.slekt.sendKeys("Avocado", Keys.TAB, "Artsepitet", Keys.TAB, "Kultivar", Keys.TAB, "Frøkilde", Keys.TAB, "Underart", Keys.TAB, "Varietet", Keys.TAB, "Form ", Keys.TAB, "Varemerke ");
+        nyPlante.slekt.sendKeys("Avocadoo", Keys.TAB, "Artsepitet", Keys.TAB, "Kultivar", Keys.TAB, "Frøkilde", Keys.TAB, "Underart", Keys.TAB, "Varietet", Keys.TAB, "Form ", Keys.TAB, "Varemerke ");
     }
 
     @And("Velg Hybrid mellom arter")
@@ -106,13 +108,13 @@ public class NyPlanteStepdefs {
 
     @And("Fyll ut Slekt, Artsepitet for Sekundaer opprinnelse")
     public void fyllUtSlektArtsepitetForSekundaerOpprinnelse() {
-        nyPlante.slektSekundaerOpprinnelse.sendKeys("SlektSekundaer", Keys.TAB, "ArtsepitetSekundaer");
-        ReusableMethods.wait(1);
+        nyPlante.slektSekundaerOpprinnelse.sendKeys("SlektSekundaer", Keys.TAB, "ArtsepitetSekundear");
     }
 
     @And("Klikk Lagre")
     public void klikkLagre() {
-        ReusableMethods.wait(1);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(nyPlante.lagreButton));
         nyPlante.lagreButton.click();
     }
 
@@ -130,7 +132,14 @@ public class NyPlanteStepdefs {
 
     @And("Fyll ut Slekt, Artsepitet for Primaer opprinnelse i Synonym")
     public void fyllUtSlektArtsepitetForPrimaerOpprinnelseISynonym() {
-        actions.click(nyPlante.slektSynonym).sendKeys("SlektPrimaer2", Keys.TAB, "ArtsepitetPrimaer2",Keys.TAB, "Kultivar ",Keys.TAB, "Frøkilde",Keys.TAB, "Underart  ",Keys.TAB, "Varietet ",Keys.TAB, "Form ",Keys.TAB, "Varemerke").perform();
+        ReusableMethods.click(nyPlante.slektSynonym);
+        ReusableMethods.wait(1);
+        ReusableMethods.sendKeysJS(nyPlante.slektSynonym, "SlektSynonym");
+        ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")));
+        ReusableMethods.wait(1);
+        ReusableMethods.sendKeysJS(Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")),"ArtsepitetSynonym");
+        ReusableMethods.wait(5);
+        ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("button[title='Lagre']")));
     }
 
     @Then("Klikk Legg til under Andre sprok")
@@ -142,18 +151,20 @@ public class NyPlanteStepdefs {
     @And("Velg Engelsk som sprok")
     public void velgEngelskSomSprok() {
         ReusableMethods.wait(1);
-        WebElement sprok = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-        Select select = new Select(sprok);
-        //List<WebElement> sprokList = select.getOptions();
-        //select.selectByIndex(random.nextInt(sprokList.size()));
-        select.selectByIndex(4);
+        ReusableMethods.ddmIndex(Driver.getDriver().findElement(By.xpath("(//select)[1]")), 4);
+       // WebElement sprok = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
+       // Select select = new Select(sprok);
+      //  select.selectByIndex(4);
     }
 
     @And("Skriv i {string}")
     public void skrivINavn(String str) {
         ReusableMethods.wait(1);
-        ReusableMethods.sendKeysJS(nyPlante.navn,str);
+        ReusableMethods.click(nyPlante.navn);
         ReusableMethods.wait(1);
+        ReusableMethods.sendKeysJS(nyPlante.navn,str);
+        ReusableMethods.wait(5);
+        ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("button[title='Lagre']")));
     }
 
     @Then("Klikk {string} for E-plante")
@@ -171,13 +182,13 @@ public class NyPlanteStepdefs {
     @And("Velg Traer")
     public void velgTraer() {
         nyPlante.plantegruppeTraer.click();
+        ReusableMethods.visibleWait(nyPlante.plantegruppeTraerBekreft,10);
     }
 
     @And("Velg Alltidgronn")
     public void velgAlltidgronn() {
-        ReusableMethods.wait(1);
         nyPlante.plantegruppeAlltidgronn.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.visibleWait(nyPlante.plantegruppeAlltidgronnBekreft,10);
     }
 
     @Then("Velg {string} fra Pollinator-vennlig")
@@ -207,9 +218,7 @@ public class NyPlanteStepdefs {
 
     @Then("Velg {string} alternativ fra Restriksjoner og vern")
     public void velgAlternativFraRestriksjonerOgVern(String str) {
-        ReusableMethods.wait(2);
         PlantevalgMethods.velgEnMultiSelect(nyPlante.restriksjonerOgVern, str);
-
     }
 
     @Then("Klikk {string} for Vegetativ")
@@ -219,6 +228,7 @@ public class NyPlanteStepdefs {
 
     @Then("Klikk {string} for Fro")
     public void klikkNeiForFro(String str) {
+        ReusableMethods.wait(1);
         nyPlante.fro.click();
     }
 
@@ -234,7 +244,8 @@ public class NyPlanteStepdefs {
     @And("Velg hoyde mellom {string} - {string}")
     public void velgHoydeMellom(String str, String str2) {
         ReusableMethods.wait(1);
-        nyPlante.hoyde.sendKeys(str, Keys.TAB, str2, Keys.TAB);
+        nyPlante.hoyde.sendKeys( str,Keys.TAB, str2, Keys.TAB);
+
     }
 
 
@@ -361,7 +372,8 @@ public class NyPlanteStepdefs {
 
     @And("Skriv i {string} - {string} Kyst")
     public void skrivIKyst(String str, String str2) {
-        nyPlante.kyst.sendKeys(str, Keys.TAB, str2);
+        nyPlante.kyst.sendKeys(Keys.TAB, str2);
+        nyPlante.kyst.sendKeys(str);
     }
 
     @Then("Velg {string} alternativ fra pH")
@@ -573,6 +585,8 @@ public class NyPlanteStepdefs {
 
     @Given("Klikk Legg til forskningsresultat")
     public void klikkLeggTilForskningsresultat() {
+        ReusableMethods.wait(1);
+        ReusableMethods.scrollEnd();
         nyPlante.leggTilForskningsresultat.click();
     }
 

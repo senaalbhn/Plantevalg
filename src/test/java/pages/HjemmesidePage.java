@@ -13,8 +13,10 @@ public class HjemmesidePage {
 
     @FindBy (xpath = "//*[@type='email']" )
     public WebElement epost;
-    @FindBy (css = "a[title*='Avocado']>div[class^='_name']" )
+    @FindBy (xpath = "//span[text()='Avocadoo']" )
     public WebElement forstePlante;
+    @FindBy (xpath = "//span[text()='Avocadoo']" )
+    public WebElement redigertetPlante;
     @FindBy (xpath = "//button[@title='Nullstill']" )
     public WebElement nullstill;
     @FindBy (css = "input[placeholder='Søk i plantebasen']" )

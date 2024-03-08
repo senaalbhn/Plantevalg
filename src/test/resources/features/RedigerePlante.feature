@@ -1,11 +1,11 @@
 Feature: Redigere Plante Test
 
-  @q2 @dato @synonym @bilde
+  @q2 @dato @synonym @bilde @forsk
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
 
-  @q2 @dato @synonym @bilde
+  @q2 @dato @synonym @bilde @forsk
   Scenario: Brukeren skal kunne velge en plante for redigering
     Given   Klikk Plante
     Then    Klikk Rediger
@@ -102,14 +102,14 @@ Feature: Redigere Plante Test
     And    Velg "Vårbilde" type bilde
     And    Velg "Sally O’Halloran" Fotograf
     And    Skriv "Fotokilde2" i Fotokilde, "Notis2" i Notis,"Hvor er bilde tatt2" i Hvor er bilde tatt,"Postnummer2" i Postnummer,"Poststed2" i Poststed
-    Then   Klikk Velg Bilde "eple3"
+    Then   Klikk Velg Bilde "avocado2"
     And    Vent til nytt bilde
     Then   Klikk Lagre og Lukk
     Then   Klikk Legg Til
     And    Velg "Diversebilde" type bilde
     And    Velg "Erik Burås" Fotograf
     And    Skriv "Fotokilde3" i Fotokilde, "Notis3" i Notis,"Hvor er bilde tatt3" i Hvor er bilde tatt,"Postnummer3" i Postnummer,"Poststed3" i Poststed
-    Then   Klikk Velg Bilde "eple2"
+    Then   Klikk Velg Bilde "avocado3"
     Then   Klikk Lagre og Lukk
   @q2
   Scenario: Brukeren skal kunne redigere Tilleggsinformasjon informasjon
@@ -117,27 +117,27 @@ Feature: Redigere Plante Test
     Then   Bytt Tilleggsopplysninger
     And    Bytt Kommentar
     And    Bytt Forskeres erfaring med planten
-  @q2
+  @q2 @forsk
   Scenario: Brukeren skal kunne redigere Forskning
     Given  Klikk Forskning
     Then   Klikk redigere forskningen
-    Then   Skriv "Forfattere2" i Forfattere,"2000" i Ar, "Tittel2" i Tittel, "Utgiver2" i Utgiver, "42" i Fra, "76" i Til, "ISBN00000" ISBN, "https://www.example2.com/file.pdf" i Tilgjengelig fra nett og "030313" i Hentet dato
+    Then   Skriv "Forfattere2" i Forfattere,"2000" i Ar, "Tittel2" i Tittel, "Utgiver2" i Utgiver, "42" i Fra, "76" i Til, "ISBN00000" ISBN, "https://www.example2.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
     And    Skriv i Oppsummering av forskningen, Steder for forskning og utproving, Oppsummering av forskningen vedrorende denne planten
     And    Klikk Legg til referanse
-    And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og "121220" i Hentet dato
+    And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
     And    Klikk Knytt til flere
     And    Skriv "Nivero" i searchbox og velg planten, skriv "Oppsummering av forskningen vedrørende denne planten" i textbox og klikk knytt
     Given  Klikk Legg til forskningsresultat
-    And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og "121220" i Hentet dato
+    And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
 
   @dato
   Scenario: Brukeren skal kunne redigere Forskning-dato
     Given  Klikk Forskning
     Given  Klikk Legg til forskningsresultat
-    And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og "121220" i Hentet dato
+    Then   Skriv "Forfattere2" i Forfattere,"2000" i Ar, "Tittel2" i Tittel, "Utgiver2" i Utgiver, "42" i Fra, "76" i Til, "ISBN00000" ISBN, "https://www.example2.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
   @synonym
   Scenario: Brukeren skal kunne redigere Navn og opprinnelse informasjon
     Given  Klikk Navn og opprinnelse
