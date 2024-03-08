@@ -58,9 +58,9 @@ public class PlanteSidePage {
     @FindBy(xpath = "//button[@class='_iconButton_zwn2h_1 _colorDarkGray_zwn2h_111 _hasBorder_zwn2h_24 _sizeSmall_zwn2h_60 _shadow_zwn2h_21 _background_zwn2h_18']")
     public WebElement registertBilde;
     //Forskning
-    @FindBy(xpath = "(//button[@class='_iconButton_zwn2h_1  _hasBorder_zwn2h_24 _sizeSmall_zwn2h_60 _shadow_zwn2h_21 _background_zwn2h_18'])[1]")
+    @FindBy(css = "div[class=' textStyleHeaderSmall']+div button")
     public WebElement redigereForskning;
-    @FindBy(xpath = "(//button[@class='_iconButton_zwn2h_1  _hasBorder_zwn2h_24 _sizeSmall_zwn2h_60 _shadow_zwn2h_21 _background_zwn2h_18'])[1]")
+    @FindBy(css = "div[class=' textStyleHeaderSmall']+div+div button")
     public WebElement apneForskning;
     @FindBy(xpath = "(//textarea)[1]")
     public WebElement oppsummeringAvForskningen;

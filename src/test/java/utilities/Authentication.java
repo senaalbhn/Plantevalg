@@ -6,13 +6,16 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class Authentication {
-    public static String generateToken(String username, String password){
+    public static void main(String[] args) {
+        System.out.println("generate token()= "+generateToken(ConfigReader.getProperty("email"),ConfigReader.getProperty("password")));
+    }
+    public static String generateToken(String email, String password){
         String body = "{\n" +
-                "  \"password\": \""+password+"\",\n" +
-                "  \"username\": \""+username+"\"\n" +
+                "  \"email\": \""+email+"\",\n" +
+                "  \"password\": \""+password+"\"\n" +
                 "}";
 
-        Response response = given().body(body).contentType(ContentType.JSON).when().post("https://test-plantevalg.azurewebsites.net/");
-        return response.jsonPath().getString("token");
+        Response response = given().body(body).contentType(ContentType.JSON).when().post("https://test-plantevalg.azurewebsites.net/api/user/signIn");
+        return response.jsonPath().getString("tokens.accessToken");
     }
 }

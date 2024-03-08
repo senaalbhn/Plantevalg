@@ -63,6 +63,13 @@ public class NyPlantePage {
     public WebElement plantegruppeTraer;
     @FindBy(css = "div[title^='All']")
     public WebElement plantegruppeAlltidgronn;
+    @FindBy(xpath = "//div[(@class='_plantGroupCard_1i63u_1 _selected_1i63u_39')and(@title='Trær')]")
+    public WebElement plantegruppeTraerBekreft;
+    @FindBy(xpath = "//div[(@class='_plantGroupCard_1i63u_1 _selected_1i63u_39')and(@title='Alltidgrønn')]")
+    public WebElement plantegruppeAlltidgronnBekreft;
+    @FindBy(xpath = "//div[(@class='_plantGroupCard_1i63u_1 _selected_1i63u_39')and(@title='Løvfellende')]")
+    public WebElement plantegruppeLovfellendeBekreft;
+
     @FindBy(xpath = "//*[@class='_input_2gb8b_44']")
     public WebElement restriksjonerOgVern;
     @FindBy(xpath = "(//*[@class='_option_2gb8b_78'])[1]")

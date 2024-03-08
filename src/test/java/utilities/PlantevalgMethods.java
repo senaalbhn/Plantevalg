@@ -4,11 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.asserts.SoftAssert;
 import pages.NyPlantePage;
 
 public class PlantevalgMethods {
     static NyPlantePage nyPlante= new NyPlantePage();
     static Actions actions= new Actions(Driver.getDriver());
+
 
 
     public static void velgEnFraRestriksjonerOgVern(int idx) {
@@ -31,6 +33,12 @@ public class PlantevalgMethods {
     public static void klikkJaEllerNei (String str) {
         WebElement button = Driver.driver.findElement(By.xpath("(//a[@title='"+str+"'])[1]"));
         actions.click(button).perform();
+    }
+    public static void bekreft(WebElement element,String expectedData){
+        SoftAssert softAssert = new SoftAssert();
+        String actual= element.getAttribute("title");
+        String actualData= actual.split(":")[1].trim();
+        softAssert.assertEquals(actualData,expectedData);
     }
 
 
