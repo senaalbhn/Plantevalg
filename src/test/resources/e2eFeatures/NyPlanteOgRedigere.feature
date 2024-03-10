@@ -96,7 +96,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Uanselig (brun)" fra Stamme barkfarge
     Then   Velg "Rødbrun" fra Skudd-greiner farge
 
-  @e2eU
+  @e2eUi
   Scenario: Brukeren skal kunne legge til Bilde
     Given  Klikk Bilde
     Then   Klikk Legg Til
@@ -148,17 +148,17 @@ Feature: Ny Plante Tilsetning og Redegering Test
     And    Bytt Slekt, Artsepitet for Sekundaer opprinnelse
     And    Klikk Lagre
     Then   Klikk "Ja" for Viltvoksende i Norge og Produsert i Norge
-#   Then   Klikk Synonymer som har registert for
-#    And    Bytt Slekt, Artsepitet for Primaer opprinnelse i Synonym
+    Then   Klikk Synonymer som har registert for
+    And    Bytt Slekt, Artsepitet for Primaer opprinnelse i Synonym
     Then   Klikk Legg til under Synonymer botanisk navn
     And    Fyll ut Slekt, Artsepitet for Primaer opprinnelse iSynonym
     And    Klikk Lagre
-#    Then   Klikk po og bytte det tidligere lagrede sproket
-#    Then   Klikk Legg til
-#    And    Skriv i Synonymer til
-#    Then   Klikk Legg til flere sprok under Andre sprok
-#    And    Velg Norsk som sprok
-#    And    Skriv i Norsk Navn
+    Then   Klikk po og bytte det tidligere lagrede sproket
+    Then   Klikk Legg til
+    And    Skriv i Synonymer til
+    Then   Klikk Legg til flere sprok under Andre sprok
+    And    Velg Norsk som sprok
+    And    Skriv i Norsk Navn
     Then   Klikk "Ja" for E-plante
 
   @q2 @e2eUi
@@ -272,10 +272,11 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Given   Go til Plantevalg-siden
     Then    Klikk Plante
     And     Bekreft alle informasjon til planten etter redigere
-
+  @e2eUi
   Scenario: Brukeren skal kunne slette planten
     Given    Klikk Rediger
     Then     Slett Plante
+    And      Lukk siden
 
 
 

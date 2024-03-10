@@ -13,7 +13,7 @@ public class HjemmesidePage {
 
     @FindBy (xpath = "//*[@type='email']" )
     public WebElement epost;
-    @FindBy (xpath = "//span[text()='Avocadoo']" )
+    @FindBy (xpath = "//span[contains(text(),'Avocadoo')]" )
     public WebElement forstePlante;
     @FindBy (xpath = "//span[text()='Avocadoo']" )
     public WebElement redigertetPlante;

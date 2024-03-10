@@ -137,9 +137,8 @@ public class NyPlanteStepdefs {
         ReusableMethods.sendKeysJS(nyPlante.slektSynonym, "SlektSynonym");
         ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")));
         ReusableMethods.wait(1);
-        ReusableMethods.sendKeysJS(Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")),"ArtsepitetSynonym");
-        ReusableMethods.wait(5);
-        ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("button[title='Lagre']")));
+        Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")).sendKeys("ArtsepitetSynonym",Keys.TAB,"k",Keys.TAB,"f",Keys.TAB,"u",Keys.TAB,"v",Keys.TAB,"f",Keys.TAB,"v");
+        ReusableMethods.sendKeysJS(nyPlante.slektSynonym, "SlektSynonym");
     }
 
     @Then("Klikk Legg til under Andre sprok")
@@ -163,8 +162,9 @@ public class NyPlanteStepdefs {
         ReusableMethods.click(nyPlante.navn);
         ReusableMethods.wait(1);
         ReusableMethods.sendKeysJS(nyPlante.navn,str);
-        ReusableMethods.wait(5);
-        ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("button[title='Lagre']")));
+        ReusableMethods.wait(1);
+        ReusableMethods.ddmIndex(Driver.getDriver().findElement(By.xpath("(//select)[1]")), 4);
+        ReusableMethods.sendKeysJS(nyPlante.navn,str);
     }
 
     @Then("Klikk {string} for E-plante")
@@ -189,6 +189,11 @@ public class NyPlanteStepdefs {
     public void velgAlltidgronn() {
         nyPlante.plantegruppeAlltidgronn.click();
         ReusableMethods.visibleWait(nyPlante.plantegruppeAlltidgronnBekreft,10);
+    }
+    @And("Kontrol")
+    public void kontrol() {
+
+
     }
 
     @Then("Velg {string} fra Pollinator-vennlig")
@@ -305,7 +310,6 @@ public class NyPlanteStepdefs {
 
     @And("Skriv i {string} - {string} tregruppe")
     public void skrivITregruppe(String str, String str2) {
-
         nyPlante.tregruppe.sendKeys(str, Keys.TAB, str2);
     }
 
@@ -605,7 +609,6 @@ public class NyPlanteStepdefs {
     //Slett plante
     @Then("Slett Plante")
     public void slettPlante() {
-        ReusableMethods.wait(15);
         nyPlante.slettPlante.click();
         ReusableMethods.wait(1);
         nyPlante.slettPlanteJA.click();
@@ -622,4 +625,6 @@ public class NyPlanteStepdefs {
     public void venteSekunder(int skn) {
         ReusableMethods.wait(skn);
     }
+
+
 }
