@@ -10,6 +10,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import pages.NyPlantePage;
 import pojos.getRequest.AllergenicitiesPojo;
 import pojos.getRequest.NamePojo;
+import pojos.getRequest.PruningsPojo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -52,11 +53,7 @@ public class PlantevalgMethods {
     public static void plante(Class<?> pojoClass, String str) {
         ArrayList<NamePojo> nameList = new ArrayList<>();
         nameList.add(new NamePojo(str));
-
-        try {
-            ArrayList<?> pojoList = new ArrayList<>((Collection) pojoClass.getConstructor(ArrayList.class).newInstance(nameList));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //ArrayList<pojoClass> pojo = new ArrayList<pojoClass>();
+        //pojo.add(new pojoClass(nameList));
     }
 }

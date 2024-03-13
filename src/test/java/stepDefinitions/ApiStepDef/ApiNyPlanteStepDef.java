@@ -1,9 +1,12 @@
 package stepDefinitions.ApiStepDef;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonObject;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -34,6 +37,7 @@ public class ApiNyPlanteStepDef {
     ArrayList<BotanicalNamespojo> botanicalName;
     GetPojo expectedData;
     GetPojo actualDataById;
+    String planteId;
 
 
     @Given("URL er redigert for lagre plante")
@@ -171,9 +175,15 @@ public class ApiNyPlanteStepDef {
         ArrayList<GroupsPojo> groups = new ArrayList<GroupsPojo>();
         groups.add(new GroupsPojo(namegroups));
         //lightConditions / Lysforhold
-
+        ArrayList<NamePojo> nameLightConditions = new ArrayList<NamePojo>();
+        nameLightConditions.add(new NamePojo("Sol"));
+        ArrayList<LightConditionsPojo> lightConditions = new ArrayList<LightConditionsPojo>();
+        lightConditions.add(new LightConditionsPojo(nameLightConditions));
         //moistureConditions / Fuktighetsforhold
-
+        ArrayList<NamePojo> nameMoistureConditions = new ArrayList<NamePojo>();
+        nameMoistureConditions.add(new NamePojo("Tørt"));
+        ArrayList<MoistureConditionsPojo> moistureConditions = new ArrayList<MoistureConditionsPojo>();
+        moistureConditions.add(new MoistureConditionsPojo(nameMoistureConditions));
         //naturalLifespans / Naturlig levealder
         ArrayList<NamePojo> nameNaturlig = new ArrayList<NamePojo>();
         nameNaturlig.add(new NamePojo("Lang (100-300 år)"));
@@ -194,9 +204,158 @@ public class ApiNyPlanteStepDef {
         namePrunings.add(new NamePojo("Middels"));
         ArrayList<PruningsPojo> prunings = new ArrayList<PruningsPojo>();
         prunings.add(new PruningsPojo(namePrunings));
+        //reproductionMethods / r
+        ArrayList<NamePojo> nameRepro = new ArrayList<NamePojo>();
+        nameRepro.add(new NamePojo("Frø"));
+        ArrayList<ReproductionMethodsPojo> reproduction = new ArrayList<ReproductionMethodsPojo>();
+        reproduction.add(new ReproductionMethodsPojo(nameRepro));
+        //restrictionsAndProtections / Restriksjoner
+        ArrayList<NamePojo> nameRestriksjoner  = new ArrayList<NamePojo>();
+        nameRestriksjoner.add(new NamePojo("Søknadspliktig iht forskrift fremmede organismer vedl 5"));
+        ArrayList<RestrictionsAndProtectionsPojo> restriction = new ArrayList<RestrictionsAndProtectionsPojo>();
+        restriction.add(new RestrictionsAndProtectionsPojo(nameRestriksjoner));
+        //rootTypes / Rottype
+        ArrayList<NamePojo> rootTypesName  = new ArrayList<NamePojo>();
+        rootTypesName.add(new NamePojo("Pålerot"));
+        ArrayList<RootTypesPojo> rootTypes = new ArrayList<RootTypesPojo>();
+        rootTypes.add(new RootTypesPojo(rootTypesName));
+        //saltTolerances / Salttoleranse
+        ArrayList<NamePojo> nameSalt  = new ArrayList<NamePojo>();
+        nameSalt.add(new NamePojo("Svak mot salt i jord"));
+        ArrayList<SaltTolerancesPojo> saltTolerances = new ArrayList<SaltTolerancesPojo>();
+        saltTolerances.add(new SaltTolerancesPojo(nameSalt));
+        //shapes / Form
+        ArrayList<NamePojo> nameShapes  = new ArrayList<NamePojo>();
+        nameShapes.add(new NamePojo("Klatrende"));
+        ArrayList<ShapesPojo> shapes = new ArrayList<ShapesPojo>();
+        shapes.add(new ShapesPojo(nameShapes));
+       saltTolerances.add(new SaltTolerancesPojo(nameSalt));
+        //soils / Jord
+        ArrayList<NamePojo> nameSoils  = new ArrayList<NamePojo>();
+        nameSoils.add(new NamePojo("Tung, leirrik jord med dårlig dreneringsevne"));
+        ArrayList<SoilsPojo> soils = new ArrayList<SoilsPojo>();
+        soils.add(new SoilsPojo(nameSoils));
+        //subGroups / Undergruppe
+        ArrayList<NamePojo> nameSubGroups  = new ArrayList<NamePojo>();
+        nameSubGroups.add(new NamePojo("Alltidgrønn"));
+        ArrayList<SubGroupsPojo> subGroups = new ArrayList<SubGroupsPojo>();
+        subGroups.add(new SubGroupsPojo(nameSubGroups));
+        //usages / Bruksområde
+        ArrayList<NamePojo> nameUsages  = new ArrayList<NamePojo>();
+        nameUsages.add(new NamePojo("Solitær"));
+        ArrayList<UsagesPojo> usages = new ArrayList<UsagesPojo>();
+        usages.add(new UsagesPojo(nameUsages));
+        //widths / Bredde
+        ArrayList<NamePojo> nameWidths   = new ArrayList<NamePojo>();
+        nameWidths.add(new NamePojo("Smal (<1/2 av høyde"));
+        ArrayList<WidthsPojo> widths = new ArrayList<WidthsPojo>();
+        widths.add(new WidthsPojo(nameWidths));
+       //windTolerances / Vindtoleranse
+        ArrayList<NamePojo> nameWindTolerances   = new ArrayList<NamePojo>();
+        nameWindTolerances.add(new NamePojo("Tåler noe vind"));
+        ArrayList<WindTolerancesPojo> windTolerances = new ArrayList<WindTolerancesPojo>();
+        windTolerances.add(new WindTolerancesPojo(nameWindTolerances));
+       //flowerOneOrMoreColors / Blomst
+        ArrayList<NamePojo> nameFlowerOneOrMoreColors   = new ArrayList<NamePojo>();
+        nameFlowerOneOrMoreColors.add(new NamePojo("Flere farger innen arten"));
+        ArrayList<FlowerOneOrMoreColorsPojo> flowerOneOrMoreColors = new ArrayList<FlowerOneOrMoreColorsPojo>();
+        flowerOneOrMoreColors.add(new FlowerOneOrMoreColorsPojo(nameFlowerOneOrMoreColors));
+       //flowerPrimaryColors / Blomst farge
+        ArrayList<NamePojo> nameFlowerPrimaryColors   = new ArrayList<NamePojo>();
+        nameFlowerPrimaryColors.add(new NamePojo("Hvit"));
+        ArrayList<FlowerPrimaryColorsPojo> flowerPrimaryColors = new ArrayList<FlowerPrimaryColorsPojo>();
+        flowerPrimaryColors.add(new FlowerPrimaryColorsPojo(nameFlowerPrimaryColors));
+       //flowerOtherColors / Blomst andre farger
+        ArrayList<NamePojo> nameFlowerOtherColors = new ArrayList<NamePojo>();
+        nameFlowerOtherColors.add(new NamePojo("Lilla"));
+        ArrayList<FlowerOtherColorsPojo> flowerOtherColors = new ArrayList<FlowerOtherColorsPojo>();
+        flowerOtherColors.add(new FlowerOtherColorsPojo(nameFlowerOtherColors));
+       //flowerFills / Fylt
+        ArrayList<NamePojo> nameFlowerFills   = new ArrayList<NamePojo>();
+        nameFlowerFills.add(new NamePojo("Ja"));
+        ArrayList<FlowerFillsPojo> flowerFills = new ArrayList<FlowerFillsPojo>();
+        flowerFills.add(new FlowerFillsPojo(nameFlowerFills));
+       //scentedFlowers / Duft
+        ArrayList<NamePojo> nameScentedFlowers   = new ArrayList<NamePojo>();
+        nameScentedFlowers.add(new NamePojo("Ja"));
+        ArrayList<ScentedFlowersPojo> scentedFlowers = new ArrayList<ScentedFlowersPojo>();
+        scentedFlowers.add(new ScentedFlowersPojo(nameScentedFlowers));
+       //fruitColors / Fruktfarge
+        ArrayList<NamePojo> nameFruitColors   = new ArrayList<NamePojo>();
+        nameFruitColors.add(new NamePojo("Svart"));
+        ArrayList<FruitColorsPojo> fruitColors = new ArrayList<FruitColorsPojo>();
+        fruitColors.add(new FruitColorsPojo(nameFruitColors));
+       //leafColors / Bladfarge
+        ArrayList<NamePojo> nameLeafColors   = new ArrayList<NamePojo>();
+        nameLeafColors.add(new NamePojo("Flerfarget/broket"));
+        ArrayList<LeafColorsPojo> leafColors = new ArrayList<LeafColorsPojo>();
+        leafColors.add(new LeafColorsPojo(nameLeafColors));
+       //leafShapes / Bladform
+        ArrayList<NamePojo> nameLeafShapes   = new ArrayList<NamePojo>();
+        nameLeafShapes.add(new NamePojo("Fliket"));
+        ArrayList<LeafShapesPojo> leafShapes = new ArrayList<LeafShapesPojo>();
+        leafShapes.add(new LeafShapesPojo(nameLeafShapes));
+       //leafSizes / Bladstørrelse
+        ArrayList<NamePojo> nameLeafSizes = new ArrayList<NamePojo>();
+        nameLeafSizes.add(new NamePojo("Liten"));
+        ArrayList<LeafSizesPojo> leafSizes = new ArrayList<LeafSizesPojo>();
+        leafSizes.add(new LeafSizesPojo(nameLeafSizes));
+       //scentedLeaves /
+        ArrayList<NamePojo> nameScentedLeaves   = new ArrayList<NamePojo>();
+        nameScentedLeaves.add(new NamePojo("Ja"));
+        ArrayList<ScentedLeavesPojo> scentedLeaves = new ArrayList<ScentedLeavesPojo>();
+        scentedLeaves.add(new ScentedLeavesPojo(nameScentedLeaves));
+       //autumnColors / Høstfarger
+        ArrayList<NamePojo> nameAutumnColors = new ArrayList<NamePojo>();
+        nameAutumnColors.add(new NamePojo("Guloransje"));
+        ArrayList<AutumnColorsPojo> autumnColors = new ArrayList<AutumnColorsPojo>();
+        autumnColors.add(new AutumnColorsPojo(nameAutumnColors));
+       //winterCharacteristics / Vinter-karakte
+        ArrayList<NamePojo> nameWinterCharacteristics   = new ArrayList<NamePojo>();
+        nameWinterCharacteristics.add(new NamePojo("Silhuett"));
+        ArrayList<WinterCharacteristicsPojo> winterCharacteristics = new ArrayList<WinterCharacteristicsPojo>();
+        winterCharacteristics.add(new WinterCharacteristicsPojo(nameWinterCharacteristics));
+       //trunkBarkStructures / Stamme barkstruktur
+        ArrayList<NamePojo> nameTrunkBarkStructures= new ArrayList<NamePojo>();
+        nameTrunkBarkStructures.add(new NamePojo("Stripete"));
+        ArrayList<TrunkBarkStructuresPojo> trunkBarkStructures = new ArrayList<TrunkBarkStructuresPojo>();
+        trunkBarkStructures.add(new TrunkBarkStructuresPojo(nameTrunkBarkStructures));
+       //trunkBarkColors / Stamme barkfarge
+        ArrayList<NamePojo> nameTrunkBarkColors   = new ArrayList<NamePojo>();
+        nameTrunkBarkColors.add(new NamePojo("Uanselig (brun)"));
+        ArrayList<TrunkBarkColorsPojo> trunkBarkColors = new ArrayList<TrunkBarkColorsPojo>();
+        trunkBarkColors.add(new TrunkBarkColorsPojo(nameTrunkBarkColors));
+       //shootsBranchColors / Skudd/greiner farge
+        ArrayList<NamePojo> nameShootsBranchColors   = new ArrayList<NamePojo>();
+        nameShootsBranchColors.add(new NamePojo("Rødbrun"));
+        ArrayList<ShootsBranchColorsPojo> shootsBranchColors = new ArrayList<ShootsBranchColorsPojo>();
+        shootsBranchColors.add(new ShootsBranchColorsPojo(nameShootsBranchColors));
+       //thorns / torner
+        ArrayList<NamePojo> nameThorns   = new ArrayList<NamePojo>();
+        nameThorns.add(new NamePojo("Kan ha torner"));
+        ArrayList<ThornsPojo> thorns = new ArrayList<ThornsPojo>();
+        thorns.add(new ThornsPojo(nameThorns));
+       //fruitTimes / Frukt tid
+        ArrayList<NamePojo> nameFruitTimes   = new ArrayList<NamePojo>();
+        nameFruitTimes.add(new NamePojo("Sommer"));
+        ArrayList<FruitTimesPojo> fruitTimes = new ArrayList<FruitTimesPojo>();
+        fruitTimes.add(new FruitTimesPojo(nameFruitTimes));
+       //flowerOrnamentalValues / Blomst prydverdi
+        ArrayList<NamePojo> nameFlowerOrnamentalValues   = new ArrayList<NamePojo>();
+        nameFlowerOrnamentalValues.add(new NamePojo("Lite betydelig"));
+        ArrayList<FlowerOrnamentalValuesPojo> flowerOrnamentalValues = new ArrayList<FlowerOrnamentalValuesPojo>();
+        flowerOrnamentalValues.add(new FlowerOrnamentalValuesPojo(nameFlowerOrnamentalValues));
+
+        //researchResultMappings / Stamme barkfarge
+        ArrayList <ReferencesPojo> referencesPojos= new ArrayList<ReferencesPojo>();
+        referencesPojos.add(new ReferencesPojo());
+        ResearchResultPojo resultPojo= new ResearchResultPojo(referencesPojos);
+        ArrayList<ResearchResultMappingsPojo> researchResultMappings = new ArrayList<ResearchResultMappingsPojo>();
+        researchResultMappings.add(new ResearchResultMappingsPojo(resultPojo));
 
 
-        QualitiesPojo qualitie = new QualitiesPojo("Tilleggsopplysninger", "Kommentar", 6, 2, 0, 0, 250, 1000, 5, 1500, 5, 1500, 5, 1500, 5, 1500, 0, 0, 0, 3, 5, 4, 2, 0, true, true, 10, 7, "Forskeres erfaring med planten", true, true, allergenicities,coverages,edibilities, groups);
+
+        QualitiesPojo qualitie = new QualitiesPojo("Tilleggsopplysninger", "Kommentar", 6, 2, 0, 0, 250, 1000, 5, 1500, 5, 1500, 5, 1500, 5, 1500, 0, 0, 0, 3, 5, 4, 2, 0, true, true, 10, 7, "Forskeres erfaring med planten", true, true, allergenicities,coverages,edibilities, groups,null,null,lightConditions,moistureConditions,naturlig,ph,pollinator,prunings,reproduction, restriction,rootTypes,saltTolerances,shapes,soils,subGroups,usages,widths,windTolerances,flowerOneOrMoreColors,flowerPrimaryColors,flowerOtherColors,flowerFills,scentedFlowers,fruitColors,leafColors,leafShapes,leafSizes,scentedLeaves,autumnColors,winterCharacteristics,trunkBarkStructures,trunkBarkColors,shootsBranchColors,thorns,fruitTimes,flowerOrnamentalValues,researchResultMappings);
         expectedData = new GetPojo(qualitie, synonym2, botanical, true, null, "Avocado x Artsepitet ssp. Underart var. Varietet f. Form 'Kultivar' fk. Frøkilde Varemerke®");
         System.out.println(expectedData);
     }
@@ -214,4 +373,19 @@ public class ApiNyPlanteStepDef {
     public void responseBodyForForventedeDataForLagretPlantenErVerifisert() {
         Assert.assertEquals(expectedData.getPrimaryBotanicalName(),actualDataById.getPrimaryBotanicalName());
     }
+
+    @Given("IDen til det registrerte anlegget innhentes")
+    public void idenTilDetRegistrerteAnleggetInnhentes() {
+        setup(ConfigReader.getProperty("email"), ConfigReader.getProperty("password"));
+        spec.pathParams("first", "api", "second", "plants");
+        response=given(spec).when().get("{first}/{second}");
+        JsonPath json=response.jsonPath();
+        List<String> idList=json.getList("findAll{it.botanicalNames.genus=='Avocadoo'}.id");
+        planteId=idList.get(0);
+        System.out.println(planteId);
+
+
+    }
 }
+
+

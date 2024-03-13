@@ -1,6 +1,5 @@
 Feature: Ny Plante Tilsetning Api Test
 
-  @api1
   Scenario: Test for å lagre en ny plante
     Given   URL er redigert for lagre plante
     Then    Payload er redigert for lagre plante
@@ -8,6 +7,10 @@ Feature: Ny Plante Tilsetning Api Test
     And     Det er verifisert at statuskoden er 200
     And     Response body for opprette plante er verifisert
 
+  Scenario: Test for å hente plante id.
+  Given     IDen til det registrerte anlegget innhentes
+
+  @api1
   Scenario: Test for å hente generert planteinformasjon.
     Given   URL er redigert for hente planteinformasjon
     Then    Redigeres forventede data for lagret planten
