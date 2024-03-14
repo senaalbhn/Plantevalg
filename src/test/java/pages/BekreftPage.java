@@ -9,13 +9,17 @@ public class BekreftPage {
     public BekreftPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
-//Navn og opprinnelse
+    //Navn og opprinnelse
     @FindBy (css = "div[title*='Opphav']")
     public WebElement opphav;
     @FindBy (css = "div[title*='Viltvoksende']")
     public WebElement viltvoksende;
     @FindBy (css = "div[title*='Produsert ']")
     public WebElement produsert ;
+    @FindBy (css = "div[title*='Synonymer ']")
+    public WebElement synonym ;
+    @FindBy (css = "div[title*='Engelsk navn:']")
+    public WebElement andresprk ;
     @FindBy (css = "div[title*='E-plante']")
     public WebElement ePlante;
     //Egenskaper

@@ -136,9 +136,9 @@ public class NyPlanteStepdefs {
         ReusableMethods.wait(1);
         ReusableMethods.sendKeysJS(nyPlante.slektSynonym, "SlektSynonym");
         ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")));
-        ReusableMethods.wait(1);
         Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")).sendKeys("ArtsepitetSynonym",Keys.TAB,"k",Keys.TAB,"f",Keys.TAB,"u",Keys.TAB,"v",Keys.TAB,"f",Keys.TAB,"v");
-        ReusableMethods.sendKeysJS(nyPlante.slektSynonym, "SlektSynonym");
+        ReusableMethods.wait(1);
+        actions.sendKeys(nyPlante.slektSynonym,"SlektSynonym").perform();
     }
 
     @Then("Klikk Legg til under Andre sprok")
@@ -177,6 +177,7 @@ public class NyPlanteStepdefs {
     @Given("Klikk Egenskaper")
     public void klikkEgenskaper() {
         nyPlante.egenskaper.click();
+        ReusableMethods.wait(1);
     }
 
     @And("Velg Traer")
@@ -198,6 +199,7 @@ public class NyPlanteStepdefs {
 
     @Then("Velg {string} fra Pollinator-vennlig")
     public void velgEnFraPollinatorVennlig(String str) {
+        ReusableMethods.wait(1);
         WebElement pollinatorVennlig = Driver.getDriver().findElement(By.cssSelector("label[title='Pollinator-vennlig']+div>select"));
         ReusableMethods.ddmVisibleText(pollinatorVennlig, str);
     }
@@ -511,6 +513,7 @@ public class NyPlanteStepdefs {
     @Then("Velg {string} fra Skudd-greiner farge")
     public void velgFraSkuddGreinerFarge(String str) {
         PlantevalgMethods.velgEnMultiSelect(nyPlante.skuddGreinerFarge, str);
+        ReusableMethods.wait(2);
     }
 
 
@@ -579,6 +582,7 @@ public class NyPlanteStepdefs {
     @And("Skriv i Forskeres erfaring med planten")
     public void skrivIForskeresErfaringMedPlanten() {
         nyPlante.forskeresErfaringMedPlanten.sendKeys("Forskeres erfaring med planten");
+        ReusableMethods.wait(2);
     }
 
     //Forskning

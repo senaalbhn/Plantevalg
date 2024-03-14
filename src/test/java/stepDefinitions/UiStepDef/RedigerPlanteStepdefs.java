@@ -82,7 +82,7 @@ public class RedigerPlanteStepdefs {
     public void byttSlektArtsepitetForPrimaerOpprinnelseISynonym() {
         ReusableMethods.wait(2);
         actions.click(planteSide.synonymPrimaerSlekt).keyDown(Keys.CONTROL).sendKeys("a").sendKeys("x").keyUp(Keys.CONTROL).perform();
-        planteSide.synonymPrimaerSlekt.sendKeys(faker.cat().name(), Keys.TAB,"PrimaerArtsepitet3",Keys.TAB,"Kl3",Keys.TAB,"Fr3",Keys.TAB,"Un3",Keys.TAB,"Vr3",Keys.TAB,"Fr3",Keys.TAB,"Vm3");
+        planteSide.synonymPrimaerSlekt.sendKeys("PrimaerSlekt3", Keys.TAB,"PrimaerArtsepitet3",Keys.TAB,"Kl3",Keys.TAB,"Fr3",Keys.TAB,"Un3",Keys.TAB,"Vr3",Keys.TAB,"Fr3",Keys.TAB,"Vm3");
         planteSide.varemerkeButtonForOpphavOgSynonym.click();
         ReusableMethods.wait(1);
         planteSide.lagre.click();
@@ -173,6 +173,7 @@ public class RedigerPlanteStepdefs {
     public void byttForskeresErfaringMedPlanten() {
         actions.click(nyPlante.tilleggsopplysninger).keyDown(nyPlante.forskeresErfaringMedPlanten,Keys.CONTROL).sendKeys("a","x").keyUp(Keys.CONTROL).perform();
         nyPlante.forskeresErfaringMedPlanten.sendKeys("Byttet Forskeres erfaring med planten");
+        ReusableMethods.wait(2);
     }
 //Forskningen
     @Then("Klikk redigere forskningen")

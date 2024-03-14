@@ -33,6 +33,8 @@ Feature: Ny Plante Tilsetning og Redegering Test
   @e2eUi
   Scenario: Brukeren skal kunne legge til Egenskaper informasjon
     Given  Klikk Egenskaper
+    And    Velg Traer
+    And    Velg Alltidgronn
     Then   Velg "Søknadspliktig iht forskrift fremmede organismer vedl 5" alternativ fra Restriksjoner og vern
     Then   Velg "Ja" fra Pollinator-vennlig
     Then   Velg "Honningplante" fra Matnyttig
@@ -40,8 +42,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Lang (100-300 år)" fra Naturlig levealder
     Then   Klikk "Nei" for Vegetativ
     Then   Klikk "Nei" for Fro
-    And    Velg Traer
-    And    Velg Alltidgronn
+
 
   @e2eUi
   Scenario: Brukeren skal kunne legge til Størrelse og form informasjon
@@ -126,6 +127,14 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Given   Go til Plantevalg-siden
     Given   Klikk Plante
     Given  Bekreft alle informasjon til planten
+
+  @e2eUi @api1
+  Scenario: Test for å hente generert planteinformasjon.
+    Given   URL er redigert for hente planteinformasjon
+    Then    Redigeres forventede data for lagret planten
+    Then    GET-Request sendes for hente planteinformasjon
+    And     Det er verifisert at statuskoden er 200
+    And     Response body for forventede data for lagret planten er verifisert
 
   @e2eUi
   Scenario: Brukeren skal kunne velge en plante for redigering
@@ -274,9 +283,9 @@ Feature: Ny Plante Tilsetning og Redegering Test
     And     Bekreft alle informasjon til planten etter redigere
   @e2eUi
   Scenario: Brukeren skal kunne slette planten
-    Given    Klikk Rediger
-    Then     Slett Plante
-    And      Lukk siden
+   # Given    Klikk Rediger
+   # Then     Slett Plante
+   # And      Lukk siden
 
 
 

@@ -10,6 +10,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Ignore;
+import org.testng.asserts.SoftAssert;
 import pojos.PostNyPlante.postRequest.BotanicalNamespojo;
 import pojos.PostNyPlante.postRequest.Postpojo;
 import pojos.PostNyPlante.postRequest.Qualitiespojo;
@@ -38,6 +39,7 @@ public class ApiNyPlanteStepDef {
     GetPojo expectedData;
     GetPojo actualDataById;
     String planteId;
+    ArrayList<AllergenicitiesPojo> allergenicities;
 
 
     @Given("URL er redigert for lagre plante")
@@ -145,69 +147,87 @@ public class ApiNyPlanteStepDef {
     @Given("URL er redigert for hente planteinformasjon")
     public void urlErRedigertForHentePlanteinformasjon() {
         setup(ConfigReader.getProperty("email"), ConfigReader.getProperty("password"));
-        spec.pathParams("first", "api", "second", "plant", "third", id);
-    }
+        spec.pathParams("first", "api", "second", "plants");
+        response=given(spec).when().get("{first}/{second}");
+        JsonPath json=response.jsonPath();
+        List<String> idList=json.getList("findAll{it.primaryBotanicalName.startsWith('Avocadoo')}.id");
+        planteId=idList.get(0);
+        System.out.println(planteId);
 
+        setup(ConfigReader.getProperty("email"), ConfigReader.getProperty("password"));
+        spec.pathParams("first", "api", "second", "plant", "third", planteId);
+    }
+    ArrayList<CoveragesPojo> coverages ;
+    ArrayList<EdibilitiesPojo> edibilities;
+    ArrayList<GroupsPojo> groups;
+    ArrayList<LightConditionsPojo> lightConditions;
+    ArrayList<MoistureConditionsPojo> moistureConditions;
+    ArrayList<NaturalLifespansPojo> naturlig;
+    ArrayList<PhConditionsPojo> ph;
+    ArrayList<PollinatorFriendlinessPojo> pollinator;
+    ArrayList<PruningsPojo> prunings;
+    ArrayList<ReproductionMethodsPojo> reproduction;
+    ArrayList<NamePojo> nameAllergenicities;
     @Then("Redigeres forventede data for lagret planten")
     public void redigeresForventedeDataForLagretPlanten() {
+
         ArrayList<BotanicalNamesPojo> botanical = new ArrayList<BotanicalNamesPojo>();
         botanical.add(new BotanicalNamesPojo("Avocado", "Artsepitet", false, true, "Kultivar", "Frøkilde", "Underart", "Varietet", "Form", "Varemerke", true, "PRIMARY"));
-
         List<SynonymsPojo> synonym2 = new ArrayList<>();
         //allergenicities / Allergi
-        ArrayList<NamePojo> nameAllergenicities = new ArrayList<NamePojo>();
+        nameAllergenicities = new ArrayList<NamePojo>();
         nameAllergenicities.add(new NamePojo("Hudkontakt"));
-        ArrayList<AllergenicitiesPojo> allergenicities = new ArrayList<AllergenicitiesPojo>();
+        allergenicities = new ArrayList<AllergenicitiesPojo>();
         allergenicities.add(new AllergenicitiesPojo(nameAllergenicities));
         //coverages / dekkevne
         ArrayList<NamePojo> nameDekkevne = new ArrayList<NamePojo>();
         nameDekkevne.add(new NamePojo("Liten"));
-        ArrayList<CoveragesPojo> coverages = new ArrayList<CoveragesPojo>();
+        coverages = new ArrayList<CoveragesPojo>();
         coverages.add(new CoveragesPojo(nameDekkevne));
         //edibilities / Matnyttig
         ArrayList<NamePojo> nameMatnyttig = new ArrayList<NamePojo>();
         nameMatnyttig.add(new NamePojo("Honningplante"));
-        ArrayList<EdibilitiesPojo> edibilities = new ArrayList<EdibilitiesPojo>();
+        edibilities = new ArrayList<EdibilitiesPojo>();
         edibilities.add(new EdibilitiesPojo(nameMatnyttig));
         //groups / Plantegruppe
         ArrayList<NamePojo> namegroups = new ArrayList<NamePojo>();
         namegroups.add(new NamePojo("Trær"));
-        ArrayList<GroupsPojo> groups = new ArrayList<GroupsPojo>();
+        groups = new ArrayList<GroupsPojo>();
         groups.add(new GroupsPojo(namegroups));
         //lightConditions / Lysforhold
         ArrayList<NamePojo> nameLightConditions = new ArrayList<NamePojo>();
         nameLightConditions.add(new NamePojo("Sol"));
-        ArrayList<LightConditionsPojo> lightConditions = new ArrayList<LightConditionsPojo>();
+        lightConditions = new ArrayList<LightConditionsPojo>();
         lightConditions.add(new LightConditionsPojo(nameLightConditions));
         //moistureConditions / Fuktighetsforhold
         ArrayList<NamePojo> nameMoistureConditions = new ArrayList<NamePojo>();
         nameMoistureConditions.add(new NamePojo("Tørt"));
-        ArrayList<MoistureConditionsPojo> moistureConditions = new ArrayList<MoistureConditionsPojo>();
+        moistureConditions = new ArrayList<MoistureConditionsPojo>();
         moistureConditions.add(new MoistureConditionsPojo(nameMoistureConditions));
         //naturalLifespans / Naturlig levealder
         ArrayList<NamePojo> nameNaturlig = new ArrayList<NamePojo>();
         nameNaturlig.add(new NamePojo("Lang (100-300 år)"));
-        ArrayList<NaturalLifespansPojo> naturlig = new ArrayList<NaturalLifespansPojo>();
+        naturlig = new ArrayList<NaturalLifespansPojo>();
         naturlig.add(new NaturalLifespansPojo(nameNaturlig));
         //phConditions / ph
         ArrayList<NamePojo> namePh = new ArrayList<NamePojo>();
         namePh.add(new NamePojo("Basisk >7"));
-        ArrayList<PhConditionsPojo> ph = new ArrayList<PhConditionsPojo>();
+        ph = new ArrayList<PhConditionsPojo>();
         ph.add(new PhConditionsPojo(namePh));
         //pollinatorFriendliness / Pollinator
         ArrayList<NamePojo> namePollinator = new ArrayList<NamePojo>();
         namePollinator.add(new NamePojo("Ja"));
-        ArrayList<PollinatorFriendlinessPojo> pollinator = new ArrayList<PollinatorFriendlinessPojo>();
+        pollinator = new ArrayList<PollinatorFriendlinessPojo>();
         pollinator.add(new PollinatorFriendlinessPojo(namePollinator));
         //prunings / Beskjæringsbehov
         ArrayList<NamePojo> namePrunings = new ArrayList<NamePojo>();
         namePrunings.add(new NamePojo("Middels"));
-        ArrayList<PruningsPojo> prunings = new ArrayList<PruningsPojo>();
+        prunings = new ArrayList<PruningsPojo>();
         prunings.add(new PruningsPojo(namePrunings));
         //reproductionMethods / r
         ArrayList<NamePojo> nameRepro = new ArrayList<NamePojo>();
         nameRepro.add(new NamePojo("Frø"));
-        ArrayList<ReproductionMethodsPojo> reproduction = new ArrayList<ReproductionMethodsPojo>();
+        reproduction = new ArrayList<ReproductionMethodsPojo>();
         reproduction.add(new ReproductionMethodsPojo(nameRepro));
         //restrictionsAndProtections / Restriksjoner
         ArrayList<NamePojo> nameRestriksjoner  = new ArrayList<NamePojo>();
@@ -353,25 +373,98 @@ public class ApiNyPlanteStepDef {
         ArrayList<ResearchResultMappingsPojo> researchResultMappings = new ArrayList<ResearchResultMappingsPojo>();
         researchResultMappings.add(new ResearchResultMappingsPojo(resultPojo));
 
-
-
         QualitiesPojo qualitie = new QualitiesPojo("Tilleggsopplysninger", "Kommentar", 6, 2, 0, 0, 250, 1000, 5, 1500, 5, 1500, 5, 1500, 5, 1500, 0, 0, 0, 3, 5, 4, 2, 0, true, true, 10, 7, "Forskeres erfaring med planten", true, true, allergenicities,coverages,edibilities, groups,null,null,lightConditions,moistureConditions,naturlig,ph,pollinator,prunings,reproduction, restriction,rootTypes,saltTolerances,shapes,soils,subGroups,usages,widths,windTolerances,flowerOneOrMoreColors,flowerPrimaryColors,flowerOtherColors,flowerFills,scentedFlowers,fruitColors,leafColors,leafShapes,leafSizes,scentedLeaves,autumnColors,winterCharacteristics,trunkBarkStructures,trunkBarkColors,shootsBranchColors,thorns,fruitTimes,flowerOrnamentalValues,researchResultMappings);
-        expectedData = new GetPojo(qualitie, synonym2, botanical, true, null, "Avocado x Artsepitet ssp. Underart var. Varietet f. Form 'Kultivar' fk. Frøkilde Varemerke®");
-        System.out.println(expectedData);
+        expectedData = new GetPojo(qualitie, synonym2, botanical, true, null, "Avocadoo x Artsepitet ssp. Underart var. Varietet f. Form  'Kultivar' fk. Frøkilde Varemerke ®");
+                                                                                                               //Avocadoo x Artsepitet ssp. Underart var. Varietet f. Form 'Kultivar' fk. Frøkilde Varemerke®
     }
 
     @Then("GET-Request sendes for hente planteinformasjon")
     public void getRequestSendesForHentePlanteinformasjon() {
-        System.out.println(id);
+        System.out.println(planteId);
         response = given(spec).when().get("{first}/{second}/{third}");
-        response.prettyPrint();
         actualDataById=response.as(GetPojo.class);
 
     }
 
     @And("Response body for forventede data for lagret planten er verifisert")
     public void responseBodyForForventedeDataForLagretPlantenErVerifisert() {
-        Assert.assertEquals(expectedData.getPrimaryBotanicalName(),actualDataById.getPrimaryBotanicalName());
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(actualDataById.getPrimaryBotanicalName(),expectedData.getPrimaryBotanicalName());
+        softAssert.assertEquals(actualDataById.isIsEPlant(),expectedData.isIsEPlant());
+        softAssert.assertEquals(actualDataById.getQualities().getAdditionalInfo(),expectedData.getQualities().getAdditionalInfo());
+        softAssert.assertEquals(actualDataById.getQualities().getComment(),expectedData.getQualities().getComment());
+        softAssert.assertEquals(actualDataById.getQualities().getFloweringTimeEnd(),expectedData.getQualities().getFloweringTimeEnd());
+        softAssert.assertEquals(actualDataById.getQualities().getFloweringTimeStart(),expectedData.getQualities().getFloweringTimeStart());
+        softAssert.assertEquals(actualDataById.getQualities().getFruitTimeEnd(),expectedData.getQualities().getFruitTimeEnd());
+        softAssert.assertEquals(actualDataById.getQualities().getFruitTimeStart(),expectedData.getQualities().getFruitTimeStart());
+        softAssert.assertEquals(actualDataById.getQualities().getMaximumHeight(),expectedData.getQualities().getMaximumHeight());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimumHeight(),expectedData.getQualities().getMinimumHeight());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimimGapTreeGroup(),expectedData.getQualities().getMinimimGapTreeGroup());
+        softAssert.assertEquals(actualDataById.getQualities().getMaximumGapTreeGroup(),expectedData.getQualities().getMaximumGapTreeGroup());
+        softAssert.assertEquals(actualDataById.getQualities().getMaximumGapShrubbery(),expectedData.getQualities().getMaximumGapShrubbery());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimumGapShrubbery(),expectedData.getQualities().getMinimumGapShrubbery());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimumGapSolitary(),expectedData.getQualities().getMinimumGapSolitary());
+        softAssert.assertEquals(actualDataById.getQualities().getMaximumGapSolitary(),expectedData.getQualities().getMaximumGapSolitary());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimumGapTrimmedHedge(),expectedData.getQualities().getMinimumGapTrimmedHedge());
+        softAssert.assertEquals(actualDataById.getQualities().getMaximumGapCenterToCenter(),expectedData.getQualities().getMaximumGapCenterToCenter());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimumGapCenterToCenter(),expectedData.getQualities().getMinimumGapCenterToCenter());
+        softAssert.assertEquals(actualDataById.getQualities().getMaximumNumberOfPlantsPerSquareMeter(),expectedData.getQualities().getMaximumNumberOfPlantsPerSquareMeter());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimumNumberOfPlantsPerSquareMeter(),expectedData.getQualities().getMinimumNumberOfPlantsPerSquareMeter());
+        softAssert.assertEquals(actualDataById.getQualities().getMaximumHardinessCoast(),expectedData.getQualities().getMaximumHardinessCoast());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimumHardinessCoast(),expectedData.getQualities().getMinimumHardinessCoast());
+        softAssert.assertEquals(actualDataById.getQualities().getMinimumHardinessInland(),expectedData.getQualities().getMinimumHardinessInland());
+        softAssert.assertEquals(actualDataById.getQualities().getMaximumHardinessInland(),expectedData.getQualities().getMaximumHardinessInland());
+        softAssert.assertEquals(actualDataById.getQualities().isOriginNorwegian(),expectedData.getQualities().isOriginNorwegian());
+        softAssert.assertEquals(actualDataById.getQualities().isProducedInNorway(),expectedData.getQualities().isProducedInNorway());
+        softAssert.assertEquals(actualDataById.getQualities().getRefloweringTimeStart(),expectedData.getQualities().getRefloweringTimeStart());
+        softAssert.assertEquals(actualDataById.getQualities().getRefloweringTimeEnd(),expectedData.getQualities().getRefloweringTimeEnd());
+        softAssert.assertEquals(actualDataById.getQualities().getResearchersExperience(),expectedData.getQualities().getResearchersExperience());
+        softAssert.assertEquals(actualDataById.getQualities().isSeed(),expectedData.getQualities().isSeed());
+        softAssert.assertEquals(actualDataById.getQualities().isVegetative(),expectedData.getQualities().isVegetative());
+        /*
+        softAssert.assertTrue(actualDataById.getQualities().getAllergenicities().contains("Hudkontakt"));
+        softAssert.assertTrue(actualDataById.getQualities().getCoverages().contains("Liten"));
+        softAssert.assertTrue(actualDataById.getQualities().getEdibilities().contains("Honningplante"));
+        softAssert.assertTrue(actualDataById.getQualities().getGroups().contains("Trær"));
+        List<String> lys= List.of("Sol","Skygge","Halvskygge");
+        softAssert.assertTrue(actualDataById.getQualities().getLightConditions().containsAll(lys));
+        softAssert.assertTrue(actualDataById.getQualities().getMoistureConditions().containsAll(moistureConditions));
+        softAssert.assertTrue(actualDataById.getQualities().getNaturalLifespans().containsAll(naturlig));
+        softAssert.assertTrue(actualDataById.getQualities().getPhConditions().containsAll(ph));
+        softAssert.assertTrue(actualDataById.getQualities().getPollinatorFriendliness().containsAll(pollinator));
+        softAssert.assertTrue(actualDataById.getQualities().getPrunings().containsAll(prunings));
+        softAssert.assertTrue(actualDataById.getQualities().getReproductionMethods().containsAll(reproduction));
+        softAssert.assertTrue(actualDataById.getQualities().getRestrictionsAndProtections().containsAll(expectedData.getQualities().getRestrictionsAndProtections()));
+        softAssert.assertTrue(actualDataById.getQualities().getRootTypes().containsAll(expectedData.getQualities().getRootTypes()));
+        softAssert.assertTrue(actualDataById.getQualities().getSaltTolerances().containsAll(expectedData.getQualities().getSaltTolerances()));
+        softAssert.assertTrue(actualDataById.getQualities().getShapes().containsAll(expectedData.getQualities().getShapes()));
+        softAssert.assertTrue(actualDataById.getQualities().getSoils().containsAll(expectedData.getQualities().getSoils()));
+        softAssert.assertTrue(actualDataById.getQualities().getSubGroups().containsAll(expectedData.getQualities().getSubGroups()));
+        softAssert.assertTrue(actualDataById.getQualities().getUsages().containsAll(expectedData.getQualities().getUsages()));
+        softAssert.assertTrue(actualDataById.getQualities().getWidths().containsAll(expectedData.getQualities().getWidths()));
+        softAssert.assertTrue(actualDataById.getQualities().getWindTolerances().containsAll(expectedData.getQualities().getWindTolerances()));
+        softAssert.assertTrue(actualDataById.getQualities().getFlowerOneOrMoreColors().containsAll(expectedData.getQualities().getFlowerOneOrMoreColors()));
+        softAssert.assertTrue(actualDataById.getQualities().getFlowerPrimaryColors().containsAll(expectedData.getQualities().getFlowerPrimaryColors()));
+        softAssert.assertTrue(actualDataById.getQualities().getFlowerOtherColors().containsAll(expectedData.getQualities().getFlowerOtherColors()));
+        softAssert.assertTrue(actualDataById.getQualities().getFlowerFills().containsAll(expectedData.getQualities().getFlowerFills()));
+        softAssert.assertTrue(actualDataById.getQualities().getScentedFlowers().containsAll(expectedData.getQualities().getScentedFlowers()));
+        softAssert.assertTrue(actualDataById.getQualities().getFruitColors().containsAll(expectedData.getQualities().getFruitColors()));
+        softAssert.assertTrue(actualDataById.getQualities().getLeafColors().containsAll(expectedData.getQualities().getLeafColors()));
+        softAssert.assertTrue(actualDataById.getQualities().getLeafShapes().containsAll(expectedData.getQualities().getLeafShapes()));
+        softAssert.assertTrue(actualDataById.getQualities().getLeafSizes().containsAll(expectedData.getQualities().getLeafSizes()));
+        softAssert.assertTrue(actualDataById.getQualities().getAutumnColors().containsAll(expectedData.getQualities().getAutumnColors()));
+        softAssert.assertTrue(actualDataById.getQualities().getWinterCharacteristics().containsAll(expectedData.getQualities().getWinterCharacteristics()));
+        softAssert.assertTrue(actualDataById.getQualities().getTrunkBarkStructures().containsAll(expectedData.getQualities().getTrunkBarkStructures()));
+        softAssert.assertTrue(actualDataById.getQualities().getTrunkBarkColors().containsAll(expectedData.getQualities().getTrunkBarkColors()));
+        softAssert.assertTrue(actualDataById.getQualities().getShootsBranchColors().containsAll(expectedData.getQualities().getShootsBranchColors()));
+        softAssert.assertTrue(actualDataById.getQualities().getThorns().containsAll(expectedData.getQualities().getThorns()));
+        softAssert.assertTrue(actualDataById.getQualities().getFruitTimes().containsAll(expectedData.getQualities().getFruitTimes()));
+        softAssert.assertTrue(actualDataById.getQualities().getFlowerOrnamentalValues().containsAll(expectedData.getQualities().getFlowerOrnamentalValues()));
+        softAssert.assertTrue(actualDataById.getQualities().getResearchResultMappings().containsAll(expectedData.getQualities().getResearchResultMappings()));
+        */
+
+        softAssert.assertAll();
     }
 
     @Given("IDen til det registrerte anlegget innhentes")
@@ -380,7 +473,7 @@ public class ApiNyPlanteStepDef {
         spec.pathParams("first", "api", "second", "plants");
         response=given(spec).when().get("{first}/{second}");
         JsonPath json=response.jsonPath();
-        List<String> idList=json.getList("findAll{it.botanicalNames.genus=='Avocadoo'}.id");
+        List<String> idList=json.getList("findAll{it.primaryBotanicalName.startsWith('Avocadoo')}.id");
         planteId=idList.get(0);
         System.out.println(planteId);
 
