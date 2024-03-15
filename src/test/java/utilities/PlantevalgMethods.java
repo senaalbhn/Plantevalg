@@ -1,5 +1,6 @@
 package utilities;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -50,10 +51,36 @@ public class PlantevalgMethods {
         softAssert.assertEquals(actualData, expectedData);
     }
 
-    public static void plante(Class<?> pojoClass, String str) {
-        ArrayList<NamePojo> nameList = new ArrayList<>();
-        nameList.add(new NamePojo(str));
-        //ArrayList<pojoClass> pojo = new ArrayList<pojoClass>();
-        //pojo.add(new pojoClass(nameList));
+
+    public static void velgPlante(String str) {
+
+       String planteNavn= str.split(" ")[1];
+       WebElement velg = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'"+planteNavn+"')]"));
+       actions.click(velg).perform();
     }
+
+    public static void bekreftPlante (String str){
+        String planteFirstNavnExpected= str.split(" ")[0];
+        String planteSekundNavnExpected= str.split(" ")[1];
+        String planteFirstNavnActual = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'"+planteFirstNavnExpected+"')]")).getText();
+        String planteSekundNavnActual = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'"+planteSekundNavnExpected+"')]")).getText();
+        System.out.println(planteFirstNavnExpected+" "+planteSekundNavnExpected);
+        System.out.println(planteFirstNavnActual+" "+planteSekundNavnActual);
+        Assert.assertEquals(planteFirstNavnExpected+" "+planteSekundNavnExpected,planteFirstNavnActual+" "+planteSekundNavnActual);
+
+    }
+    public static void velgBlomstFarge (String str){
+        WebElement farge= Driver.getDriver().findElement(By.cssSelector("div[class='_buttons_1btq1_1'] button[title='"+str+"']"));
+        actions.click(farge).perform();
+    }
+
+    public static void scroll(){
+        ReusableMethods.scrollEnd();
+        ReusableMethods.wait(1);
+        ReusableMethods.scrollEnd();
+        ReusableMethods.wait(1);
+        ReusableMethods.scrollEnd();
+        ReusableMethods.wait(1);
+    }
+
 }
