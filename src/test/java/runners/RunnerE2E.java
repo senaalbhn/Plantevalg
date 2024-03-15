@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
          */
         features = "src/test/resources/e2eFeatures", //features package'ının yolu (content root)
         glue = "stepDefinitions", //stepDefinitions package ismi
-        tags = "@q1", //Hangi scenarioları bu tag'ı belirtirsek o scenariolar çalışır
+        tags = "@e2eUi", //Hangi scenarioları bu tag'ı belirtirsek o scenariolar çalışır
         dryRun = false, //true seçersek scenariolari kontrol eder browser'ı çalıştırmaz
         monochrome = false//-->true kullanırsak konsoldaki çıktıları tek renk(siyah) olarak verir
 )

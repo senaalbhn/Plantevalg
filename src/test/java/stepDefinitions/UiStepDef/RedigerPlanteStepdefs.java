@@ -82,7 +82,7 @@ public class RedigerPlanteStepdefs {
     public void byttSlektArtsepitetForPrimaerOpprinnelseISynonym() {
         ReusableMethods.wait(2);
         actions.click(planteSide.synonymPrimaerSlekt).keyDown(Keys.CONTROL).sendKeys("a").sendKeys("x").keyUp(Keys.CONTROL).perform();
-        planteSide.synonymPrimaerSlekt.sendKeys(faker.cat().name(), Keys.TAB,"PrimaerArtsepitet3",Keys.TAB,"Kl3",Keys.TAB,"Fr3",Keys.TAB,"Un3",Keys.TAB,"Vr3",Keys.TAB,"Fr3",Keys.TAB,"Vm3");
+        planteSide.synonymPrimaerSlekt.sendKeys("PrimaerSlekt3", Keys.TAB,"PrimaerArtsepitet3",Keys.TAB,"Kl3",Keys.TAB,"Fr3",Keys.TAB,"Un3",Keys.TAB,"Vr3",Keys.TAB,"Fr3",Keys.TAB,"Vm3");
         planteSide.varemerkeButtonForOpphavOgSynonym.click();
         ReusableMethods.wait(1);
         planteSide.lagre.click();
@@ -135,6 +135,9 @@ public class RedigerPlanteStepdefs {
     public void velgLovfellende() {
         planteSide.lovfellende.click();
         ReusableMethods.visibleWait(nyPlante.plantegruppeLovfellendeBekreft,10);
+        if (!Driver.getDriver().findElement(By.cssSelector("div[title='Løvfellende'][class='_plantGroupCard_1i63u_1 _selected_1i63u_39']")).isDisplayed()) {
+            planteSide.lovfellende.click();
+        }
     }
 
 
@@ -156,17 +159,21 @@ public class RedigerPlanteStepdefs {
 //Tilleggsinformasjon
     @Then("Bytt Tilleggsopplysninger")
     public void byttTilleggsopplysninger() {
+        actions.click(nyPlante.tilleggsopplysninger).keyDown(nyPlante.tilleggsopplysninger,Keys.CONTROL).sendKeys("a","x").keyUp(Keys.CONTROL).perform();
         nyPlante.tilleggsopplysninger.sendKeys("Bytte Tilleggsopplysninger");
     }
 
     @And("Bytt Kommentar")
     public void byttKommentar() {
+        actions.click(nyPlante.tilleggsopplysninger).keyDown(nyPlante.kommentar,Keys.CONTROL).sendKeys("a","x").keyUp(Keys.CONTROL).perform();
         nyPlante.kommentar.sendKeys("Byttet Kommentar");
     }
 
     @And("Bytt Forskeres erfaring med planten")
     public void byttForskeresErfaringMedPlanten() {
+        actions.click(nyPlante.tilleggsopplysninger).keyDown(nyPlante.forskeresErfaringMedPlanten,Keys.CONTROL).sendKeys("a","x").keyUp(Keys.CONTROL).perform();
         nyPlante.forskeresErfaringMedPlanten.sendKeys("Byttet Forskeres erfaring med planten");
+        ReusableMethods.wait(2);
     }
 //Forskningen
     @Then("Klikk redigere forskningen")
@@ -177,7 +184,10 @@ public class RedigerPlanteStepdefs {
     @And("Skriv i Oppsummering av forskningen, Steder for forskning og utproving, Oppsummering av forskningen vedrorende denne planten")
     public void skrivIOppsummeringAvForskningenStederForForskningOgUtprovingOppsummeringAvForskningenVedrorendeDennePlanten() {
         ReusableMethods.wait(2);
-        planteSide.oppsummeringAvForskningen.sendKeys(faker.backToTheFuture().quote(),Keys.TAB, faker.backToTheFuture().quote(), Keys.TAB, faker.backToTheFuture().quote());
+        Driver.getDriver().findElement(By.cssSelector("label[title*='Oppsummering av forskningen (F']+div textarea")).sendKeys("Oppsummering av forskningen for forskningresultat");
+        Driver.getDriver().findElement(By.cssSelector("label[title*='Steder for']+div textarea")).sendKeys("Oppsummering av forskningen for forskningresultat");
+        Driver.getDriver().findElement(By.cssSelector("label[title*='Oppsummering av forskningen vedrørende']+div textarea")).sendKeys("Oppsummering av forskningen for forskningresultat");
+       // planteSide.oppsummeringAvForskningen.sendKeys("Oppsummering av forskningen for forskningresultat",Keys.TAB, "Steder for forskning og utprøving for forskningresultat", Keys.TAB, "Oppsummering av forskningen vedrørende denne planten for forskningresultat");
     }
 
     @And("Klikk Legg til referanse")

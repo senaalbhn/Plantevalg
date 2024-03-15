@@ -23,11 +23,11 @@ Feature: Ny Plante Tilsetning Test
     Then   Klikk "Nei" for Viltvoksende i Norge og Produsert i Norge
     Then   Klikk Legg til under Synonymer botanisk navn
     And    Fyll ut Slekt, Artsepitet for Primaer opprinnelse i Synonym
-  #  And    Klikk Lagre
+    And    Klikk Lagre
     Then   Klikk Legg til under Andre sprok
     And    Velg Engelsk som sprok
     And    Skriv i "English Name"
-   # And    Klikk Lagre
+    And    Klikk Lagre
     Then   Klikk "Nei" for E-plante
 
   @q1 @egenskaper

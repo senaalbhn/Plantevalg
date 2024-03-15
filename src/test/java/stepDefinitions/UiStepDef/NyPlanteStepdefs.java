@@ -136,10 +136,9 @@ public class NyPlanteStepdefs {
         ReusableMethods.wait(1);
         ReusableMethods.sendKeysJS(nyPlante.slektSynonym, "SlektSynonym");
         ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")));
+        Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")).sendKeys("ArtsepitetSynonym",Keys.TAB,"k",Keys.TAB,"f",Keys.TAB,"u",Keys.TAB,"v",Keys.TAB,"f",Keys.TAB,"v");
         ReusableMethods.wait(1);
-        ReusableMethods.sendKeysJS(Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")),"ArtsepitetSynonym");
-        ReusableMethods.wait(5);
-        ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("button[title='Lagre']")));
+        actions.sendKeys(nyPlante.slektSynonym,"SlektSynonym").perform();
     }
 
     @Then("Klikk Legg til under Andre sprok")
@@ -163,8 +162,9 @@ public class NyPlanteStepdefs {
         ReusableMethods.click(nyPlante.navn);
         ReusableMethods.wait(1);
         ReusableMethods.sendKeysJS(nyPlante.navn,str);
-        ReusableMethods.wait(5);
-        ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("button[title='Lagre']")));
+        ReusableMethods.wait(1);
+        ReusableMethods.ddmIndex(Driver.getDriver().findElement(By.xpath("(//select)[1]")), 4);
+        ReusableMethods.sendKeysJS(nyPlante.navn,str);
     }
 
     @Then("Klikk {string} for E-plante")
@@ -177,6 +177,7 @@ public class NyPlanteStepdefs {
     @Given("Klikk Egenskaper")
     public void klikkEgenskaper() {
         nyPlante.egenskaper.click();
+        ReusableMethods.wait(1);
     }
 
     @And("Velg Traer")
@@ -190,9 +191,15 @@ public class NyPlanteStepdefs {
         nyPlante.plantegruppeAlltidgronn.click();
         ReusableMethods.visibleWait(nyPlante.plantegruppeAlltidgronnBekreft,10);
     }
+    @And("Kontrol")
+    public void kontrol() {
+
+
+    }
 
     @Then("Velg {string} fra Pollinator-vennlig")
     public void velgEnFraPollinatorVennlig(String str) {
+        ReusableMethods.wait(1);
         WebElement pollinatorVennlig = Driver.getDriver().findElement(By.cssSelector("label[title='Pollinator-vennlig']+div>select"));
         ReusableMethods.ddmVisibleText(pollinatorVennlig, str);
     }
@@ -305,7 +312,6 @@ public class NyPlanteStepdefs {
 
     @And("Skriv i {string} - {string} tregruppe")
     public void skrivITregruppe(String str, String str2) {
-
         nyPlante.tregruppe.sendKeys(str, Keys.TAB, str2);
     }
 
@@ -507,6 +513,7 @@ public class NyPlanteStepdefs {
     @Then("Velg {string} fra Skudd-greiner farge")
     public void velgFraSkuddGreinerFarge(String str) {
         PlantevalgMethods.velgEnMultiSelect(nyPlante.skuddGreinerFarge, str);
+        ReusableMethods.wait(2);
     }
 
 
@@ -575,6 +582,7 @@ public class NyPlanteStepdefs {
     @And("Skriv i Forskeres erfaring med planten")
     public void skrivIForskeresErfaringMedPlanten() {
         nyPlante.forskeresErfaringMedPlanten.sendKeys("Forskeres erfaring med planten");
+        ReusableMethods.wait(2);
     }
 
     //Forskning
@@ -605,7 +613,6 @@ public class NyPlanteStepdefs {
     //Slett plante
     @Then("Slett Plante")
     public void slettPlante() {
-        ReusableMethods.wait(15);
         nyPlante.slettPlante.click();
         ReusableMethods.wait(1);
         nyPlante.slettPlanteJA.click();
@@ -622,4 +629,6 @@ public class NyPlanteStepdefs {
     public void venteSekunder(int skn) {
         ReusableMethods.wait(skn);
     }
+
+
 }

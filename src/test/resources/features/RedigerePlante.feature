@@ -48,7 +48,7 @@ Feature: Redigere Plante Test
   @q2
   Scenario: Brukeren skal kunne redigere Størrelse og form informasjon
     Given  Klikk Storrelse og form
-    And    Velg hoyde mellom "100" - "2899"
+    And    Velg hoyde mellom "351" - "2899"
     And    Velg "Bred (>1/2 av høyde)" fra bredde
     Then   Velg "Slyngende" fra form
     Then   Velg "Hjerterot" fra rottype

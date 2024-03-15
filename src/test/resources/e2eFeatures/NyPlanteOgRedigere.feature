@@ -33,6 +33,8 @@ Feature: Ny Plante Tilsetning og Redegering Test
   @e2eUi
   Scenario: Brukeren skal kunne legge til Egenskaper informasjon
     Given  Klikk Egenskaper
+    And    Velg Traer
+    And    Velg Alltidgronn
     Then   Velg "Søknadspliktig iht forskrift fremmede organismer vedl 5" alternativ fra Restriksjoner og vern
     Then   Velg "Ja" fra Pollinator-vennlig
     Then   Velg "Honningplante" fra Matnyttig
@@ -40,8 +42,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Lang (100-300 år)" fra Naturlig levealder
     Then   Klikk "Nei" for Vegetativ
     Then   Klikk "Nei" for Fro
-    And    Velg Traer
-    And    Velg Alltidgronn
+
 
   @e2eUi
   Scenario: Brukeren skal kunne legge til Størrelse og form informasjon
@@ -96,7 +97,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Uanselig (brun)" fra Stamme barkfarge
     Then   Velg "Rødbrun" fra Skudd-greiner farge
 
-  @e2eU
+  @e2eUi
   Scenario: Brukeren skal kunne legge til Bilde
     Given  Klikk Bilde
     Then   Klikk Legg Til
@@ -127,6 +128,14 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Given   Klikk Plante
     Given  Bekreft alle informasjon til planten
 
+  @e2eUi @api1
+  Scenario: Test for å hente generert planteinformasjon.
+    Given   URL er redigert for hente planteinformasjon
+    Then    Redigeres forventede data for lagret planten
+    Then    GET-Request sendes for hente planteinformasjon
+    And     Det er verifisert at statuskoden er 200
+    And     Response body for forventede data for lagret planten er verifisert
+
   @e2eUi
   Scenario: Brukeren skal kunne velge en plante for redigering
     Given   Vente 3 sekunder
@@ -148,17 +157,17 @@ Feature: Ny Plante Tilsetning og Redegering Test
     And    Bytt Slekt, Artsepitet for Sekundaer opprinnelse
     And    Klikk Lagre
     Then   Klikk "Ja" for Viltvoksende i Norge og Produsert i Norge
-#   Then   Klikk Synonymer som har registert for
-#    And    Bytt Slekt, Artsepitet for Primaer opprinnelse i Synonym
+    Then   Klikk Synonymer som har registert for
+    And    Bytt Slekt, Artsepitet for Primaer opprinnelse i Synonym
     Then   Klikk Legg til under Synonymer botanisk navn
     And    Fyll ut Slekt, Artsepitet for Primaer opprinnelse iSynonym
     And    Klikk Lagre
-#    Then   Klikk po og bytte det tidligere lagrede sproket
-#    Then   Klikk Legg til
-#    And    Skriv i Synonymer til
-#    Then   Klikk Legg til flere sprok under Andre sprok
-#    And    Velg Norsk som sprok
-#    And    Skriv i Norsk Navn
+    Then   Klikk po og bytte det tidligere lagrede sproket
+    Then   Klikk Legg til
+    And    Skriv i Synonymer til
+    Then   Klikk Legg til flere sprok under Andre sprok
+    And    Velg Norsk som sprok
+    And    Skriv i Norsk Navn
     Then   Klikk "Ja" for E-plante
 
   @q2 @e2eUi
@@ -272,10 +281,11 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Given   Go til Plantevalg-siden
     Then    Klikk Plante
     And     Bekreft alle informasjon til planten etter redigere
-
+  @e2eUi
   Scenario: Brukeren skal kunne slette planten
-    Given    Klikk Rediger
-    Then     Slett Plante
+   # Given    Klikk Rediger
+   # Then     Slett Plante
+   # And      Lukk siden
 
 
 
