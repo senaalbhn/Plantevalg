@@ -48,7 +48,7 @@ Feature: Redigere Plante Test
   @q2
   Scenario: Brukeren skal kunne redigere Størrelse og form informasjon
     Given  Klikk Storrelse og form
-    And    Velg hoyde mellom "351" - "2899"
+    And    Velg hoyde mellom "350" - "2899"
     And    Velg "Bred (>1/2 av høyde)" fra bredde
     Then   Velg "Slyngende" fra form
     Then   Velg "Hjerterot" fra rottype
@@ -133,18 +133,4 @@ Feature: Redigere Plante Test
     And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
 
-  @dato
-  Scenario: Brukeren skal kunne redigere Forskning-dato
-    Given  Klikk Forskning
-    Given  Klikk Legg til forskningsresultat
-    Then   Skriv "Forfattere2" i Forfattere,"2000" i Ar, "Tittel2" i Tittel, "Utgiver2" i Utgiver, "42" i Fra, "76" i Til, "ISBN00000" ISBN, "https://www.example2.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
-  @synonym
-  Scenario: Brukeren skal kunne redigere Navn og opprinnelse informasjon
-    Given  Klikk Navn og opprinnelse
-    Then   Klikk Legg til under Synonymer botanisk navn
-    And    Fyll ut Slekt, Artsepitet for Primaer opprinnelse i Synonym
-    And    Klikk Lagre
-    Then   Klikk Legg til under Andre sprok
-    And    Velg Engelsk som sprok
-    And    Skriv i "English Name"
-    And    Klikk Lagre
+

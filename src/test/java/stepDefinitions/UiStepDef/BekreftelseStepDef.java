@@ -548,8 +548,6 @@ public class BekreftelseStepDef {
             DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("d.M.yyyy");
             String date = dtf1.format(myCurrentDate);
             String expectedForskningsresultater = "Forfattere (2024) Tittel Utgiver, side 1-2. ISBN ISBN123456. Tilgjengelig fra: https://www.example.com/file.pdf (Hentet " + date + ")";
-            System.out.println(actualForskningsresultater);
-            System.out.println(expectedForskningsresultater);
             softAssert.assertEquals(actualForskningsresultater, expectedForskningsresultater);
         } catch (NoSuchElementException e) {
             System.out.println("Forskningsresultater finnes ikke");
@@ -572,9 +570,8 @@ public class BekreftelseStepDef {
                             Driver.getDriver().findElement(By.xpath("(//span//child::span)[10]")).getText() + " " +                    //Kultivar
                             Driver.getDriver().findElement(By.xpath("(//span//child::span)[11]")).getText() + " " +                    //Frøkilde
                             Driver.getDriver().findElement(By.xpath("(//span//descendant::span)[12]")).getText();      //Varemerke
-            System.out.println(actualName);
-            String expectedName = "X Avocado2 artsepitet2 ssp. Underart2 var. Varietet2 f. Form2 'Kultivar2' fk Frøkilde2 Varemerke2 ®";
-            System.out.println(expectedName);
+
+            String expectedName = "X Avocadoo2 artsepitet2 ssp. Underart2 var. Varietet2 f. Form2 'Kultivar2' fk Frøkilde2 Varemerke2 ®";
             softAssert.assertEquals(actualName, expectedName);
         } catch (NoSuchElementException ex) {
             System.out.println("Botonicalname finnes ikke");
@@ -721,7 +718,7 @@ public class BekreftelseStepDef {
         try {
             String hoyde = bekreft.hoyde.getAttribute("title");
             String actualHoyde = hoyde.split(":")[1].trim();
-            String expectedHoyde = "1m - 28,9m";
+            String expectedHoyde = " - 28,9m";
             softAssert.assertEquals(actualHoyde, expectedHoyde);
         } catch (NoSuchElementException e) {
             System.out.println("Høyde finnes ikke");

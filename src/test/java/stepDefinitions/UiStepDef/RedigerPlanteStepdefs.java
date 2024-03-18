@@ -161,19 +161,21 @@ public class RedigerPlanteStepdefs {
     public void byttTilleggsopplysninger() {
         actions.click(nyPlante.tilleggsopplysninger).keyDown(nyPlante.tilleggsopplysninger,Keys.CONTROL).sendKeys("a","x").keyUp(Keys.CONTROL).perform();
         nyPlante.tilleggsopplysninger.sendKeys("Bytte Tilleggsopplysninger");
+        ReusableMethods.wait(1);
     }
 
     @And("Bytt Kommentar")
     public void byttKommentar() {
         actions.click(nyPlante.tilleggsopplysninger).keyDown(nyPlante.kommentar,Keys.CONTROL).sendKeys("a","x").keyUp(Keys.CONTROL).perform();
         nyPlante.kommentar.sendKeys("Byttet Kommentar");
+        ReusableMethods.wait(1);
     }
 
     @And("Bytt Forskeres erfaring med planten")
     public void byttForskeresErfaringMedPlanten() {
         actions.click(nyPlante.tilleggsopplysninger).keyDown(nyPlante.forskeresErfaringMedPlanten,Keys.CONTROL).sendKeys("a","x").keyUp(Keys.CONTROL).perform();
         nyPlante.forskeresErfaringMedPlanten.sendKeys("Byttet Forskeres erfaring med planten");
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(1);
     }
 //Forskningen
     @Then("Klikk redigere forskningen")
@@ -211,6 +213,6 @@ public class RedigerPlanteStepdefs {
 
     @And("Vent til nytt bilde")
     public void ventTilNyttBilde() {
-        ReusableMethods.wait(20);
+        ReusableMethods.wait(16);
     }
 }
