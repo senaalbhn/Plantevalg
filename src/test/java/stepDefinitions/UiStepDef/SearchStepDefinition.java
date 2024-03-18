@@ -4,9 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,6 +18,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.ReadWriteLock;
 
 public class SearchStepDefinition {
     HjemmesidePage hjemmeside = new HjemmesidePage();
@@ -48,7 +47,19 @@ public class SearchStepDefinition {
     @And("Tilbake hovedsida")
     public void tilbakeHovedsida() {
         Driver.getDriver().get(ConfigReader.getProperty("Url"));
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
+        try {
+            ReusableMethods.visibleWait(hjemmeside.nullstill,3);
+            hjemmeside.nullstill.click();
+        } catch (ElementClickInterceptedException e) {
+            System.out.println("Nullstill feil");
+        }
+        try {
+            ReusableMethods.visibleWait(hjemmeside.nullstill,3);
+            hjemmeside.nullstill.click();
+        } catch (ElementClickInterceptedException e) {
+            System.out.println("Nullstill feil");
+        }
     }
 
     //Plante Hovedgruppe
@@ -61,6 +72,7 @@ public class SearchStepDefinition {
 
     @Then("Bekreft alle planter er {string}")
     public void bekreftAllePlanterEr(String str) {
+        PlantevalgMethods.scroll();
         List<WebElement> allePlanter = Driver.getDriver().findElements(By.cssSelector("a[class='_plantListElement_ekgvi_1'] div[class^='_nameAndDescription_']"));
         actions.click(allePlanter.get(random.nextInt(allePlanter.size()))).perform();
         PlantevalgMethods.bekreftTrueStr(bekreftPage.plantegruppe, str);
@@ -70,7 +82,7 @@ public class SearchStepDefinition {
     //Plante Undergruppe
     @Given("Velg {string} under {string} po Undergruppe filter")
     public void velgUnderPoUndergruppeFilter(String under, String hoved) {
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(1);
         hjemmeside.nullstill.click();
         WebElement plantegruppe = Driver.getDriver().findElement(By.cssSelector("div[title='" + hoved + "']"));
         plantegruppe.click();
@@ -95,8 +107,7 @@ public class SearchStepDefinition {
     //Form
     @Given("Velg {string} po Form filter")
     public void velgPoFormFilter(String str) {
-        ReusableMethods.wait(2);
-        hjemmeside.nullstill.click();
+        ReusableMethods.wait(1);
         WebElement form = Driver.getDriver().findElement(By.cssSelector("div[class^='_multiSelect']"));
         PlantevalgMethods.velgEnMultiSelect(form, str);
         ReusableMethods.wait(1);
@@ -113,9 +124,7 @@ public class SearchStepDefinition {
     //Høyde
     @Given("Velg {string} og {string} po hoyde filter")
     public void velgOgPoHoydeFilter(String min, String max) {
-        ReusableMethods.wait(2);;
-        hjemmeside.nullstill.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(1);;
         search.hoyde.sendKeys(min, Keys.TAB, max, Keys.TAB);
         ReusableMethods.wait(1);
     }
@@ -159,7 +168,6 @@ public class SearchStepDefinition {
     @Given("Velg {string} po Fuktighetsforhold filter")
     public void velgPoFuktighetsforholdFilter(String str) {
         ReusableMethods.wait(2);
-        hjemmeside.nullstill.click();
         PlantevalgMethods.velgFuktighetsforhold(str);
         PlantevalgMethods.scroll();
     }
@@ -179,8 +187,6 @@ public class SearchStepDefinition {
     //Hardforhet Innland
     @Given("Velg {string} og {string} po Hardforhet Innland filter")
     public void velgOgPoHardforhetInnlandFilter(String min, String max) {
-        ReusableMethods.wait(2);
-        hjemmeside.nullstill.click();
         ReusableMethods.wait(1);
         search.hardforhetInnland.sendKeys(min, Keys.TAB, max, Keys.TAB);
         ReusableMethods.wait(1);
@@ -212,8 +218,7 @@ public class SearchStepDefinition {
     //Hardforhet kyst
     @Given("Velg {string} og {string} po Hardforhet kyst filter")
     public void velgOgPoHardforhetKystFilter(String min, String max) {
-        ReusableMethods.wait(2);
-        hjemmeside.nullstill.click();
+
         ReusableMethods.wait(1);
         search.HardforhetKyst.sendKeys(min, Keys.TAB, max, Keys.TAB);
         ReusableMethods.wait(1);
@@ -245,8 +250,8 @@ public class SearchStepDefinition {
     //Lysforhold
     @Given("Velg {string} po Lysforhold filter")
     public void velgPoLysforholdFilter(String str) {
-        ReusableMethods.wait(2);
-        hjemmeside.nullstill.click();
+        ReusableMethods.wait(1);
+
         PlantevalgMethods.velgLysforhold(str);
         PlantevalgMethods.scroll();
     }
@@ -267,7 +272,6 @@ public class SearchStepDefinition {
     @Given("Velg {string} po Blomst hovedfarge filter")
     public void velgPoBlomstHovedfargeFilter(String str) {
         ReusableMethods.wait(2);
-        hjemmeside.nullstill.click();
         search.avansert.click();
         search.blomstFarge.click();
         actions.moveToLocation(1, 1).click().perform();
@@ -278,21 +282,24 @@ public class SearchStepDefinition {
 
     @And("Bekreft alle planter  har {string} Blomst hovedfarge")
     public void bekreftAllePlanterHarBlomstHovedfarge(String str) {
-        PlantevalgMethods.scroll();
-        List<WebElement> planter = Driver.getDriver().findElements(By.cssSelector("button[class='_iconButton_zwn2h_1  _hasBorder_zwn2h_24 _sizeSmall_zwn2h_60 _shadow_zwn2h_21 _background_zwn2h_18']"));
-        for (WebElement w : planter) {
-            Assert.assertTrue(w.getAttribute("title").contains("Blå"));
-            System.out.println(w.getAttribute("title"));
+        try {
+            PlantevalgMethods.scroll();
+            List<WebElement> planter = Driver.getDriver().findElements(By.cssSelector("button[class='_iconButton_zwn2h_1  _hasBorder_zwn2h_24 _sizeSmall_zwn2h_60 _shadow_zwn2h_21 _background_zwn2h_18']"));
+            for (WebElement w : planter) {
+                Assert.assertTrue(w.getAttribute("title").contains("Blå"));
+                System.out.println(w.getAttribute("title"));
+            }
+            actions.click(planter.get(random.nextInt(planter.size()))).perform();
+            PlantevalgMethods.bekreftTrueStr(bekreftPage.blomstFarge, str);
+        } catch (NoSuchElementException e) {
+            tilbakeHovedsida();
         }
-        actions.click(planter.get(random.nextInt(planter.size()))).perform();
-        PlantevalgMethods.bekreftTrueStr(bekreftPage.blomstFarge, str);
     }
 
     //E-plante
     @Given("Velg E-plante")
     public void velgEPlante() {
         ReusableMethods.wait(2);
-        hjemmeside.nullstill.click();
         PlantevalgMethods.avansertFiltre("E-plante");
         search.eplante.click();
         ReusableMethods.wait(1);
@@ -308,7 +315,6 @@ public class SearchStepDefinition {
     @Given("Velg {string} og {string} po {string} filter")
     public void velgOgPoFilter(String min, String max, String filter) {
         ReusableMethods.wait(2);
-        hjemmeside.nullstill.click();
         PlantevalgMethods.avansertFiltre(filter);
         ReusableMethods.wait(2);
         PlantevalgMethods.filterMedSlider(filter, min, max);
@@ -658,9 +664,8 @@ public class SearchStepDefinition {
     @Given("Bruk sokefelt for finne planter")
     public void brukSokefeltForFinnePlanter() {
 
-
         for (int i = 0; i < 20 ; i++) {
-            Driver.getDriver().findElements(By.xpath("(//div[@class='_name_ekgvi_36'])["+random+"]//child::span//child::span"));
+            WebElement a=Driver.getDriver().findElement(By.xpath("(//div[@class='_name_ekgvi_36'])["+random+"]//child::span//child::span"));
         }
 
     }

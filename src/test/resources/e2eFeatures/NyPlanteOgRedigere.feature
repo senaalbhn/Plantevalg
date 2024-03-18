@@ -5,7 +5,6 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
 
-  @e2eUi
   Scenario: Brukeren skal kunne legge til Botanisk navn informasjon
     Given   Klikk Ny Plnate
     Then    Fyll ut Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke
@@ -13,7 +12,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     And     Velg varemerke "TM"
     And     Klikk Lagre og Fortsette
 
-  @e2eUi
+  @q1 @d
   Scenario: Brukeren skal kunne legge til Navn og opprinnelse informasjon
     Given  Klikk Navn og opprinnelse
     Then   Klikk Legg til under Opphav
@@ -29,12 +28,12 @@ Feature: Ny Plante Tilsetning og Redegering Test
     And    Skriv i "English Name"
     And    Klikk Lagre
     Then   Klikk "Nei" for E-plante
+    And    Bekreft navn finnes
 
-  @e2eUi
+
+  @q1 @egenskaper
   Scenario: Brukeren skal kunne legge til Egenskaper informasjon
     Given  Klikk Egenskaper
-    And    Velg Traer
-    And    Velg Alltidgronn
     Then   Velg "Søknadspliktig iht forskrift fremmede organismer vedl 5" alternativ fra Restriksjoner og vern
     Then   Velg "Ja" fra Pollinator-vennlig
     Then   Velg "Honningplante" fra Matnyttig
@@ -42,9 +41,10 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Lang (100-300 år)" fra Naturlig levealder
     Then   Klikk "Nei" for Vegetativ
     Then   Klikk "Nei" for Fro
+    And    Velg Traer
+    And    Velg Alltidgronn
 
-
-  @e2eUi
+  @q1
   Scenario: Brukeren skal kunne legge til Størrelse og form informasjon
     Given  Klikk Storrelse og form
     And    Velg hoyde mellom "250" - "1000"
@@ -52,7 +52,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Klatrende" fra form
     Then   Velg "Pålerot" fra rottype
 
-  @e2eUi
+  @q1
   Scenario: Brukeren skal kunne legge til Bruksområde informasjon
     Given  Klikk Bruksomrode
     And    Klikk "Nei" Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer
@@ -63,7 +63,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Liten" fra Dekkevne
     Then   Velg "Middels" fra Beskjaeringsbehov
 
-  @e2eUi
+  @q1
   Scenario: Brukeren skal kunne legge til Plassering informasjon
     Given  Klikk Plassering
     And    Klikk "Nei" Lysforhold, Jord og Fuktighetsforhold
@@ -73,54 +73,54 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Svak mot salt i jord" alternativ fra Salttoleranse
     Then   Velg "Tåler noe vind" fra Vindtoleranse
 
-  @e2eUi
+  @q1
   Scenario: Brukeren skal kunne legge til Prydverdi informasjon
     Given  Klikk Prydverdi
-    Then   Velg "Flere farger innen arten" fra Blomst en eller flere farger
-    Then   Velg "Hvit" fra Blomst farge
-    Then   Velg "Lilla" fra Blomst andre farger
-    Then   Velg "Lite betydelig" fra Blomst prydverdi
     Then   Velg "Ja" fra Fylt
-    And    Skriv "2" - "6" i Blomstringstid
-    And    Skriv "7" - "10" i Remontering-Gjenblomstring
     And    Klikk "Nei" for Blomsterduft
     And    Klikk "Nei" for Duft blad og stenge
     Then   Velg "Svart" fra Fruktfarge
     Then   Velg "Sommer" fra Frukt tid
-    Then   Velg "Flerfarget/broket" fra Bladfarge
-    Then   Velg "Fliket" fra Bladform
-    Then   Velg "Liten" fra Bladstorrelse
     Then   Velg "Guloransje" fra Hostfarger
     Then   Velg "Silhuett" fra Vinterkarakter
     Then   Velg "Kan ha torner" fra Torner
+    Then   Velg "Flerfarget/broket" fra Bladfarge
+    Then   Velg "Fliket" fra Bladform
+    Then   Velg "Liten" fra Bladstorrelse
     Then   Velg "Stripete" fra Stamme barkstruktur
     Then   Velg "Uanselig (brun)" fra Stamme barkfarge
     Then   Velg "Rødbrun" fra Skudd-greiner farge
+    Then   Velg "Flere farger innen arten" fra Blomst en eller flere farger
+    Then   Velg "Hvit" fra Blomst farge
+    Then   Velg "Lilla" fra Blomst andre farger
+    Then   Velg "Lite betydelig" fra Blomst prydverdi
+    And    Skriv "2" - "6" i Blomstringstid
+    And    Skriv "7" - "10" i Remontering-Gjenblomstring
 
-  @e2eUi
+  @
   Scenario: Brukeren skal kunne legge til Bilde
     Given  Klikk Bilde
     Then   Klikk Legg Til
     And    Velg "Diversebilde" type bilde
     And    Velg "Erik Burås" Fotograf
     And    Skriv "Fotokilde" i Fotokilde, "Notis" i Notis,"Hvor er bilde tatt" i Hvor er bilde tatt,"Postnummer" i Postnummer,"Poststed" i Poststed
-    Then   Klikk Velg Bilde "eple"
+    Then   Klikk Velg Bilde "avocado"
     Then   Klikk Lagre og Lukk
 
-  @e2eUi
+  @q1
   Scenario: Brukeren skal kunne legge til Tilleggsinformasjon informasjon
     Given  Klikk Tilleggsinformasjon
     Then   Skriv i Tilleggsopplysninger
     And    Skriv i Kommentar
     And    Skriv i Forskeres erfaring med planten
 
-  @e2eUi
+  @q1
   Scenario: Brukeren skal kunne legge til Forskning informasjon
     Given  Klikk Forskning
     Given  Klikk Legg til forskningsresultat
     Then   Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
-    Given   Vente 3 sekunder
+    And   Vente 3 sekunder
 
   @e2eUi
   Scenario: Planter skal kunne registreres etter ønske
@@ -148,8 +148,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then    Bytt Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke
     And     Velg Hybrid mellom slekter
     And     Velg varemerke "R"
-
-  @e2eUi
+  @q2
   Scenario: Brukeren skal kunne redigere Navn og opprinnelse informasjon
     Given  Klikk Navn og opprinnelse
     Then   Klikk Opphav
@@ -169,8 +168,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     And    Velg Norsk som sprok
     And    Skriv i Norsk Navn
     Then   Klikk "Ja" for E-plante
-
-  @q2 @e2eUi
+  @q2
   Scenario: Brukeren skal kunne redigere Egenskaper informasjon
     Given  Klikk Egenskaper
     And    Velg Lovfellende
@@ -181,16 +179,15 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Forbudt iht forskrift fremmede organismer vedl 1" alternativ fra Restriksjoner og vern
     Then   Klikk "Ja" for Vegetativ
     Then   Klikk "Ja" for Fro
-
-  @q2 @e2eUi
+  @q2
   Scenario: Brukeren skal kunne redigere Størrelse og form informasjon
     Given  Klikk Storrelse og form
-    And    Velg hoyde mellom "100" - "2899"
+    And    Velg hoyde mellom "350" - "2899"
     And    Velg "Bred (>1/2 av høyde)" fra bredde
     Then   Velg "Slyngende" fra form
     Then   Velg "Hjerterot" fra rottype
 
-  @q2 @e2eUi
+  @q2
   Scenario: Brukeren skal kunne redigere Bruksområde informasjon
     Given  Klikk Bruksomrode
     And    Klikk "Ja" Gruppe,Alle-trerekke,Fri hekk, Klippet hekk, Markdekkende, Slyng-klatreplante og Solitaer
@@ -200,8 +197,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     And    Skriv i "1567" - "2500" Klippet hekk
     Then   Velg "Stor" fra Dekkevne
     Then   Velg "Lite" fra Beskjaeringsbehov
-
-  @q2 @e2eUi
+  @q2
   Scenario: Brukeren skal kunne redigere Plassering informasjon
     Given  Klikk Plassering
     And    Klikk "Ja" Lysforhold, Jord og Fuktighetsforhold
@@ -210,8 +206,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Middels 5,5-7" alternativ fra pH
     Then   Velg "Toleranse for salt i luft" alternativ fra Salttoleranse
     Then   Velg "Bør stå i le" fra Vindtoleranse
-
-  @q2 @e2eUi
+  @q2
   Scenario: Brukeren skal kunne redigere Prydverdi informasjon
     Given  Klikk Prydverdi
     Then   Velg "Flerfarget blomst" fra Blomst en eller flere farger
@@ -234,33 +229,29 @@ Feature: Ny Plante Tilsetning og Redegering Test
     Then   Velg "Glatt" fra Stamme barkstruktur
     Then   Velg "Gul (grønn)" fra Stamme barkfarge
     Then   Velg "Grå" fra Skudd-greiner farge
-
-
-  @e2eUi
+  @q2 @bilde
   Scenario: Brukeren skal kunne redigere Bilde
     Given  Klikk Bilde
     Then   Klikk po og bytte det tidligere lagrede Bildet
     And    Velg "Vårbilde" type bilde
     And    Velg "Sally O’Halloran" Fotograf
     And    Skriv "Fotokilde2" i Fotokilde, "Notis2" i Notis,"Hvor er bilde tatt2" i Hvor er bilde tatt,"Postnummer2" i Postnummer,"Poststed2" i Poststed
-    Then   Klikk Velg Bilde "eple3"
+    Then   Klikk Velg Bilde "avocado2"
     And    Vent til nytt bilde
     Then   Klikk Lagre og Lukk
     Then   Klikk Legg Til
     And    Velg "Diversebilde" type bilde
     And    Velg "Erik Burås" Fotograf
     And    Skriv "Fotokilde3" i Fotokilde, "Notis3" i Notis,"Hvor er bilde tatt3" i Hvor er bilde tatt,"Postnummer3" i Postnummer,"Poststed3" i Poststed
-    Then   Klikk Velg Bilde "eple2"
+    Then   Klikk Velg Bilde "avocado3"
     Then   Klikk Lagre og Lukk
-
-  @q2 @e2eUi
+  @q2
   Scenario: Brukeren skal kunne redigere Tilleggsinformasjon informasjon
     Given  Klikk Tilleggsinformasjon
     Then   Bytt Tilleggsopplysninger
     And    Bytt Kommentar
     And    Bytt Forskeres erfaring med planten
-
-  @q2 @e2eUi
+  @q2 @forsk
   Scenario: Brukeren skal kunne redigere Forskning
     Given  Klikk Forskning
     Then   Klikk redigere forskningen

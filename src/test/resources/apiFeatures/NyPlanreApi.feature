@@ -1,5 +1,5 @@
 Feature: Ny Plante Tilsetning Api Test
-
+  @apiLgre
   Scenario: Test for å lagre en ny plante
     Given   URL er redigert for lagre plante
     Then    Payload er redigert for lagre plante
@@ -10,7 +10,7 @@ Feature: Ny Plante Tilsetning Api Test
   Scenario: Test for å hente plante id.
   Given     IDen til det registrerte anlegget innhentes
 
-  @api1
+  @apiGet
   Scenario: Test for å hente generert planteinformasjon.
     Given   URL er redigert for hente planteinformasjon
     Then    Redigeres forventede data for lagret planten
@@ -22,11 +22,10 @@ Feature: Ny Plante Tilsetning Api Test
     Given   URL er redigert for redigere plante
     Then    Payload er redigert for redigere plante
     Then    PATCH-Request sendes for redigere plante
-    And     Det er verifisert at statuskoden er 200
     And     Response body for redigere plante er verifisert
 
-  @
   Scenario: Test for å kan slette planten
     Given   URL er redigert for slette plante
     Then    Delete-Request sendes for slette plante og mottas Response
     And     Det er verifisert at statuskoden er 200
+

@@ -52,9 +52,9 @@ public class ApiNyPlanteStepDef {
     @Then("Payload er redigert for lagre plante")
     public void payloadErRedigertForLagrePlante() {
 
-        botanicalNames = new BotanicalNamespojo("Avocado", "Artsepitet", false, true, "Kultivar", "Frøkilde", "Underart", "Varietet", "Form", "Varemerke", true, "PRIMARY");
+        botanicalNames = new BotanicalNamespojo("Avocadoo", "Artsepitet", false, true, "Kultivar", "Frøkilde", "Underart", "Varietet", "Form ", "Varemerke ", true, "PRIMARY");
         botanicalName = new ArrayList<BotanicalNamespojo>();
-        botanicalName.add(new BotanicalNamespojo("Avocado", "Artsepitet", false, true, "Kultivar", "Frøkilde", "Underart", "Varietet", "Form", "Varemerke", true, "PRIMARY"));
+        botanicalName.add(new BotanicalNamespojo("Avocadoo", "Artsepitet", false, true, "Kultivar", "Frøkilde", "Underart", "Varietet", "Form ", "Varemerke ", true, "PRIMARY"));
         List<Synonymspojo> synonym = new ArrayList<>();
         qualities = new Qualitiespojo("Tilleggsopplysninger", "Kommentar", 6, 2, 0, 0, 250, 1000, 5, 1500, 5, 1500, 5, 1500, 5, 1500, 0, 0, 0, 3, 5, 4, 2, 0, true, true, 10, 7, "Forskeres erfaring med planten");
         payload = new Postpojo(true, null, synonym, botanicalName, qualities);
@@ -420,8 +420,8 @@ public class ApiNyPlanteStepDef {
         softAssert.assertEquals(actualDataById.getQualities().getRefloweringTimeStart(),expectedData.getQualities().getRefloweringTimeStart());
         softAssert.assertEquals(actualDataById.getQualities().getRefloweringTimeEnd(),expectedData.getQualities().getRefloweringTimeEnd());
         softAssert.assertEquals(actualDataById.getQualities().getResearchersExperience(),expectedData.getQualities().getResearchersExperience());
-        softAssert.assertEquals(actualDataById.getQualities().isSeed(),expectedData.getQualities().isSeed());
-        softAssert.assertEquals(actualDataById.getQualities().isVegetative(),expectedData.getQualities().isVegetative());
+        softAssert.assertEquals(actualDataById.getQualities().isSeed(),expectedData.getQualities().isSeed(),"Frø");
+        softAssert.assertEquals(actualDataById.getQualities().isVegetative(),expectedData.getQualities().isVegetative(),"Vegetativ");
         /*
         softAssert.assertTrue(actualDataById.getQualities().getAllergenicities().contains("Hudkontakt"));
         softAssert.assertTrue(actualDataById.getQualities().getCoverages().contains("Liten"));
@@ -482,3 +482,5 @@ public class ApiNyPlanteStepDef {
 }
 
 
+//Avocadoo x Artsepitet ssp. Underart var. Varietet f. Form  'Kultivar' fk. Frøkilde Varemerke ®
+//Avocadoo x Artsepitet ssp. Underart var. Varietet f. Form 'Kultivar' fk. Frøkilde Varemerke ®

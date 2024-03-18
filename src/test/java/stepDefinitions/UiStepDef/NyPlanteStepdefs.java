@@ -572,11 +572,15 @@ public class NyPlanteStepdefs {
     @Then("Skriv i Tilleggsopplysninger")
     public void skrivITilleggsopplysninger() {
         nyPlante.tilleggsopplysninger.sendKeys("Tilleggsopplysninger");
+        ReusableMethods.wait(1);
+
     }
 
     @And("Skriv i Kommentar")
     public void skrivIKommentar() {
         nyPlante.kommentar.sendKeys("Kommentar");
+        ReusableMethods.wait(1);
+
     }
 
     @And("Skriv i Forskeres erfaring med planten")
@@ -631,4 +635,9 @@ public class NyPlanteStepdefs {
     }
 
 
+    @And("Bekreft navn finnes")
+    public void bekreftNavnFinnes() {
+        ReusableMethods.wait(1);
+        Driver.getDriver().findElement(By.cssSelector("label[title='Engelsk navn']+div input")).sendKeys("English Name");
+    }
 }

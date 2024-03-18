@@ -29,6 +29,8 @@ Feature: Ny Plante Tilsetning Test
     And    Skriv i "English Name"
     And    Klikk Lagre
     Then   Klikk "Nei" for E-plante
+    And    Bekreft navn finnes
+
 
   @q1 @egenskaper
   Scenario: Brukeren skal kunne legge til Egenskaper informasjon
@@ -75,26 +77,27 @@ Feature: Ny Plante Tilsetning Test
   @q1
   Scenario: Brukeren skal kunne legge til Prydverdi informasjon
     Given  Klikk Prydverdi
-    Then   Velg "Flere farger innen arten" fra Blomst en eller flere farger
-    Then   Velg "Hvit" fra Blomst farge
-    Then   Velg "Lilla" fra Blomst andre farger
-    Then   Velg "Lite betydelig" fra Blomst prydverdi
     Then   Velg "Ja" fra Fylt
-    And    Skriv "2" - "6" i Blomstringstid
-    And    Skriv "7" - "10" i Remontering-Gjenblomstring
     And    Klikk "Nei" for Blomsterduft
     And    Klikk "Nei" for Duft blad og stenge
     Then   Velg "Svart" fra Fruktfarge
     Then   Velg "Sommer" fra Frukt tid
-    Then   Velg "Flerfarget/broket" fra Bladfarge
-    Then   Velg "Fliket" fra Bladform
-    Then   Velg "Liten" fra Bladstorrelse
     Then   Velg "Guloransje" fra Hostfarger
     Then   Velg "Silhuett" fra Vinterkarakter
     Then   Velg "Kan ha torner" fra Torner
+    Then   Velg "Flerfarget/broket" fra Bladfarge
+    Then   Velg "Fliket" fra Bladform
+    Then   Velg "Liten" fra Bladstorrelse
     Then   Velg "Stripete" fra Stamme barkstruktur
     Then   Velg "Uanselig (brun)" fra Stamme barkfarge
     Then   Velg "Rødbrun" fra Skudd-greiner farge
+    Then   Velg "Flere farger innen arten" fra Blomst en eller flere farger
+    Then   Velg "Hvit" fra Blomst farge
+    Then   Velg "Lilla" fra Blomst andre farger
+    Then   Velg "Lite betydelig" fra Blomst prydverdi
+    And    Skriv "2" - "6" i Blomstringstid
+    And    Skriv "7" - "10" i Remontering-Gjenblomstring
+
   @
   Scenario: Brukeren skal kunne legge til Bilde
     Given  Klikk Bilde
