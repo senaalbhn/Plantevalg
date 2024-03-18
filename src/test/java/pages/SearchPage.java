@@ -14,13 +14,20 @@ public class SearchPage {
     @FindBy(css = "button[title='Avansert']")
     public WebElement avansert;
 
-    @FindBy(xpath = "(//input[@type='text'])[2]")
+    @FindBy(xpath = "(//div[text()='Høyde']//following-sibling::div//child::input)[1]")
     public WebElement hoyde;
     @FindBy(xpath = "(//div[@class='_label_17x55_2 textStyleMenu' and text()='Hardførhet kyst']//following::input)[1]")
     public WebElement HardforhetKyst;
-
+    @FindBy(xpath = "(//div[@class='_label_17x55_2 textStyleMenu' and text()='Hardførhet innland']//following::input)[1]")
+    public WebElement hardforhetInnland;
+    @FindBy(xpath = "//div[text()='E-plante']//following-sibling::div//child::a")
+    public WebElement eplante;
 
     @FindBy(css = "div[title='Blomsterfarge']+a")
     public WebElement blomstFarge;
+
+
+
+
 
 }
