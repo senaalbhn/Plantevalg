@@ -28,7 +28,7 @@ public class RunnerApi {
     /*
         @CucumberOptions() bu notasyon sayesinde hangi scenariolari çalıştıracağımızı ve hangi raporları
     alacağımızı belirtiriz
-        dryRun parametresi eğer true seçilirse scenariolari çalıştırmadan feature file daki steplerin
+        dryRun parametresi eğer true seçjava jailirse scenariolari çalıştırmadan feature file daki steplerin
     stepDefinition class'ındaki methodlar ile uyuşuğ uyuşmadığını kontrol eder ve browser'ı çalıştırmaz
      */
 
