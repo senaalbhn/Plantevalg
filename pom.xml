@@ -101,10 +101,10 @@
                 <version>3.0.0-M1</version>
                 <configuration>
                     <parallel>methods</parallel>
-                    <threadCount>2</threadCount>
+                    <threadCount>1</threadCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
                     <forkCount>2</forkCount>
-                    <reuseForks>true</reuseForks>
+                    <reuseForks>false</reuseForks>
                     <includes>
                         <include>**/runners/*Runner*.java</include>
                     </includes>
