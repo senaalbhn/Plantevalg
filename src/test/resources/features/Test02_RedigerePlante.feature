@@ -1,4 +1,4 @@
-Feature: Redigere Plante Test
+Feature: Redigere Plante og Bekreftelse Test
 
   @q2 @dato @synonym @bilde @forsk
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
@@ -132,5 +132,10 @@ Feature: Redigere Plante Test
     Given  Klikk Legg til forskningsresultat
     And    Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
+
+  Scenario: Planter skal kunne redigere etter ønske
+    *      Tilbake hovedsida
+    *      Klikk Plante
+    *      Bekreft alle informasjon til planten etter redigere
 
 

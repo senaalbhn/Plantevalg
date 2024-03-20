@@ -1,4 +1,4 @@
-Feature: Ny Plante Tilsetning Test
+Feature: Ny Plante Tilsetning og Bekreftelse Test
 
   @q1 @d @egenskaper
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
@@ -121,6 +121,11 @@ Feature: Ny Plante Tilsetning Test
     Given  Klikk Legg til forskningsresultat
     Then   Skriv "Forfattere" i Forfattere,"2024" i Ar, "Tittel" i Tittel, "Utgiver" i Utgiver, "1" i Fra, "2" i Til, "ISBN123456" ISBN, "https://www.example.com/file.pdf" i Tilgjengelig fra nett og Hentet dato
     And    Klikk Lagre
+
+  Scenario: Planter skal kunne registreres etter ønske
+    *      Tilbake hovedsida
+    *      Klikk Plante
+    *      Bekreft alle informasjon til planten
 
 
 

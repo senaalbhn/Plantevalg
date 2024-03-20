@@ -17,6 +17,7 @@ import pojos.getRequest.PruningsPojo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 public class PlantevalgMethods {
@@ -38,7 +39,7 @@ public class PlantevalgMethods {
 
     public static void velgEnMultiSelect(WebElement element, String str) {
         actions.click(element).perform();
-        WebElement valg = Driver.getDriver().findElement(By.xpath("//*[text()='" + str + "']"));
+        WebElement valg = Driver.getDriver().findElement(By.xpath("//div[starts-with(text(),'"+str+"')]"));
         actions.click(valg).perform();
         actions.moveToLocation(1, 1).click().perform();
     }
@@ -57,7 +58,7 @@ public class PlantevalgMethods {
     public static void bekreftTrueStr(WebElement element, String expectedData) {
         SoftAssert softAssert = new SoftAssert();
         String actual = element.getAttribute("title");
-        String actualData = actual.split(":")[1].trim();
+        List <String> actualData = List.of(actual.split(":")[1].trim().replaceAll(" ","").split(","));
         softAssert.assertTrue(actualData.contains(expectedData));
         System.out.println(actual.split(":")[0]+" til "+Driver.getDriver().findElement(By.xpath("(//span[@class='_italic_yzjvg_6'])[1]")).getText()+ " er lik eller inneholder "+expectedData+ " som forventet" );
     }

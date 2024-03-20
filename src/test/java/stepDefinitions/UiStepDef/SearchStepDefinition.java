@@ -47,15 +47,15 @@ public class SearchStepDefinition {
     @And("Tilbake hovedsida")
     public void tilbakeHovedsida() {
         Driver.getDriver().get(ConfigReader.getProperty("Url"));
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(1);
         try {
-            ReusableMethods.visibleWait(hjemmeside.nullstill,3);
+            ReusableMethods.visibleWait(hjemmeside.nullstill, 3);
             hjemmeside.nullstill.click();
         } catch (ElementClickInterceptedException e) {
             System.out.println("Nullstill feil");
         }
         try {
-            ReusableMethods.visibleWait(hjemmeside.nullstill,3);
+            ReusableMethods.visibleWait(hjemmeside.nullstill, 3);
             hjemmeside.nullstill.click();
         } catch (ElementClickInterceptedException e) {
             System.out.println("Nullstill feil");
@@ -108,10 +108,20 @@ public class SearchStepDefinition {
     @Given("Velg {string} po Form filter")
     public void velgPoFormFilter(String str) {
         ReusableMethods.wait(1);
-        WebElement form = Driver.getDriver().findElement(By.cssSelector("div[class^='_multiSelect']"));
-        PlantevalgMethods.velgEnMultiSelect(form, str);
-        ReusableMethods.wait(1);
-
+        try {
+            WebElement form = Driver.getDriver().findElement(By.cssSelector("div[class^='_multiSelect']"));
+            PlantevalgMethods.velgEnMultiSelect(form, str);
+            PlantevalgMethods.scroll();
+            ReusableMethods.wait(1);
+        } catch (NoSuchElementException e) {
+            search.avansert.click();
+            search.form.click();
+            actions.moveToLocation(1, 1).click().perform();
+            WebElement form = Driver.getDriver().findElement(By.cssSelector("div[class^='_multiSelect']"));
+            PlantevalgMethods.velgEnMultiSelect(form, str);
+            PlantevalgMethods.scroll();
+            ReusableMethods.wait(1);
+        }
     }
 
     @Then("Bekreft alle planter har {string} form")
@@ -124,7 +134,8 @@ public class SearchStepDefinition {
     //Høyde
     @Given("Velg {string} og {string} po hoyde filter")
     public void velgOgPoHoydeFilter(String min, String max) {
-        ReusableMethods.wait(1);;
+        ReusableMethods.wait(1);
+        ;
         search.hoyde.sendKeys(min, Keys.TAB, max, Keys.TAB);
         ReusableMethods.wait(1);
     }
@@ -167,9 +178,18 @@ public class SearchStepDefinition {
     //Fuktighetsforhold
     @Given("Velg {string} po Fuktighetsforhold filter")
     public void velgPoFuktighetsforholdFilter(String str) {
-        ReusableMethods.wait(2);
-        PlantevalgMethods.velgFuktighetsforhold(str);
-        PlantevalgMethods.scroll();
+        ReusableMethods.wait(1);
+        try {
+            PlantevalgMethods.velgFuktighetsforhold(str);
+            PlantevalgMethods.scroll();
+            ReusableMethods.wait(1);
+        } catch (NoSuchElementException e) {
+            search.avansert.click();
+            search.fuktighetsforhold.click();
+            actions.moveToLocation(1, 1).click().perform();
+            PlantevalgMethods.velgFuktighetsforhold(str);
+            ReusableMethods.wait(1);
+        }
     }
 
     @Then("Bekreft alle planter har {string} Fuktighetsforhold")
@@ -272,11 +292,16 @@ public class SearchStepDefinition {
     @Given("Velg {string} po Blomst hovedfarge filter")
     public void velgPoBlomstHovedfargeFilter(String str) {
         ReusableMethods.wait(2);
-        search.avansert.click();
-        search.blomstFarge.click();
-        actions.moveToLocation(1, 1).click().perform();
-        PlantevalgMethods.velgBlomstFarge(str);
-        ReusableMethods.wait(2);
+            try {
+                PlantevalgMethods.velgBlomstFarge(str);
+                ReusableMethods.wait(2);
+            } catch (NoSuchElementException e) {
+                search.avansert.click();
+                search.blomstFarge.click();
+                actions.moveToLocation(1, 1).click().perform();
+                PlantevalgMethods.velgBlomstFarge(str);
+                ReusableMethods.wait(2);
+            }
 
     }
 
@@ -286,7 +311,8 @@ public class SearchStepDefinition {
             PlantevalgMethods.scroll();
             List<WebElement> planter = Driver.getDriver().findElements(By.cssSelector("button[class='_iconButton_zwn2h_1  _hasBorder_zwn2h_24 _sizeSmall_zwn2h_60 _shadow_zwn2h_21 _background_zwn2h_18']"));
             for (WebElement w : planter) {
-                Assert.assertTrue(w.getAttribute("title").contains("Blå"));
+                List <String> actualData = List.of(w.getAttribute("title").replaceAll(" ","").split(","));
+                Assert.assertTrue(actualData.contains(str));
                 System.out.println(w.getAttribute("title"));
             }
             actions.click(planter.get(random.nextInt(planter.size()))).perform();
@@ -311,6 +337,7 @@ public class SearchStepDefinition {
         actions.click(allePlanter.get(random.nextInt(allePlanter.size()))).perform();
         PlantevalgMethods.bekreftEquals(bekreftPage.ePlante, "Ja");
     }
+
     //Blomstringstid
     @Given("Velg {string} og {string} po {string} filter")
     public void velgOgPoFilter(String min, String max, String filter) {
@@ -663,10 +690,31 @@ public class SearchStepDefinition {
 
     @Given("Bruk sokefelt for finne planter")
     public void brukSokefeltForFinnePlanter() {
+        PlantevalgMethods.scroll();
+        PlantevalgMethods.scroll();
+        PlantevalgMethods.scroll();
 
-        for (int i = 0; i < 20 ; i++) {
-            WebElement a=Driver.getDriver().findElement(By.xpath("(//div[@class='_name_ekgvi_36'])["+random+"]//child::span//child::span"));
+
+        List<WebElement> plante = Driver.getDriver().findElements(By.xpath("(//div[@class='_name_ekgvi_36'])[" + random.nextInt(150) + "]//child::span//child::span"));
+        String planteName = "";
+        for (WebElement w : plante) {
+            planteName = planteName + w.getText() + " ";
         }
+        System.out.println("planteName = " + planteName);
+        hjemmeside.sokefelte.sendKeys(planteName.trim());
+        ReusableMethods.wait(1);
+        WebElement planteForventet = Driver.getDriver().findElement(By.cssSelector("div[class='_illustration_ekgvi_25']"));
+
+        planteForventet.click();
+
+        List<WebElement> planteValg = Driver.getDriver().findElements(By.xpath("//div[@class='_component_yzjvg_1']//child::span//child::span"));
+        String planteNameValg = "";
+        for (WebElement w : planteValg) {
+            planteNameValg = planteNameValg + w.getText() + " ";
+        }
+        System.out.println("planteNameValg = " + planteNameValg);
+        Assert.assertEquals(planteName.trim(), planteNameValg.trim());
+
 
     }
 }

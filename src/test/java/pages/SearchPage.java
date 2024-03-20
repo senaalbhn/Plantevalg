@@ -26,6 +26,12 @@ public class SearchPage {
     @FindBy(css = "div[title='Blomsterfarge']+a")
     public WebElement blomstFarge;
 
+    @FindBy(css = "div[title='Fuktighetsforhold']+a")
+    public WebElement fuktighetsforhold;
+
+    @FindBy(css = "div[title='Form']+a")
+    public WebElement form;
+
 
 
 

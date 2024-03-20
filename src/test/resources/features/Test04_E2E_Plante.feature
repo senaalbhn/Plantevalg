@@ -1,10 +1,11 @@
-Feature: Ny Plante Tilsetning og Redegering Test
+Feature: Ny Plante Tilsetning,Redegering og Bekreftelse Test
 
   @e2eUi
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
 
+  @e2eUi
   Scenario: Brukeren skal kunne legge til Botanisk navn informasjon
     Given   Klikk Ny Plnate
     Then    Fyll ut Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke
@@ -12,7 +13,7 @@ Feature: Ny Plante Tilsetning og Redegering Test
     And     Velg varemerke "TM"
     And     Klikk Lagre og Fortsette
 
-  @q1 @d
+  @e2eUi
   Scenario: Brukeren skal kunne legge til Navn og opprinnelse informasjon
     Given  Klikk Navn og opprinnelse
     Then   Klikk Legg til under Opphav

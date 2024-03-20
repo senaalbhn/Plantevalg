@@ -1,11 +1,16 @@
-Feature: Søke Test
+Feature: Bruke Filter Test
 
   @søke @hoyde @blomstfarge @kyst @lystforhold @innland @fuktighetsforhold @blomstringstid @form @plantegruppe @undergruppe @eplante
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
 
+  @søke
+  Scenario: Bkukeren må kunne finne planter med søkefelt
+    Given   Bruk sokefelt for finne planter
+    *       Tilbake hovedsida
 
+  @søke
   Scenario Outline: Brukeren skal kunne finne plante med Plantegruppe filter
     Given   Velg "<plantegrupper>" po Plantegruppe filter
     Then    Bekreft alle planter er "<plantegrupper>"
@@ -17,6 +22,7 @@ Feature: Søke Test
       | Klatrere      |
       | Stauder       |
 
+  @søke
   Scenario Outline: Brukeren skal kunne finne plante med Undergruppe filter
     Given   Velg "<undergruppe>" under "<plantegrupper>" po Undergruppe filter
     Then    Bekreft alle planter er "<undergruppe>" under "<plantegrupper>" Undergruppe
@@ -35,8 +41,7 @@ Feature: Søke Test
       | Stauder       | Bregne       |
 
 
-
-  @form #ferdig
+  @form  @søke
   Scenario Outline: Brukeren skal kunne finne plante med Form filter
     Given   Velg "<form>" po Form filter
     Then    Bekreft alle planter har "<form>" form
@@ -44,13 +49,13 @@ Feature: Søke Test
     Examples:
       | form                  |
       | Hengende              |
-      | Kjegle (="pyramidal") |
+      | Kjegle (='pyramidal') |
       | Klatrende             |
       | Kule/halvkule         |
       | Matte                 |
       | Nedliggende/krypende  |
       | Opprett               |
-      | Oval="Eggformet"      |
+      | Oval='Eggformet'      |
       | Slyngende             |
       | Spredende/vandrende   |
       | Søyle                 |
@@ -125,7 +130,7 @@ Feature: Søke Test
     Then    Bekreft alle planter er mellom 1 m- 3 m
     And     Tilbake hovedsida
 
-  @eplante
+  @eplante  @søke
   Scenario: Brukeren skal kunne finne plante med E-Plante filter
     Given   Velg E-plante
     Then    Bekreft alle planter er E-Plante
