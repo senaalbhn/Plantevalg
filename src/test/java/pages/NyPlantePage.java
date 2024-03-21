@@ -17,6 +17,8 @@ public class NyPlantePage {
     //Botonisk Navn
     @FindBy(xpath = "(//*[@placeholder='Fritekst'])[1]")
     public WebElement slekt;
+    @FindBy(css = "label[title='Artsepitet']+div input")
+    public WebElement artsepitet;
     @FindBy(xpath = "//*[@class='_circle_16oj8_28']")
     public WebElement varemerkeButton;
     @FindBy(xpath = "//*[text()='Hybrid mellom arter (x)']")

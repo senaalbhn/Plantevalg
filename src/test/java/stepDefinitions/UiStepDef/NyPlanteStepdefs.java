@@ -83,6 +83,7 @@ public class NyPlanteStepdefs {
     public void klikkLagreOgFortsette() {
         ReusableMethods.wait(1);
         nyPlante.lagreOgFortsette.click();
+
     }
 
     //Navn og opprinnelse

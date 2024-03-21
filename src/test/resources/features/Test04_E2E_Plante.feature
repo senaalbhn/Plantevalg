@@ -275,9 +275,9 @@ Feature: Ny Plante Tilsetning,Redegering og Bekreftelse Test
     And     Bekreft alle informasjon til planten etter redigere
   @e2eUi
   Scenario: Brukeren skal kunne slette planten
-   # Given    Klikk Rediger
-   # Then     Slett Plante
-   # And      Lukk siden
+    Given    Klikk Rediger
+    Then     Slett Plante
+    And      Lukk siden
 
 
 
