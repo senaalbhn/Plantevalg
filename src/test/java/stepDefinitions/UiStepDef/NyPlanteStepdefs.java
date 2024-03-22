@@ -325,11 +325,14 @@ public class NyPlanteStepdefs {
     @And("Skriv i {string} - {string} Solitaer")
     public void skrivISolitaer(String str, String str2) {
         nyPlante.solitaer.sendKeys(str, Keys.TAB, str2);
+        ReusableMethods.wait(1);
+
     }
 
     @And("Skriv i {string} - {string} Klippet hekk")
     public void skrivIKlippetHekk(String str, String str2) {
         nyPlante.klippetHekk.sendKeys(str, Keys.TAB, str2, Keys.TAB);
+        ReusableMethods.wait(1);
     }
 
     @Then("Velg {string} fra Dekkevne")
@@ -459,21 +462,26 @@ public class NyPlanteStepdefs {
     public void velgFraFruktfarge(String str) {
         WebElement fruktfarge = Driver.getDriver().findElement(By.xpath("(//select)[3]"));
         ReusableMethods.ddmVisibleText(fruktfarge, str);
+        ReusableMethods.wait(1);
+
     }
 
     @Then("Velg {string} fra Frukt tid")
     public void velgFraFruktTid(String str) {
         PlantevalgMethods.velgEnMultiSelect(nyPlante.fruktTid, str);
+        ReusableMethods.wait(1);
     }
 
     @Then("Velg {string} fra Bladfarge")
     public void velgFraBladfarge(String str) {
         PlantevalgMethods.velgEnMultiSelect(nyPlante.bladfarge, str);
+        ReusableMethods.wait(1);
     }
 
     @Then("Velg {string} fra Bladform")
     public void velgFraBladform(String str) {
         PlantevalgMethods.velgEnMultiSelect(nyPlante.bladform, str);
+        ReusableMethods.wait(1);
     }
 
     @Then("Velg {string} fra Bladstorrelse")

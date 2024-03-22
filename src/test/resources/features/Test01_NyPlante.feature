@@ -126,6 +126,9 @@ Feature: Ny Plante Tilsetning og Bekreftelse Test
     *      Tilbake hovedsida
     *      Klikk Plante
     *      Bekreft alle informasjon til planten
+    And     Lukk siden
+
+
 
 
 

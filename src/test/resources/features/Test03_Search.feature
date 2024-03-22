@@ -47,20 +47,20 @@ Feature: Bruke Filter Test
     Then    Bekreft alle planter har "<form>" form
     And     Tilbake hovedsida
     Examples:
-      | form                  |
-      | Hengende              |
-      | Kjegle (='pyramidal') |
-      | Klatrende             |
-      | Kule/halvkule         |
-      | Matte                 |
-      | Nedliggende/krypende  |
-      | Opprett               |
-      | Oval='Eggformet'      |
-      | Slyngende             |
-      | Spredende/vandrende   |
-      | Søyle                 |
-      | Tue                   |
-      | Vase (smal og bred)   |
+      | form        |
+      | Hengende    |
+      | Kjegle      |
+      | Klatrende   |
+      | Kule        |
+      | Matte       |
+      | Nedliggende |
+      | Opprett     |
+      | Oval        |
+      | Slyngende   |
+      | Spredende   |
+      | Søyle       |
+      | Tue         |
+      | Vase        |
 
   @søke @fuktighetsforhold #ferdig
   Scenario Outline: Brukeren skal kunne finne plante med Fuktighetsforhold filter
@@ -135,4 +135,5 @@ Feature: Bruke Filter Test
     Given   Velg E-plante
     Then    Bekreft alle planter er E-Plante
     And     Tilbake hovedsida
+    And     Lukk siden
 

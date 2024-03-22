@@ -12,8 +12,8 @@ Feature: Negatif Tester
     And Klikk Ny Plnate
     And Fyll ut Slekt, Artsepitet, Kultivar, Frøkilde, Underart, Varietet, Form, Varemerke
     And Klikk Lagre og Fortsette
-    And Bekreft plante ikke lagres
     And Tilbake hovedsida
+    And Bekreft plante ikke lagres
     And Klikk Plante
     And Klikk Rediger
     And Slett Plante

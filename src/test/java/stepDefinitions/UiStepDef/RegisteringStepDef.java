@@ -2,6 +2,7 @@ package stepDefinitions.UiStepDef;
 
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -117,4 +118,6 @@ public class RegisteringStepDef {
         List<WebElement> allePlanter = Driver.getDriver().findElements(By.cssSelector("a[class='_plantListElement_ekgvi_1']"));
         Assert.assertEquals(1, allePlanter.size());
     }
+
+
 }

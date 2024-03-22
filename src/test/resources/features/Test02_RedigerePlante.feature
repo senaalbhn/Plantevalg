@@ -137,5 +137,8 @@ Feature: Redigere Plante og Bekreftelse Test
     *      Tilbake hovedsida
     *      Klikk Plante
     *      Bekreft alle informasjon til planten etter redigere
+    And     Lukk siden
+
+
 
 

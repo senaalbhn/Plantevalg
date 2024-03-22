@@ -590,7 +590,7 @@ public class BekreftelseStepDef {
         try {
             String synonym = bekreft.synonym.getAttribute("title");
             String actualSynonym = synonym.split(":")[1].trim();
-            String expectedSynonym = "PrimaerSlekt3 primaerartsepitet3 Un3 Vr3 Fr3 'Kl3' Fr3 ™, PrimaerSlekt4 primaerartsepitet4 Un4 Vr4 Fr4 'Kl4' Fr4 ™";
+            String expectedSynonym = "PrimaerSlekt4 primaerartsepitet4 Un4 Vr4 Fr4 'Kl4' Fr4 ™, PrimaerSlekt3 primaerartsepitet3 Un3 Vr3 Fr3 'Kl3' Fr3 ™";
             softAssert.assertEquals(actualSynonym, expectedSynonym);
         } catch (NoSuchElementException ex) {
             System.out.println("Synonym finnes ikke");
@@ -599,7 +599,7 @@ public class BekreftelseStepDef {
         try {
             String sprk = bekreft.andresprk.getAttribute("title");
             String actualSprk = sprk.split(":")[1].trim();
-            String expectedSprk = "English Name";
+            String expectedSprk = "New English Name";
             softAssert.assertEquals(actualSprk, expectedSprk);
         } catch (NoSuchElementException ex) {
             System.out.println("Engelsk navn finnes ikke");
@@ -718,7 +718,7 @@ public class BekreftelseStepDef {
         try {
             String hoyde = bekreft.hoyde.getAttribute("title");
             String actualHoyde = hoyde.split(":")[1].trim();
-            String expectedHoyde = " - 28,9m";
+            String expectedHoyde = "3,5m - 28,9m";
             softAssert.assertEquals(actualHoyde, expectedHoyde);
         } catch (NoSuchElementException e) {
             System.out.println("Høyde finnes ikke");
@@ -1053,4 +1053,6 @@ public class BekreftelseStepDef {
 
         softAssert.assertAll();
     }
+
+
 }
