@@ -48,16 +48,16 @@ public class AdminStepDefitions {
 
     @And("Bekreft {string} bilde er publisert")
     public void bekreftBildeErPublisert(String str) {
+        adminPage.storBilde.click();
         List<WebElement> bilder= Driver.getDriver().findElements(By.cssSelector("._image_19w8c_1"));
         List<String> bildeinfo= new ArrayList<>();
 
         for (int i = 0; i < bilder.size() ; i++) {
             bildeinfo.add(adminPage.bildeInfo.getText());
-            // for ile olmayabilir do ve while bir bak amac bilder listesi kadar kez neste bilde buttonuna basmak boylece her seferinde fotokilde bilgisini alidigimiz bir liste olcak ve sonra onu karsilastiracagiz
+            adminPage.nesteBilde.click();
         }
-        adminPage.storBilde.click();
-        Assert.assertTrue(adminPage.bildeInfo.getText().contains(str));
-        System.out.println(str + " bilde publisert");
+        Assert.assertTrue(bildeinfo.contains(str));
+        System.out.println( str + " bilde publisert");
     }
 
     @And("Velg {string} bilder som skal publisere")
