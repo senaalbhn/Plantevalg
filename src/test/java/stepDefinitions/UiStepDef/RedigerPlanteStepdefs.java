@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.AdminPage;
 import pages.HjemmesidePage;
 import pages.NyPlantePage;
 import pages.PlanteSidePage;
@@ -27,6 +28,7 @@ public class RedigerPlanteStepdefs {
     Faker faker= new Faker();
     String fakeSlekt2;
     Actions actions= new Actions(Driver.getDriver());
+
     public RedigerPlanteStepdefs() {
         PageFactory.initElements(Driver.getDriver(),this);
     }

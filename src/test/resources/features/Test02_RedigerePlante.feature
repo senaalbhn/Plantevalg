@@ -103,7 +103,7 @@ Feature: Redigere Plante og Bekreftelse Test
     And    Velg "Sally O’Halloran" Fotograf
     And    Skriv "Fotokilde2" i Fotokilde, "Notis2" i Notis,"Hvor er bilde tatt2" i Hvor er bilde tatt,"Postnummer2" i Postnummer,"Poststed2" i Poststed
     Then   Klikk Velg Bilde "avocado2"
-    And    Vent til nytt bilde
+    And    Vente for lagring
     Then   Klikk Lagre og Lukk
     Then   Klikk Legg Til
     And    Velg "Diversebilde" type bilde
@@ -137,6 +137,8 @@ Feature: Redigere Plante og Bekreftelse Test
     *      Tilbake hovedsida
     *      Klikk Plante
     *      Bekreft alle informasjon til planten etter redigere
+    And    Klikk Rediger
+    And     Slett Plante
     And     Lukk siden
 
 

@@ -25,16 +25,16 @@ public class Hooks {
      */
     @Before
     public void setUp() {
-        System.out.println("Scenario'lar Çalismaya Başladı");
+        System.out.println("Scenarios starter");
     }
 
     @AfterMethod
     public void tearDown() {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertAll();
-        System.out.println("Scenario'lar Çalismasi Bitti");
+        System.out.println("Scenarios er ferdig");
     }
-/*
+
 
 
     @After
@@ -42,9 +42,9 @@ public class Hooks {
         if (scenario.isFailed()){
             TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
             scenario.attach(ts.getScreenshotAs(OutputType.BYTES),"image/png","scenario_"+scenario.getName());
-            Driver.closeDriver();
+            //Driver.closeDriver();
         }
     }
 
- */
+
 }

@@ -22,6 +22,26 @@ public class AdminPage {
     public WebElement nesteBilde;
     @FindBy (css = "div[class='_busy_1su0p_50']")
     public WebElement busy;
+    @FindBy (xpath = "//div[starts-with(text(),'Vennligst vent')]")
+    public WebElement vent;
+    @FindBy (css = "div[class^='_selectAll'] div[class^='_checkbox']")
+    public WebElement velgAlle;
+    @FindBy (css = "div[class^='_inputs_'] div[class^='_autocomplete'] input")
+    public WebElement botaniskNavn;
+    @FindBy (css = "div[class^='_autoCompleteResult']")
+    public WebElement firstPlante;
+   @FindBy (css = "div[class^='_photographer']")
+    public WebElement infoFotoOgKilde;
+   @FindBy (css = "div[class^='_name_3']")
+    public WebElement biltetype;
+   @FindBy (css = "label[title='Notis']+div input")
+    public WebElement notis;
+   @FindBy (css = "label[title='Notis']+div input")
+    public WebElement hvor;
+   @FindBy (css = "label[title='Notis']+div input")
+    public WebElement postnummer;
+   @FindBy (css = "label[title='Notis']+div input")
+    public WebElement poststed;
 
 
 }
