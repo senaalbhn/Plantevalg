@@ -35,13 +35,13 @@ Feature: Ny Plante Tilsetning og Bekreftelse Test
   @q1 @egenskaper
   Scenario: Brukeren skal kunne legge til Egenskaper informasjon
     Given  Klikk Egenskaper
-    Then   Velg "Søknadspliktig iht forskrift fremmede organismer vedl 5" alternativ fra Restriksjoner og vern
     Then   Velg "Ja" fra Pollinator-vennlig
     Then   Velg "Honningplante" fra Matnyttig
     Then   Velg "Hudkontakt" fra Allergi
     Then   Velg "Lang (100-300 år)" fra Naturlig levealder
     Then   Klikk "Nei" for Vegetativ
     Then   Klikk "Nei" for Fro
+    Then   Velg "Søknadspliktig iht forskrift fremmede organismer vedl 5" alternativ fra Restriksjoner og vern
     And    Velg Traer
     And    Velg Alltidgronn
 
@@ -97,6 +97,7 @@ Feature: Ny Plante Tilsetning og Bekreftelse Test
     Then   Velg "Lite betydelig" fra Blomst prydverdi
     And    Skriv "2" - "6" i Blomstringstid
     And    Skriv "7" - "10" i Remontering-Gjenblomstring
+    And    Vente 5 sekunder
 
   @
   Scenario: Brukeren skal kunne legge til Bilde
@@ -114,6 +115,8 @@ Feature: Ny Plante Tilsetning og Bekreftelse Test
     Then   Skriv i Tilleggsopplysninger
     And    Skriv i Kommentar
     And    Skriv i Forskeres erfaring med planten
+    And    Vente 5 sekunder
+
 
   @q1
   Scenario: Brukeren skal kunne legge til Forskning informasjon

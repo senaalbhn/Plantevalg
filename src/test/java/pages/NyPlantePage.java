@@ -196,7 +196,7 @@ public class NyPlantePage {
 
 
     //Tilleggsinformasjon
-    @FindBy(xpath = "//*[@title='Tilleggsinformasjon']")
+    @FindBy(xpath = "//a[@title='Tilleggsinformasjon']")
     public WebElement tilleggsinformasjon;
     @FindBy(xpath = "(//textarea)[1]")
     public WebElement tilleggsopplysninger;
@@ -206,7 +206,7 @@ public class NyPlantePage {
     public WebElement forskeresErfaringMedPlanten;
 
     //Forskning
-    @FindBy(xpath = "//*[@title='Forskning']")
+    @FindBy(xpath = "//a[@title='Forskning']")
     public WebElement forskning;
     @FindBy(xpath = "//button[@title='Legg til forskningsresultat']")
     public WebElement leggTilForskningsresultat;
