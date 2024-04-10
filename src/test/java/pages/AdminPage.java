@@ -20,7 +20,7 @@ public class AdminPage {
     public WebElement bildeInfo;
     @FindBy (css = "button[title='>']")
     public WebElement nesteBilde;
-    @FindBy (css = "div[class='_busy_1su0p_50']")
+    @FindBy (css = "div[class^='_busy_']")
     public WebElement busy;
     @FindBy (xpath = "//div[starts-with(text(),'Vennligst vent')]")
     public WebElement vent;

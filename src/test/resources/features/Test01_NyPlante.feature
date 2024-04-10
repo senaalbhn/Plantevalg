@@ -4,6 +4,7 @@ Feature: Ny Plante Tilsetning og Bekreftelse Test
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
+    And    Vente for lagring
 
   @q1 @d @egenskaper
   Scenario: Brukeren skal kunne legge til Botanisk navn informasjon

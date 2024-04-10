@@ -48,8 +48,6 @@ Feature: Laste opp og Publisert Bilder
     And   Klikk Lagre og Lukk
 
 
-
-
   Scenario: Kun Admin skal kunne publisere bilder
     Given   Go til Plantevalg-siden
     Given   Klikk Plante
