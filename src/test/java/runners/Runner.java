@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
         glue = "stepDefinitions", //stepDefinitions package ismi
         tags = "", //Hangi scenarioları bu tag'ı belirtirsek o scenariolar çalışır
         dryRun = false, //true seçersek scenariolari kontrol eder browser'ı çalıştırmaz
-        monochrome = true//-->true kullanırsak konsoldaki çıktıları tek renk(siyah) olarak verir
+        monochrome = false//-->true kullanırsak konsoldaki çıktıları tek renk(siyah) olarak verir
 )
 
 public class Runner {

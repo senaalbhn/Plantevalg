@@ -39,7 +39,7 @@ Feature: Redigere Plante og Bekreftelse Test
     Given  Klikk Egenskaper
     And    Velg Lovfellende
     Then   Velg "Ukjent" fra Pollinator-vennlig
-    Then   Velg "Spiselig" fra Matnyttig
+    Then   Velg "Spiselig" fra Spiselig
     Then   Velg "Sterk blomsterduft" fra Allergi
     Then   Velg "Middels (20-50 år)" fra Naturlig levealder
     Then   Velg "Forbudt iht forskrift fremmede organismer vedl 1" alternativ fra Restriksjoner og vern

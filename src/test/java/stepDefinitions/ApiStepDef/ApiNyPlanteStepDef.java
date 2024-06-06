@@ -2,7 +2,6 @@ package stepDefinitions.ApiStepDef;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.JsonObject;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -169,8 +168,9 @@ public class ApiNyPlanteStepDef {
     ArrayList<ReproductionMethodsPojo> reproduction;
     ArrayList<NamePojo> nameAllergenicities;
     @Then("Redigeres forventede data for lagret planten")
-    public void redigeresForventedeDataForLagretPlanten() {
 
+
+    public void redigeresForventedeDataForLagretPlanten() {
         ArrayList<BotanicalNamesPojo> botanical = new ArrayList<BotanicalNamesPojo>();
         botanical.add(new BotanicalNamesPojo("Avocado", "Artsepitet", false, true, "Kultivar", "Frøkilde", "Underart", "Varietet", "Form", "Varemerke", true, "PRIMARY"));
         List<SynonymsPojo> synonym2 = new ArrayList<>();

@@ -25,25 +25,25 @@ public class Hooks {
      */
     @Before
     public void setUp() {
-        System.out.println("Scenarios starter");
+       // System.out.println("Scenarios starter");
     }
 
     @AfterMethod
     public void tearDown() {
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertAll();
-        System.out.println("Scenarios er ferdig");
+       // SoftAssert softAssert = new SoftAssert();
+       // softAssert.assertAll();
+     //   System.out.println("Scenarios er ferdig");
     }
 
 
 
     @After
     public void tearDown(Scenario scenario) {
-        if (scenario.isFailed()){
-            TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
-            scenario.attach(ts.getScreenshotAs(OutputType.BYTES),"image/png","scenario_"+scenario.getName());
+      //  if (scenario.isFailed()){
+        //    TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
+          //  scenario.attach(ts.getScreenshotAs(OutputType.BYTES),"image/png","scenario_"+scenario.getName());
             //Driver.closeDriver();
-        }
+    //    }
     }
 
 

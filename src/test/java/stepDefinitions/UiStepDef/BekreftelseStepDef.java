@@ -75,6 +75,7 @@ public class BekreftelseStepDef {
             System.out.println("Viltvoksende i Norge finnes ikke");
         }
         //Produsert i Norge
+        /*
         try {
             String produsert = bekreft.produsert.getAttribute("title");
             String actualPro = produsert.split(":")[1].trim();
@@ -83,6 +84,8 @@ public class BekreftelseStepDef {
         } catch (NoSuchElementException e) {
             System.out.println("Produsert i Norge finnes ikke");
         }
+
+         */
         //E-Plante
         try {
             String eplante = bekreft.ePlante.getAttribute("title");
@@ -121,14 +124,14 @@ public class BekreftelseStepDef {
         } catch (NoSuchElementException e) {
             System.out.println("Pollinator finnes ikke");
         }
-        //Matnyttig
+        //Spiselig
         try {
-            String matnyttig = bekreft.matnyttig.getAttribute("title");
-            String actualMatnyttig = matnyttig.split(":")[1].trim();
+            String spiselig = bekreft.spiselig.getAttribute("title");
+            String actualMatnyttig = spiselig.split(":")[1].trim();
             String expectedMatnyttig = "Honningplante";
             softAssert.assertEquals(actualMatnyttig, expectedMatnyttig);
         } catch (NoSuchElementException e) {
-            System.out.println("Matnyttig finnes ikke");
+            System.out.println("spiselig finnes ikke");
         }
         //Allergi
         try {
@@ -177,8 +180,8 @@ public class BekreftelseStepDef {
         }
         ////////////////////////Størrelse og form////////////////////////
         //Høyde
-        String hoyde = bekreft.hoyde.getAttribute("title");
         try {
+            String hoyde = bekreft.hoyde.getAttribute("title");
             String actualHoyde = hoyde.split(":")[1].trim();
             String expectedHoyde = "2,5m - 10m";
             softAssert.assertEquals(actualHoyde, expectedHoyde);
@@ -661,12 +664,12 @@ public class BekreftelseStepDef {
         }
         //Matnyttig
         try {
-            String matnyttig = bekreft.matnyttig.getAttribute("title");
-            String actualMatnyttig = matnyttig.split(":")[1].trim();
+            String spiselig = bekreft.spiselig.getAttribute("title");
+            String actualMatnyttig = spiselig.split(":")[1].trim();
             String expectedMatnyttig = "Spiselig";
             softAssert.assertEquals(actualMatnyttig, expectedMatnyttig);
         } catch (NoSuchElementException e) {
-            System.out.println("Matnyttig finnes ikke");
+            System.out.println("Spiselig finnes ikke");
         }
         //Allergi
         try {

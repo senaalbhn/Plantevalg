@@ -6,9 +6,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.junit.Ignore;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -57,8 +56,7 @@ public class NyPlanteStepdefs {
 
     @Then("Klikk Ny Plnate")
     public void klikkNyPlnate() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(nyPlante.nyPlante));
+        ReusableMethods.wait(1);
         nyPlante.nyPlante.click();
     }
     //Botonisk Navn
@@ -83,7 +81,6 @@ public class NyPlanteStepdefs {
     public void klikkLagreOgFortsette() {
         ReusableMethods.wait(1);
         nyPlante.lagreOgFortsette.click();
-
     }
 
     //Navn og opprinnelse
@@ -137,9 +134,9 @@ public class NyPlanteStepdefs {
         ReusableMethods.wait(1);
         ReusableMethods.sendKeysJS(nyPlante.slektSynonym, "SlektSynonym");
         ReusableMethods.click(Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")));
-        Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")).sendKeys("ArtsepitetSynonym",Keys.TAB,"k",Keys.TAB,"f",Keys.TAB,"u",Keys.TAB,"v",Keys.TAB,"f",Keys.TAB,"v");
+        Driver.getDriver().findElement(By.cssSelector("label[title='Artsepitet']+div input")).sendKeys("ArtsepitetSynonym", Keys.TAB, "k", Keys.TAB, "f", Keys.TAB, "u", Keys.TAB, "v", Keys.TAB, "f", Keys.TAB, "v");
         ReusableMethods.wait(1);
-        actions.sendKeys(nyPlante.slektSynonym,"SlektSynonym").perform();
+        actions.sendKeys(nyPlante.slektSynonym, "SlektSynonym").perform();
     }
 
     @Then("Klikk Legg til under Andre sprok")
@@ -152,20 +149,19 @@ public class NyPlanteStepdefs {
     public void velgEngelskSomSprok() {
         ReusableMethods.wait(1);
         ReusableMethods.ddmIndex(Driver.getDriver().findElement(By.xpath("(//select)[1]")), 4);
-       // WebElement sprok = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
-       // Select select = new Select(sprok);
-      //  select.selectByIndex(4);
+        WebElement sprok = Driver.getDriver().findElement(By.xpath("(//select)[1]"));
+        Select select = new Select(sprok);
+        select.selectByIndex(4);
     }
 
     @And("Skriv i {string}")
     public void skrivINavn(String str) {
         ReusableMethods.wait(1);
-        ReusableMethods.click(nyPlante.navn);
+        ((JavascriptExecutor)Driver.getDriver()).executeScript("arguments[0].dispatchEvent(new Event('blur'))",nyPlante.navn);
+
+        ReusableMethods.sendKeysJS(nyPlante.navn, str);
         ReusableMethods.wait(1);
-        ReusableMethods.sendKeysJS(nyPlante.navn,str);
-        ReusableMethods.wait(1);
-        ReusableMethods.ddmIndex(Driver.getDriver().findElement(By.xpath("(//select)[1]")), 4);
-        ReusableMethods.sendKeysJS(nyPlante.navn,str);
+
     }
 
     @Then("Klikk {string} for E-plante")
@@ -184,14 +180,15 @@ public class NyPlanteStepdefs {
     @And("Velg Traer")
     public void velgTraer() {
         nyPlante.plantegruppeTraer.click();
-        ReusableMethods.visibleWait(nyPlante.plantegruppeTraerBekreft,10);
+        ReusableMethods.visibleWait(nyPlante.plantegruppeTraerBekreft, 10);
     }
 
     @And("Velg Alltidgronn")
     public void velgAlltidgronn() {
         nyPlante.plantegruppeAlltidgronn.click();
-        ReusableMethods.visibleWait(nyPlante.plantegruppeAlltidgronnBekreft,10);
+        ReusableMethods.visibleWait(nyPlante.plantegruppeAlltidgronnBekreft, 10);
     }
+
     @And("Kontrol")
     public void kontrol() {
 
@@ -205,10 +202,10 @@ public class NyPlanteStepdefs {
         ReusableMethods.ddmVisibleText(pollinatorVennlig, str);
     }
 
-    @Then("Velg {string} fra Matnyttig")
-    public void velgFraMatnyttig(String str) {
-        WebElement matnyttig = Driver.getDriver().findElement(By.cssSelector("label[title='Matnyttig']+div>select"));
-        ReusableMethods.ddmVisibleText(matnyttig, str);
+    @Then("Velg {string} fra Spiselig")
+    public void velgFraSpiselig(String str) {
+        WebElement spiselig = Driver.getDriver().findElement(By.cssSelector("label[title='Spiselig']+div>select"));
+        ReusableMethods.ddmVisibleText(spiselig, str);
     }
 
     @Then("Velg {string} fra Allergi")
@@ -248,11 +245,10 @@ public class NyPlanteStepdefs {
     }
 
 
-
     @And("Velg hoyde mellom {string} - {string}")
     public void velgHoydeMellom(String str, String str2) {
         ReusableMethods.wait(1);
-        nyPlante.hoyde.sendKeys( str,Keys.TAB, str2, Keys.TAB);
+        nyPlante.hoyde.sendKeys(str, Keys.TAB, str2, Keys.TAB);
 
     }
 
@@ -619,7 +615,7 @@ public class NyPlanteStepdefs {
         String yearValue = String.valueOf(myCurrentDate.getYear());
         String montValue = String.valueOf(myCurrentDate.getMonthValue());
         String dayValue = String.valueOf(myCurrentDate.getDayOfMonth());
-        actions.click(nyPlante.dato).sendKeys(yearValue,Keys.ARROW_LEFT,montValue,Keys.ARROW_LEFT,Keys.ARROW_LEFT,dayValue).perform();
+        actions.click(nyPlante.dato).sendKeys(yearValue, Keys.ARROW_LEFT, montValue, Keys.ARROW_LEFT, Keys.ARROW_LEFT, dayValue).perform();
         ReusableMethods.wait(1);
     }
 

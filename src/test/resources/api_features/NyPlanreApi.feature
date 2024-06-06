@@ -28,4 +28,3 @@ Feature: Ny Plante Tilsetning Api Test
     Given   URL er redigert for slette plante
     Then    Delete-Request sendes for slette plante og mottas Response
     And     Det er verifisert at statuskoden er 200
-

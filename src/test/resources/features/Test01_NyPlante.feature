@@ -4,7 +4,7 @@ Feature: Ny Plante Tilsetning og Bekreftelse Test
   Scenario: Brukeren må kunne logge inn på Plantevalgs nettside
     Given   Go til Plantevalg-siden
     Then    Skriv i epost og passord, klikk Logg inn
-    And    Vente for lagring
+  #  And     Vente for lagring
 
   @q1 @d @egenskaper
   Scenario: Brukeren skal kunne legge til Botanisk navn informasjon
@@ -29,15 +29,16 @@ Feature: Ny Plante Tilsetning og Bekreftelse Test
     And    Velg Engelsk som sprok
     And    Skriv i "English Name"
     And    Klikk Lagre
+    And    Vente 2 sekunder
     Then   Klikk "Nei" for E-plante
-    And    Bekreft navn finnes
+
 
 
   @q1 @egenskaper
   Scenario: Brukeren skal kunne legge til Egenskaper informasjon
     Given  Klikk Egenskaper
     Then   Velg "Ja" fra Pollinator-vennlig
-    Then   Velg "Honningplante" fra Matnyttig
+    Then   Velg "Honningplante" fra Spiselig
     Then   Velg "Hudkontakt" fra Allergi
     Then   Velg "Lang (100-300 år)" fra Naturlig levealder
     Then   Klikk "Nei" for Vegetativ

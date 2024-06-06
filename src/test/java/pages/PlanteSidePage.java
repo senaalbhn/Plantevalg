@@ -31,13 +31,13 @@ public class PlanteSidePage {
     public WebElement sekundaerOpprinnelse;
     @FindBy(xpath = "(//button[@title='Legg til'])[2]")
     public WebElement leggTil;
-    @FindBy(xpath = "/html/body/div/div/div/div[2]/div/div[5]/div[1]/div[6]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[3]/div/input")
+    @FindBy(xpath = "(//label[@title='Slekt']//following-sibling::div//input)[1]")
     public WebElement opphavPrimaerSlekt;
-    @FindBy(xpath = "/html/body/div/div/div/div[2]/div/div[5]/div[1]/div[6]/div/div[2]/div[2]/div/div[3]/div[2]/div/div[3]/div/input")
+    @FindBy(xpath = "(//label[@title='Slekt']//following-sibling::div//input)[2]")
     public WebElement opphavSekundaerSlekt;
-    @FindBy(xpath = "(//*[@placeholder='Fritekst'])[2]")
+    @FindBy(css = "label[title='Slekt']+div input")
     public WebElement synonymPrimaerSlekt;
-    @FindBy(xpath = "(//*[@placeholder='Fritekst'])[1]")
+    @FindBy(css = "label[title='Slekt']+div input")
     public WebElement synonymerNavn;
     @FindBy(xpath = "(//*[@placeholder='Fritekst'])[2]")
     public WebElement synonymerTil;
@@ -46,7 +46,7 @@ public class PlanteSidePage {
 
     @FindBy(xpath = "(//input)[3]")
     public WebElement andreSprokNavn;
-    @FindBy(xpath = "/html/body/div/div/div/div[2]/div/div[5]/div[1]/div[6]/div/div[2]/div[2]/div/div/div[3]/button[2]")
+    @FindBy(css = "button[title='Lagre']")
     public WebElement lagre;
 
     //Egenskaper

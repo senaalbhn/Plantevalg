@@ -29,8 +29,8 @@ public class BekreftPage {
     public WebElement undergruppe;
     @FindBy (css = "div[title*='Pollinator']")
     public WebElement pollinator;
-    @FindBy (css = "div[title*='Matnyttig']")
-    public WebElement matnyttig;
+    @FindBy (css = "div[title*='Spiselig']")
+    public WebElement spiselig;
     @FindBy (css = "div[title*='Allergi']")
     public WebElement allergi;
     @FindBy (css = "div[title*='Restriksjoner']")
